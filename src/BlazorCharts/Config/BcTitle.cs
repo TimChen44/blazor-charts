@@ -7,16 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public class BcTitle : ComponentBase
+    public class BcTitle : BcConfig
     {
         [Parameter] public string Title { get; set; }
 
-        [CascadingParameter] public BcChart BcChart { get; set; }
-
-        protected override void OnInitialized()
-        {
-            this.BcChart.AddBcE(this);
-            base.OnInitialized();
-        }
     }
 }

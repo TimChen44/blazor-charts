@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class Legend
-    {
+    public partial class Legend : Element<BcLegend>
+    {        /// <summary>
+             /// 从写配置
+             /// </summary>
+        public override BcLegend Config => Chart?.LegendConfig;
     }
 }

@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class Title : ElementGroup
+    public partial class Title : Element<BcTitle>
     {
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string Text => BcChart?.BcTitle?.Title;
+        public Title()
+        {
+            X = 100;
+            Y = 100;
+        }
 
-        [CascadingParameter] public BcChart BcChart { get; set; }
+
+        /// <summary>
+        /// 从写配置
+        /// </summary>
+        public override BcTitle Config => Chart?.TitleConfig;
 
     }
 }

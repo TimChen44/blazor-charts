@@ -1,2 +1,8 @@
-﻿@inherits ElementGroup
-<text x="@X" y="@Y"  text-anchor="middle">@Text</text>
+﻿@inherits Element<BcTitle>
+
+@if (Config != null)
+{
+    <g class="bc-title">
+        <text x="@X" y="@Y"  text-anchor="middle">@Config?.Title</text>
+    </g>
+}

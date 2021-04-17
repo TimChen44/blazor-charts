@@ -9,6 +9,8 @@ namespace BlazorCharts
 {
     public partial class BcChart
     {
+        #region 图表属性
+
         /// <summary>
         /// 宽度
         /// </summary>
@@ -19,18 +21,35 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public int Height { get; set; }
 
-        /// <summary>
-        /// 高度
-        /// </summary>
-        [Parameter] public BcTitle BcTitle { get; set; }
+        #endregion
 
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        #region 元素配置
 
-        public void AddBcE(BcTitle bce)
+        [Parameter] public BcTitle TitleConfig { get; set; }
+
+        [Parameter] public BcLegend LegendConfig { get; set; }
+
+        public void AddConfig(BcConfig config)
         {
-            BcTitle = bce;
+            switch (config)
+            {
+                case BcTitle bcTitle: 
+                    TitleConfig = bcTitle; 
+                    break;
+                case BcLegend bcLegend:
+                    LegendConfig = bcLegend;
+                    break;
+            }
         }
+
+        #endregion
+
+
+
+
+        [Parameter] public RenderFragment ChildContent { get; set; }
+
+
     }
 }
 
