@@ -1,0 +1,18 @@
+﻿@page "/"
+
+<BcChart Height="400" Width="600">
+    <BcTitle Title="@b"></BcTitle>
+</BcChart>
+
+<button @onclick="a">a</button>
+
+@code{
+
+    string b = "abcdefgh";
+
+    public void a()
+    {
+        b = DateTime.Now.ToString();
+    }
+
+}
