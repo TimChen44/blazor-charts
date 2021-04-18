@@ -2,23 +2,22 @@
 
 - 标题 Title
 - 图例 Legend
-- 主区域 Content
-    - 背景 Background
-    - 坐标轴 Axes
-        - X轴 AxesX
-            - 刻度 Scale
-            - 值 Value
-            - 标题 Title
-        - Y轴 AxesY
-            - 左轴
-            - 右轴
+- 坐标轴 AxisGroup
+    - X轴 AxesX
+        - 刻度 Scale
+        - 值 Value
+        - 标题 Title
+    - Y轴 AxesY
+        - 左轴
+        - 右轴
     - 网格 Grid
         - 横线 LineH
         - 竖线 LineV
-    - 系列组 SeriesGroup
-        - 系列 Series
-    - 标签 Labels
+- 系列组 SeriesGroup
+    - 系列 Series
+- 标签 Labels
 - 提示 Tooltip
+- 背景 Background
 
 # 生命周期
 

@@ -18,10 +18,7 @@ namespace BlazorCharts
         /// 从写配置
         /// </summary>
         public override BcTitle Config => Chart?.TitleConfig;
-        /// <summary>
-        /// 是否已经完成初始化
-        /// </summary>
-        public bool IsInited { get; set; } = false;
+
 
         #region 文本属性
 

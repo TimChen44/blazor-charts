@@ -2,6 +2,7 @@
 
 <BcChart Height="400" Width="600">
     <BcTitle Title="@b"></BcTitle>
+
 </BcChart>
 
 <button @onclick="a">a</button>
@@ -15,4 +16,24 @@
         b = DateTime.Now.ToString();
     }
 
+
+    List<Github> githubs = new List<Github>()
+{
+        new Github(){Year=2017,Start=1000,Fork=500},
+        new Github(){Year=2018,Start=1300,Fork=400},
+        new Github(){Year=2019,Start=1500,Fork=600},
+        new Github(){Year=2020,Start=1700,Fork=200},
+    };
+
+
+
+
+    public class Github
+    {
+        public int Year { get; set; }
+
+        public int Start { get; set; }
+
+        public int Fork { get; set; }
+    }
 }

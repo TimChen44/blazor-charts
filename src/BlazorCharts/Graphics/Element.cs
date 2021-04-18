@@ -26,6 +26,11 @@ namespace BlazorCharts
         [CascadingParameter] public BcChart Chart { get; set; }
 
         /// <summary>
+        /// 是否已经完成初始化
+        /// </summary>
+        public bool IsInited { get; set; } = false;
+
+        /// <summary>
         /// 更新布局，用于计算各部件占用的位置
         /// </summary>
         public abstract void UpdateLayout();

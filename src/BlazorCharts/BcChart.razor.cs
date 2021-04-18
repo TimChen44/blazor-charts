@@ -25,11 +25,15 @@ namespace BlazorCharts
 
         #region 元素配置
 
+        //标题
         private Title TitleRef { get; set; }
-
         [Parameter] public BcTitle TitleConfig { get; set; }
 
+        //图例
+        [Parameter] public Legend LegendRef { get; set; }
         [Parameter] public BcLegend LegendConfig { get; set; }
+
+
 
         public void AddConfig(BcConfig config)
         {
@@ -43,6 +47,8 @@ namespace BlazorCharts
                     break;
             }
         }
+
+        public int MyProperty { get; set; }
 
         #endregion
 
@@ -58,7 +64,7 @@ namespace BlazorCharts
         public void UpdateLayout()
         {
             TitleRef.UpdateLayout();
-            
+
         }
 
         public void UpdateData()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts.Content
 {
-    public partial class Axes
+    public partial class AxisGroup
     {
     }
 }
