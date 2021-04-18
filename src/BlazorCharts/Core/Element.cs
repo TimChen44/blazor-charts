@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +13,7 @@ namespace BlazorCharts
     /// </summary>
     public abstract class Element<C> : ComponentBase
     {
-        /// <summary>
-        /// X轴坐标
-        /// </summary>
-        [Parameter] public int X { get; set; }
-
-        /// <summary>
-        /// Y轴坐标
-        /// </summary>
-        [Parameter] public int Y { get; set; }
-
-        /// <summary>
-        /// 宽度
-        /// </summary>
-        [Parameter] public int Width { get; set; }
-
-        /// <summary>
-        /// 高度
-        /// </summary>
-        [Parameter] public int Height { get; set; }
+        public Rect Rect { get; set; } = new Rect();
 
         /// <summary>
         /// 配置文件
@@ -41,5 +24,15 @@ namespace BlazorCharts
         /// 图表对象
         /// </summary>
         [CascadingParameter] public BcChart Chart { get; set; }
+
+        /// <summary>
+        /// 更新布局，用于计算各部件占用的位置
+        /// </summary>
+        public abstract void UpdateLayout();
+
+        /// <summary>
+        /// 跟新数据，用于刷新界面的显示
+        /// </summary>
+        public abstract void UpdateData();
     }
 }

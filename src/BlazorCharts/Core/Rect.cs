@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,11 @@ namespace BlazorCharts
 {
     public class Rect
     {
-
-        public Rect() { }
+        public Rect()
+        {
+            Point = new Point();
+            Size = new Size();
+        }
 
         public Rect(int x, int y, int w, int h)
         {
@@ -48,9 +52,14 @@ namespace BlazorCharts
 
         public int B => Point.Y + Size.H;
 
+        public int C => Point.X + Size.W / 2;
+
+        public int M => Point.Y + Size.H / 2;
+
         #endregion
 
         #region 四周坐标点
+        //TODO:之后根据需要决定属性是否可以赋值
 
         /// <summary>
         /// 左上
@@ -176,12 +185,12 @@ namespace BlazorCharts
         /// <summary>
         /// X轴坐标
         /// </summary>
-        [Parameter] public int X { get; set; }
+         public int X { get; set; }
 
         /// <summary>
         /// Y轴坐标
         /// </summary>
-        [Parameter] public int Y { get; set; }
+        public int Y { get; set; }
 
         #region 操作符重载
 
@@ -241,12 +250,12 @@ namespace BlazorCharts
         /// <summary>
         /// 宽度
         /// </summary>
-        [Parameter] public int W { get; set; }
+         public int W { get; set; }
 
         /// <summary>
         /// 高度
         /// </summary>
-        [Parameter] public int H { get; set; }
+        public int H { get; set; }
 
 
         #region 操作符重载

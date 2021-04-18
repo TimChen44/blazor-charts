@@ -11,5 +11,15 @@ namespace BlazorCharts
              /// 从写配置
              /// </summary>
         public override BcLegend Config => Chart?.LegendConfig;
+
+        public override void UpdateData()
+        {
+            
+        }
+
+        public override void UpdateLayout()
+        {
+            
+        }
     }
 }

@@ -25,6 +25,8 @@ namespace BlazorCharts
 
         #region 元素配置
 
+        private Title TitleRef { get; set; }
+
         [Parameter] public BcTitle TitleConfig { get; set; }
 
         [Parameter] public BcLegend LegendConfig { get; set; }
@@ -33,8 +35,8 @@ namespace BlazorCharts
         {
             switch (config)
             {
-                case BcTitle bcTitle: 
-                    TitleConfig = bcTitle; 
+                case BcTitle bcTitle:
+                    TitleConfig = bcTitle;
                     break;
                 case BcLegend bcLegend:
                     LegendConfig = bcLegend;
@@ -44,11 +46,27 @@ namespace BlazorCharts
 
         #endregion
 
-
-
-
         [Parameter] public RenderFragment ChildContent { get; set; }
 
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            UpdateLayout();
+            UpdateData();
+        }
+
+        public void UpdateLayout()
+        {
+            TitleRef.UpdateLayout();
+            
+        }
+
+        public void UpdateData()
+        {
+            TitleRef.UpdateData();
+
+            StateHasChanged();
+        }
 
     }
 }

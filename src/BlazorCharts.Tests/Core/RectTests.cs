@@ -20,6 +20,9 @@ namespace BlazorCharts.Tests.Core
         [TestMethod()] public void T() => Assert.AreEqual(r1.T, 20);
         [TestMethod()] public void B() => Assert.AreEqual(r1.B, 120);
 
+        [TestMethod()] public void C() => Assert.AreEqual(r1.C, 35);
+        [TestMethod()] public void M() => Assert.AreEqual(r1.M, 60);
+
         [TestMethod()] public void LT() => Assert.AreEqual(r1.LT, new Point(10, 20));
         [TestMethod()] public void LM() => Assert.AreEqual(r1.LM, new Point(10, 70));
         [TestMethod()] public void LB() => Assert.AreEqual(r1.LB, new Point(10, 120));

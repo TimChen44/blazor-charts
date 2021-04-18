@@ -1,8 +1,8 @@
 ﻿@inherits Element<BcTitle>
 
-@if (Config != null)
+@if (Config != null && IsInited==true)
 {
     <g class="bc-title">
-        <text x="@X" y="@Y"  text-anchor="middle">@Config?.Title</text>
+        <text x="@TitleX" y="@TitleY"   text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Config?.Title</text>
     </g>
 }
