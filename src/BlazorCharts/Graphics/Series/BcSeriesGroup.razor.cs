@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public abstract class BcConfig : ComponentBase
+    public partial class BcSeriesGroup : Element
     {
-        [CascadingParameter] public BcChart BcChart { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected override void OnInitialized()
         {
-            this.BcChart.AddConfig(this);
+            Console.WriteLine("BcSeriesGroup");
             base.OnInitialized();
         }
-    }
 
+
+    }
 
 }

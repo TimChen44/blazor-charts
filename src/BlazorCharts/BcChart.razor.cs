@@ -9,6 +9,8 @@ namespace BlazorCharts
 {
     public partial class BcChart
     {
+        [Parameter] public RenderFragment ChildContent { get; set; }
+
         #region 图表属性
 
         /// <summary>
@@ -23,56 +25,47 @@ namespace BlazorCharts
 
         #endregion
 
-        #region 元素配置
+        #region 图表元素
 
-        //标题
-        private Title TitleRef { get; set; }
-        [Parameter] public BcTitle TitleConfig { get; set; }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public BcTitle BcTitle { get; set; }
 
-        //图例
-        [Parameter] public Legend LegendRef { get; set; }
-        [Parameter] public BcLegend LegendConfig { get; set; }
+        /// <summary>
+        /// 图例
+        /// </summary>
+        public BcLegend BcLegend { get; set; }
 
+        /// <summary>
+        /// 图表
+        /// </summary>
+        public BcSeriesGroup BcSeriesGroup { get; set; }
 
-
-        public void AddConfig(BcConfig config)
+        public void AddElement(Element element)
         {
-            switch (config)
+            switch (element)
             {
                 case BcTitle bcTitle:
-                    TitleConfig = bcTitle;
+                    BcTitle = bcTitle;
                     break;
                 case BcLegend bcLegend:
-                    LegendConfig = bcLegend;
+                    BcLegend = bcLegend;
+                    break;
+                case BcSeriesGroup bcSeriesGroup:
+                    BcSeriesGroup = bcSeriesGroup;
                     break;
             }
         }
 
-        public int MyProperty { get; set; }
-
         #endregion
-
-        [Parameter] public RenderFragment ChildContent { get; set; }
 
 
         protected override void OnAfterRender(bool firstRender)
         {
-            UpdateLayout();
-            UpdateData();
+ 
         }
 
-        public void UpdateLayout()
-        {
-            TitleRef.UpdateLayout();
-
-        }
-
-        public void UpdateData()
-        {
-            TitleRef.UpdateData();
-
-            StateHasChanged();
-        }
 
     }
 }

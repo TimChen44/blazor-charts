@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public class BcLegend : BcConfig
+    public partial class Legend : Element
     {
-        public bool Visible { get; set; } = true;
-
         public LegendPosition Position { get; set; } = LegendPosition.Right;
 
     }

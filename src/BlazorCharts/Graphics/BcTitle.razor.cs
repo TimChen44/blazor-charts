@@ -1,33 +1,36 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class Title : Element<BcTitle>
+    public partial class BcTitle : Element
     {
-        public Title()
+        public BcTitle()
         {
 
         }
 
-        /// <summary>
-        /// 从写配置
-        /// </summary>
-        public override BcTitle Config => Chart?.TitleConfig;
-
-
         #region 文本属性
 
         /// <summary>
-        /// 字体大小
+        /// 标题
         /// </summary>
-        public int FontSize => Chart?.TitleConfig.FontSize ?? 20;
+        [Parameter] public string Title { get; set; }
 
-        public TextAnchor TextAnchor => Chart?.TitleConfig.TextAnchor ?? TextAnchor.middle;
+        /// <summary>
+        /// 文本尺寸
+        /// </summary>
+        [Parameter] public int FontSize { get; set; } = 20;
+
+        /// <summary>
+        /// 文本位置
+        /// </summary>
+        public TextAnchor TextAnchor { get; set; } = TextAnchor.middle;
 
         /// <summary>
         /// 标题X坐标
@@ -54,20 +57,30 @@ namespace BlazorCharts
 
         #endregion
 
-        public override void UpdateLayout()
+        protected override void OnInitialized()
         {
+            Console.WriteLine("BcTitle");
             Rect.Point.X = 0;
             Rect.Point.Y = 0;
             Rect.Size.W = Chart.Width;
             Rect.Size.H = FontSize * 2;
+            base.OnInitialized();
         }
 
-        public override void UpdateData()
-        {
 
-            IsInited = true;
-        }
+    }
 
+
+    public enum TextAnchor
+    {
+        [Description("start")]
+        start,
+        [Description("middle")]
+        middle,
+        [Description("end")]
+        end,
+        [Description("inherit")]
+        inherit,
 
     }
 }

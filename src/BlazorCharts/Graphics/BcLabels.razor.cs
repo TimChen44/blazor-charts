@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorCharts
+namespace BlazorCharts.Series
 {
-    public class BcAxesX : BcConfig
+    public partial class BcLabels
     {
     }
 }

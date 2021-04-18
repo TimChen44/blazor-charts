@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public class BcBarSeries<T> : BcSeriesConfig
+public     class ElementSeries<T>:Element
     {
-        public BcBarSeries(SeriesType type)
+        public ElementSeries(SeriesType type)
         {
             SeriesType = type;
         }

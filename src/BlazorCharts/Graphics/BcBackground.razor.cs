@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class Background
+    public partial class BcBackground
     {
     }
 }
