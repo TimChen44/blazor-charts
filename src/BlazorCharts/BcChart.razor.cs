@@ -7,9 +7,32 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcChart
+    public partial class BcChart<TData>
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
+
+        #region 数据
+
+        /// <summary>
+        /// 数据
+        /// </summary>
+        [Parameter] public List<TData> Data { get; set; }
+
+       /// <summary>
+       /// 轴（类别）字段
+       /// </summary>
+        public Func<TData, string> CategoryField { get; set; }
+        //TODO:暂时只支持本文，应该支持文本，数字，日期，且日期支持自定义排序规则
+        //TODO:目前仅支持一个字段
+
+        /// <summary>
+        /// 图例（系列）字段
+        /// </summary>
+        public Func<TData, string> SeriesField { get; set; }
+        //TODO:暂时只支持本文
+        //TODO:目前仅支持一个字段
+
+        #endregion
 
         #region 图表属性
 
@@ -30,29 +53,29 @@ namespace BlazorCharts
         /// <summary>
         /// 标题
         /// </summary>
-        public BcTitle BcTitle { get; set; }
+        public BcTitle<TData> BcTitle { get; set; }
 
         /// <summary>
         /// 图例
         /// </summary>
-        public BcLegend BcLegend { get; set; }
+        public BcLegend<TData> BcLegend { get; set; }
 
         /// <summary>
         /// 图表
         /// </summary>
-        public BcSeriesGroup BcSeriesGroup { get; set; }
+        public BcSeriesGroup<TData> BcSeriesGroup { get; set; }
 
-        public void AddElement(Element element)
+        public void AddElement(Element<TData> element)
         {
             switch (element)
             {
-                case BcTitle bcTitle:
+                case BcTitle<TData> bcTitle:
                     BcTitle = bcTitle;
                     break;
-                case BcLegend bcLegend:
+                case BcLegend<TData> bcLegend:
                     BcLegend = bcLegend;
                     break;
-                case BcSeriesGroup bcSeriesGroup:
+                case BcSeriesGroup<TData> bcSeriesGroup:
                     BcSeriesGroup = bcSeriesGroup;
                     break;
             }
@@ -63,9 +86,13 @@ namespace BlazorCharts
 
         protected override void OnAfterRender(bool firstRender)
         {
- 
+            if (firstRender)
+            {
+                BcTitle?.Init();
+                Console.WriteLine("OnAfterRender-StateHasChanged");
+                StateHasChanged();
+            }
         }
-
 
     }
 }

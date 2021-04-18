@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcBarSeries: Element
+    public partial class BcBarSeries<TData> : Element<TData>
     {
         protected override void OnInitialized()
         {
             Console.WriteLine("BcBarSeries");
             base.OnInitialized();
+        }
+        public override void Init()
+        {
+
         }
     }
 }

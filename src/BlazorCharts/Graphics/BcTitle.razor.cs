@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcTitle : Element
+    public partial class BcTitle<TData> : Element<TData>
     {
         public BcTitle()
         {
@@ -55,16 +55,20 @@ namespace BlazorCharts
             }
         }
 
+    
         #endregion
 
         protected override void OnInitialized()
         {
-            Console.WriteLine("BcTitle");
+
+            base.OnInitialized();
+        }
+        public override void Init()
+        {
             Rect.Point.X = 0;
             Rect.Point.Y = 0;
             Rect.Size.W = Chart.Width;
             Rect.Size.H = FontSize * 2;
-            base.OnInitialized();
         }
 
 

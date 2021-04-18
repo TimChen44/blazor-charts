@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-public     class ElementSeries<T>:Element
+    public class ElementSeries<TData> : Element<TData>
     {
         public ElementSeries(SeriesType type)
         {
             SeriesType = type;
         }
 
-        public Func<T, string> ArgumentField { get; set; }
-
-        public Func<T, double> ValueField { get; set; }
+        /// <summary>
+        /// 值字段
+        /// </summary>
+        public Func<TData, double> ValueField { get; set; }
 
         public SeriesType SeriesType { get; set; }
+
+        public override void Init()
+        {
+     
+        }
     }
 
     public enum SeriesType

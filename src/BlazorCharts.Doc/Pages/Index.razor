@@ -1,9 +1,9 @@
 ﻿@page "/"
 
-<BcChart Height="400" Width="600">
-    <BcTitle Title="@b"></BcTitle>
-    <BcSeriesGroup>
-        <BcBarSeries></BcBarSeries>
+<BcChart Height="400" Width="600" Data="githubs">
+    <BcTitle Title="@b" TData="Github"></BcTitle>
+    <BcSeriesGroup TData="Github">
+        <BcBarSeries TData="Github"></BcBarSeries>
     </BcSeriesGroup>
 </BcChart>
 

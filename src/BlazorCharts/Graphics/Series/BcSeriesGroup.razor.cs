@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public partial class BcSeriesGroup : Element
+    public partial class BcSeriesGroup<TData> : Element<TData>
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
 
@@ -17,7 +17,10 @@ namespace BlazorCharts
             Console.WriteLine("BcSeriesGroup");
             base.OnInitialized();
         }
+        public override void Init()
+        {
 
+        }
 
     }
 

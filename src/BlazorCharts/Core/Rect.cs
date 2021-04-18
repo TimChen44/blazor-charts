@@ -28,6 +28,8 @@ namespace BlazorCharts
             Size = size;
         }
 
+        #region 坐标
+
         /// <summary>
         /// 坐标点
         /// </summary>
@@ -85,6 +87,8 @@ namespace BlazorCharts
             set { Size.H = value; }
         }
 
+        #endregion
+
         #region 边线坐标点
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace BlazorCharts
         public int C
         {
             get { return Point.X + Size.W / 2; }
-            set { Point.X = value- Size.W / 2; }
+            set { Point.X = value - Size.W / 2; }
         }
 
 
@@ -126,7 +130,7 @@ namespace BlazorCharts
         public int M
         {
             get { return Point.Y + Size.H / 2; }
-            set { Point.Y =  value- Size.H / 2; }
+            set { Point.Y = value - Size.H / 2; }
         }
 
         #endregion
@@ -240,6 +244,11 @@ namespace BlazorCharts
         }
 
         #endregion 
+
+        public string ToPoints()
+        {
+            return $"{LT.ToPoint()} {RT.ToPoint()} {RB.ToPoint()} {LB.ToPoint()} Z";
+        }
     }
 
     public class Point
@@ -305,6 +314,11 @@ namespace BlazorCharts
         }
 
         #endregion 
+
+        public string ToPoint()
+        {
+            return $"{X},{Y}";
+        }
     }
 
     public class Size

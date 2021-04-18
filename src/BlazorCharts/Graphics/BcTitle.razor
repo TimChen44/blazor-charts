@@ -1,7 +1,11 @@
 ﻿@namespace BlazorCharts
-@inherits Element
+@inherits Element<TData>
+@typeparam TData
 
 
-    <g class="bc-title">
-        <text x="@TitleX" y="@TitleY" text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Title</text>
-    </g>
+<g class="bc-title">
+    <text x="@TitleX" y="@TitleY" text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Title</text>
+</g>
+
+<polyline points="@Rect.ToPoints()"
+          style="fill:none;stroke:red;stroke-width:1" />
