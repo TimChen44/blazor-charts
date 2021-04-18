@@ -38,23 +38,96 @@ namespace BlazorCharts
         /// </summary>
         public Size Size { get; set; }
 
-        #region 边线坐标点
-        //TODO:之后根据需要决定属性是否可以赋值
+        /// <summary>
+        /// 复制尺寸
+        /// </summary>
+        /// <returns></returns>
+        public Rect Copy()
+        {
+            return new Rect(Point.X, Point.Y, Size.W, Size.H);
+        }
 
         /// <summary>
-        /// 左边线
+        /// 获取或设置左边线
+        /// 设置后右边线线会随之移动，优先保证尺寸不变
         /// </summary>
-        public int L => Point.X;
+        public int X
+        {
+            get { return Point.X; }
+            set { Point.X = value; }
+        }
 
-        public int R => Point.X + Size.W;
+        /// <summary>
+        /// 获取或设置顶边线
+        /// 设置后底边线线会随之移动，优先保证尺寸不变
+        /// </summary>
+        public int Y
+        {
+            get { return Point.Y; }
+            set { Point.Y = value; }
+        }
 
-        public int T => Point.Y;
+        /// <summary>
+        /// 获取或设置宽度
+        /// </summary>
+        public int W
+        {
+            get { return Size.W; }
+            set { Size.W = value; }
+        }
 
-        public int B => Point.Y + Size.H;
+        /// <summary>
+        /// 获取或设置高度
+        /// </summary>
+        public int H
+        {
+            get { return Size.H; }
+            set { Size.H = value; }
+        }
 
-        public int C => Point.X + Size.W / 2;
+        #region 边线坐标点
 
-        public int M => Point.Y + Size.H / 2;
+        /// <summary>
+        /// 获取或设置右边线
+        /// 设置后左边线线会随之移动，优先保证尺寸不变
+        /// </summary>
+        public int R
+        {
+            get { return Point.X + Size.W; }
+            set { Point.X = value - Size.W; }
+        }
+
+
+        /// <summary>
+        /// 获取或设置底边线
+        /// 设置后顶边线线会随之移动，优先保证尺寸不变
+        /// </summary>
+        public int B
+        {
+            get { return Point.Y + Size.H; }
+            set { Point.Y = value - Size.H; }
+        }
+
+        /// <summary>
+        /// 获取或设置左右中心
+        /// 设置后左右边线线会随之移动，优先保证尺寸不变
+        /// </summary>
+        public int C
+        {
+            get { return Point.X + Size.W / 2; }
+            set { Point.X = value- Size.W / 2; }
+        }
+
+
+        /// <summary>
+        /// 获取或设置上下中心
+        /// 设置后上下边线线会随之移动，优先保证尺寸不变
+        /// </summary>
+        public int M
+        {
+            get { return Point.Y + Size.H / 2; }
+            set { Point.Y =  value- Size.H / 2; }
+        }
 
         #endregion
 
@@ -185,7 +258,7 @@ namespace BlazorCharts
         /// <summary>
         /// X轴坐标
         /// </summary>
-         public int X { get; set; }
+        public int X { get; set; }
 
         /// <summary>
         /// Y轴坐标
@@ -250,7 +323,7 @@ namespace BlazorCharts
         /// <summary>
         /// 宽度
         /// </summary>
-         public int W { get; set; }
+        public int W { get; set; }
 
         /// <summary>
         /// 高度

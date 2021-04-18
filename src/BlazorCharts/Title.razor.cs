@@ -34,7 +34,7 @@ namespace BlazorCharts
 
         /// <summary>
         /// 标题X坐标
-        /// text元素定位是按照文字底部中间为原点，所以要做一些转换
+        /// 更具文字对其方式需要做调整
         /// </summary>
         public int TitleX
         {
