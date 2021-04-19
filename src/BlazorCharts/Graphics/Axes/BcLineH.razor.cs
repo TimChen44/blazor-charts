@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts.Coordinate
 {
-    public partial class LineH
+    public partial class BcLineH
     {
     }
 }

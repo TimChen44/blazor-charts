@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorCharts.Content
+namespace BlazorCharts
 {
-    public partial class AxisGroup
+    public partial class BcAxesY
     {
     }
 }

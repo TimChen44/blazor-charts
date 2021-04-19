@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorCharts
+namespace BlazorCharts.Coordinate
 {
-    public partial class AxesX
+    public partial class BcLineV
     {
     }
 }

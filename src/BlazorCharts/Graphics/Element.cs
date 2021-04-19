@@ -29,11 +29,11 @@ namespace BlazorCharts
         public bool Visible { get; set; } = true;
 
         /// <summary>
-        /// 初始化函数
-        /// 此处不使用OnInitialized的原因是应为组件被加入到BcChart的顺序不可控，但是位置计算需要根据顺序进行，所以专门做了初始化方法
+        /// 初始布局，主要用于确定各组件的位置和大小
         /// </summary>
-        public abstract void Init();
+        public virtual void InitLayout() { }
 
-
+        public virtual void UpdateDisplay() { }
     }
+
 }

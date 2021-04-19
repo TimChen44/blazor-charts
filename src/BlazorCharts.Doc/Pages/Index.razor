@@ -1,10 +1,9 @@
 ﻿@page "/"
 
-<BcChart Height="400" Width="600" Data="githubs">
+<BcChart Height="400" Width="600" Data="githubs" CategoryField="x=>x.Year.ToString()">
     <BcTitle Title="@b" TData="Github"></BcTitle>
-    <BcSeriesGroup TData="Github">
-        <BcBarSeries TData="Github"></BcBarSeries>
-    </BcSeriesGroup>
+    <BcAxisGroup TData="Github"></BcAxisGroup>
+    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)"></BcBarSeries>
 </BcChart>
 
 <button @onclick="a">a</button>

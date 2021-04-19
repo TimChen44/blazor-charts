@@ -18,19 +18,23 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public List<TData> Data { get; set; }
 
-       /// <summary>
-       /// 轴（类别）字段
-       /// </summary>
-        public Func<TData, string> CategoryField { get; set; }
+        /// <summary>
+        /// 轴（类别）字段
+        /// </summary>
+        [Parameter] public Func<TData, string> CategoryField { get; set; }
         //TODO:暂时只支持本文，应该支持文本，数字，日期，且日期支持自定义排序规则
         //TODO:目前仅支持一个字段
+
 
         /// <summary>
         /// 图例（系列）字段
         /// </summary>
-        public Func<TData, string> SeriesField { get; set; }
-        //TODO:暂时只支持本文
-        //TODO:目前仅支持一个字段
+        [Parameter] public Func<TData, string> SeriesField { get; set; }
+
+        /// <summary>
+        /// 数据处理器
+        /// </summary>
+        public DataShredder<TData> DataShredder { get; set; }
 
         #endregion
 
@@ -61,6 +65,11 @@ namespace BlazorCharts
         public BcLegend<TData> BcLegend { get; set; }
 
         /// <summary>
+        /// 轴
+        /// </summary>
+        public BcAxisGroup<TData> BcAxisGroup { get; set; }
+
+        /// <summary>
         /// 图表
         /// </summary>
         public BcSeriesGroup<TData> BcSeriesGroup { get; set; }
@@ -78,22 +87,44 @@ namespace BlazorCharts
                 case BcSeriesGroup<TData> bcSeriesGroup:
                     BcSeriesGroup = bcSeriesGroup;
                     break;
+                case ElementSeries<TData> bcElementSeries:
+                    BcSeriesGroup.AddSeries(bcElementSeries);
+                    break;
             }
         }
 
         #endregion
 
+        public BcChart()
+        {
+            DataShredder = new DataShredder<TData>(this);
+        }
 
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
             {
-                BcTitle?.Init();
-                Console.WriteLine("OnAfterRender-StateHasChanged");
-                StateHasChanged();
+                Drawing();
+
             }
         }
 
+
+
+
+        public void Drawing()
+        {
+            if (Data == null) return;
+            DataShredder.Smash();
+
+
+            BcTitle?.InitLayout();
+            BcAxisGroup?.InitLayout();
+
+
+
+            StateHasChanged();
+        }
     }
 }
 

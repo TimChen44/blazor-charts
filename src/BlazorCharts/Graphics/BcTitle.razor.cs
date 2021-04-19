@@ -63,7 +63,7 @@ namespace BlazorCharts
 
             base.OnInitialized();
         }
-        public override void Init()
+        public override void InitLayout()
         {
             Rect.Point.X = 0;
             Rect.Point.Y = 0;

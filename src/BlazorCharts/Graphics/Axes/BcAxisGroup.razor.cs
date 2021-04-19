@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public partial class BcBarSeries<TData> : ElementSeries<TData>
+    public partial class BcAxisGroup<TData> : Element<TData>
     {
-        public BcBarSeries() : base(SeriesType.Bar)
-        {
-
-        }
-
         protected override void OnInitialized()
         {
-            Console.WriteLine("BcBarSeries");
-
+            Console.WriteLine("BcSeriesGroup");
             base.OnInitialized();
         }
+
         public override void InitLayout()
         {
+            //目前没有图例，所以暂时不考虑图例问题
+ 
+
 
         }
     }

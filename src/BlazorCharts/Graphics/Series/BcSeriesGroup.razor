@@ -2,4 +2,9 @@
 @inherits Element<TData>
 @typeparam TData
 
-@ChildContent
+
+<CascadingValue Value="this">
+    <g>
+        @ChildContent
+    </g>
+</CascadingValue>

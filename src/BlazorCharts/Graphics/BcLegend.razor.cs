@@ -10,7 +10,7 @@ namespace BlazorCharts
     {
         public LegendPosition Position { get; set; } = LegendPosition.Right;
 
-        public override void Init()
+        public override void InitLayout()
         {
 
         }
