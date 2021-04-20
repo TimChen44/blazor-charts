@@ -92,6 +92,24 @@ namespace BlazorCharts
         #region 边线坐标点
 
         /// <summary>
+        /// 获取或设置左边线，等同于X
+        /// </summary>
+        public int L
+        {
+            get { return X; }
+            set { X = value; }
+        }
+
+        /// <summary>
+        /// 获取或设置顶边线，等同于Y
+        /// </summary>
+        public int T
+        {
+            get { return Y; }
+            set { Y = value; }
+        }
+
+        /// <summary>
         /// 获取或设置右边线
         /// 设置后左边线线会随之移动，优先保证尺寸不变
         /// </summary>

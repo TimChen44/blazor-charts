@@ -27,14 +27,9 @@ namespace BlazorCharts
 
 
         /// <summary>
-        /// 图例（系列）字段
+        /// 分组字段，可以将一个字段中的值分成不同的系列处理
         /// </summary>
-        [Parameter] public Func<TData, string> SeriesField { get; set; }
-
-        /// <summary>
-        /// 数据处理器
-        /// </summary>
-        public DataShredder<TData> DataShredder { get; set; }
+        [Parameter] public Func<TData, string> GroupField { get; set; }
 
         #endregion
 
@@ -90,6 +85,10 @@ namespace BlazorCharts
                 case ElementSeries<TData> bcElementSeries:
                     BcSeriesGroup.AddSeries(bcElementSeries);
                     break;
+                case BcAxisGroup<TData> bcAxisGroup:
+                    BcAxisGroup = bcAxisGroup;
+                    break;
+
             }
         }
 
@@ -97,7 +96,7 @@ namespace BlazorCharts
 
         public BcChart()
         {
-            DataShredder = new DataShredder<TData>(this);
+
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -115,15 +114,50 @@ namespace BlazorCharts
         public void Drawing()
         {
             if (Data == null) return;
-            DataShredder.Smash();
+            this.DataAnalysis();
 
 
             BcTitle?.InitLayout();
             BcAxisGroup?.InitLayout();
 
+            BcSeriesGroup?.InitLayout();
 
 
             StateHasChanged();
+        }
+
+
+        /// <summary>
+        /// 处理数据
+        /// </summary>
+        public void DataAnalysis()
+        {
+            //TODO:先实现功能，性能啥的，不能存在的 :p 
+
+            BcAxisGroup.CategoryValues = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
+
+            BcAxisGroup.AxesYMax = double.MinValue;//TODO:此处最大值和最小值应该要取整
+            BcAxisGroup.AxesYMin = double.MaxValue;
+
+            foreach (var series in BcSeriesGroup.Series)
+            {
+                var sData = new SeriesData<TData>(series.Group);
+                if (GroupField == null || string.IsNullOrWhiteSpace(series.Group))
+                    sData.Values = Data.ToList();
+                else
+                    sData.Values = Data.Where(x => GroupField(x) == series.Group).ToList();
+
+                foreach (var xValue in BcAxisGroup.CategoryValues)
+                {
+                    var value = series.ValueFunc(sData.Values.Where(x => CategoryField(x) == xValue).ToList());
+                    sData.CategoryValue.Add(xValue, value);
+
+                    if (value > BcAxisGroup.AxesYMax) BcAxisGroup.AxesYMax = value;
+                    if (value < BcAxisGroup.AxesYMin) BcAxisGroup.AxesYMin = value;
+                }
+
+                series.SeriesDatas = sData;
+            }
         }
     }
 }

@@ -15,12 +15,68 @@ namespace BlazorCharts
             base.OnInitialized();
         }
 
+        /// <summary>
+        /// 从数据中分析出的分组
+        /// </summary>
+        public List<string> CategoryValues { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Y轴最大值
+        /// </summary>
+        public double AxesYMax { get; set; }
+        /// <summary>
+        /// Y轴最小值
+        /// </summary>
+        public double AxesYMin { get; set; }//TODO:如果最小值存在复数是有用，先假设不存在负数
+
+
+        /// <summary>
+        /// X横
+        /// </summary>
+        public BcAxesX<TData> AxesX { get; set; }
+
+        /// <summary>
+        /// Y轴左侧
+        /// </summary>
+        public BcAxesY<TData> AxesYLeft { get; set; }
+
+        /// <summary>
+        /// Y轴右侧
+        /// </summary>
+        public BcAxesY<TData> AxesYRight { get; set; }
+
+        public void AddSeries(ElementAxes<TData> element)
+        {
+            switch(element)
+            {
+                case BcAxesX<TData> bcAxesX:
+                    AxesX = AxesX;
+                    break;
+                case BcAxesY<TData> bcAxesY when bcAxesY.Position==AxesYPosition.Left:
+                    AxesYLeft = bcAxesY;
+                    break;
+                case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Right:
+                    AxesYRight = bcAxesY;
+                    break;
+            }
+            element.AxisGroup = this;
+
+        }
+
+
         public override void InitLayout()
         {
-            //目前没有图例，所以暂时不考虑图例问题
- 
+            //TODO:有了图例后，需要加入图例坐标计算
+            Rect.Y = Chart.BcTitle?.Rect.B??0;
+            Rect.X = 0;
+            Rect.W = Chart.Width;
+            Rect.H = Chart.Height - Rect.Y;
 
+   AxesYLeft?.InitLayout();
+            AxesYRight?.InitLayout();
 
+            AxesX?.InitLayout();
+         
         }
     }
 }

@@ -26,9 +26,15 @@ namespace BlazorCharts
 
 
         /// <summary>
-        /// 图例（系列）字段
+        /// 分组字段，可以将一个字段中的值分成不同的系列处理
         /// </summary>
-        [Parameter] public string Name { get; set; }
+        [Parameter] public string Group { get; set; }
+
+
+        /// <summary>
+        /// 系列名字
+        /// </summary>
+        [Parameter] public string Caption { get; set; }
 
         /// <summary>
         /// 值字段
@@ -50,5 +56,17 @@ namespace BlazorCharts
     public enum SeriesType
     {
         Bar,
+    }
+
+
+    /// <summary>
+    /// 系列的数据
+    /// </summary>
+    /// <typeparam name="TData"></typeparam>
+    public record SeriesData<TData>(string Name)
+    {
+        public List<TData> Values { get; set; }
+
+        public Dictionary<string, double> CategoryValue { get; set; } = new Dictionary<string, double>();
     }
 }

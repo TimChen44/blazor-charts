@@ -1,6 +1,5 @@
 ﻿@namespace BlazorCharts
-<h3>AxesX</h3>
+@inherits ElementAxes<TData>
+@typeparam TData
 
-@code {
-
-}
+<polyline points="@Rect.ToPoints()" style="fill:rgb(0 255 0 / 0.50);" />
