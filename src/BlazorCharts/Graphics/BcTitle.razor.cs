@@ -68,7 +68,7 @@ namespace BlazorCharts
             Rect.Point.X = 0;
             Rect.Point.Y = 0;
             Rect.Size.W = Chart.Width;
-            Rect.Size.H = FontSize * 2;
+            Rect.Size.H = FontSize * 3;
         }
 
 

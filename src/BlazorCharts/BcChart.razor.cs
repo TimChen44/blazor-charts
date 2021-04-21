@@ -88,7 +88,9 @@ namespace BlazorCharts
                 case BcAxisGroup<TData> bcAxisGroup:
                     BcAxisGroup = bcAxisGroup;
                     break;
-
+                case ElementAxes<TData> axes:
+                    BcAxisGroup.AddAxes(axes);
+                    break;
             }
         }
 

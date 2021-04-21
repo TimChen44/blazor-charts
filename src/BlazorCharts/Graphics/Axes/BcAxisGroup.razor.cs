@@ -21,6 +21,12 @@ namespace BlazorCharts
         public List<string> CategoryValues { get; set; } = new List<string>();
 
         /// <summary>
+        /// 每一个分组在X轴上的位置
+        /// </summary>
+        public Dictionary<string, int> CategoryPositions { get; set; } = new Dictionary<string, int>();
+
+
+        /// <summary>
         /// Y轴最大值
         /// </summary>
         public double AxesYMax { get; set; }
@@ -45,14 +51,14 @@ namespace BlazorCharts
         /// </summary>
         public BcAxesY<TData> AxesYRight { get; set; }
 
-        public void AddSeries(ElementAxes<TData> element)
+        public void AddAxes(ElementAxes<TData> element)
         {
-            switch(element)
+            switch (element)
             {
                 case BcAxesX<TData> bcAxesX:
-                    AxesX = AxesX;
+                    AxesX = bcAxesX;
                     break;
-                case BcAxesY<TData> bcAxesY when bcAxesY.Position==AxesYPosition.Left:
+                case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Left:
                     AxesYLeft = bcAxesY;
                     break;
                 case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Right:
@@ -67,16 +73,22 @@ namespace BlazorCharts
         public override void InitLayout()
         {
             //TODO:有了图例后，需要加入图例坐标计算
-            Rect.Y = Chart.BcTitle?.Rect.B??0;
+            Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
             Rect.X = 0;
             Rect.W = Chart.Width;
             Rect.H = Chart.Height - Rect.Y;
 
-   AxesYLeft?.InitLayout();
+            AxesYLeft?.InitLayout();
             AxesYRight?.InitLayout();
 
             AxesX?.InitLayout();
-         
+
+            //计算分组在X轴上的位置
+            for (int i = 0; i < CategoryValues.Count; i++)
+            {
+                //为了解决无法评分时，增量误差，所以每个位置都重新计算
+                CategoryPositions.Add(CategoryValues[i], (int)Math.Round(((double)(AxesX.Rect.W - AxesYLeft.Rect.W)) / (CategoryValues.Count + 1) * (i + 1), 0));
+            }
         }
     }
 }

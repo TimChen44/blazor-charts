@@ -29,7 +29,11 @@ namespace BlazorCharts
         }
         public override void InitLayout()
         {
+            Rect.X = Chart.BcAxisGroup.AxesYLeft.Rect.R;
+            Rect.Y=Chart.BcAxisGroup.AxesYLeft.Rect.T;
 
+            Rect.W = Chart.BcAxisGroup.AxesX.Rect.R - Rect.X;
+            Rect.H = Chart.BcAxisGroup.AxesX.Rect.T - Rect.Y;
         }
 
     }

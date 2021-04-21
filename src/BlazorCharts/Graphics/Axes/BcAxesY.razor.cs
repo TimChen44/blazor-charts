@@ -16,6 +16,11 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
+            Rect.X = 0;
+            Rect.Y = AxisGroup.Rect.T;
+            var maxString = AxisGroup.AxesYMax.ToString().Length > AxisGroup.AxesYMin.ToString().Length ? AxisGroup.AxesYMax.ToString() : AxisGroup.AxesYMin.ToString();
+            Rect.W = 20 + maxString.CalcWidth(FontSize) + 10;
+            Rect.H = AxisGroup.Rect.H;
 
 
 

@@ -12,15 +12,13 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
+            Rect.H = 10 + FontSize + 20;
             Rect.X = 0;
-            Rect.Y = AxisGroup.Rect.T;
-
-            var maxLenght = Math.Max(AxisGroup.AxesYMax.ToString().Length, AxisGroup.AxesYMin.ToString().Length).ToString();
-
-
-            Rect.W = maxLenght.CalcWidth(FontSize);
+            Rect.W = AxisGroup.Rect.W;
+            Rect.B = AxisGroup.Rect.B;
 
             base.InitLayout();
+
         }
     }
 }

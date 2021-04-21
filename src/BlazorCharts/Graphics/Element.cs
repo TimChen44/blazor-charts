@@ -26,6 +26,10 @@ namespace BlazorCharts
         /// </summary>
         [CascadingParameter] public BcChart<TData> Chart { get; set; }
 
+
+        /// <summary>
+        /// 隐藏元素，多数情况下隐藏只是不占用控件和不显示，但是内部示例依旧创建，用于其他元素计算位置时引用
+        /// </summary>
         public bool Visible { get; set; } = true;
 
         /// <summary>
