@@ -30,7 +30,7 @@ namespace BlazorCharts
         /// <summary>
         /// 文本位置
         /// </summary>
-        public TextAnchor TextAnchor { get; set; } = TextAnchor.middle;
+        public TextAnchor TextAnchor { get; set; } = TextAnchor.Middle;
 
         /// <summary>
         /// 标题X坐标
@@ -77,16 +77,5 @@ namespace BlazorCharts
     }
 
 
-    public enum TextAnchor
-    {
-        [Description("start")]
-        start,
-        [Description("middle")]
-        middle,
-        [Description("end")]
-        end,
-        [Description("inherit")]
-        inherit,
 
-    }
 }

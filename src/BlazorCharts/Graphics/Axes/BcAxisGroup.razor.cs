@@ -92,10 +92,11 @@ namespace BlazorCharts
             for (int i = 0; i < CategoryValues.Count; i++)
             {
                 //为了解决无法评分时，增量误差，所以每个位置都重新计算
-                CategoryPositions.Add(CategoryValues[i], (int)Math.Round(((double)(AxesX.Rect.W - AxesYLeft.Rect.W)) / (CategoryValues.Count + 1) * (i + 1), 0));
+                CategoryPositions.Add(CategoryValues[i], (int)Math.Round((double)AxesX.Rect.W / (CategoryValues.Count + 1) * (i + 1), 0));
             }
 
             base.InitLayout();
         }
     }
+
 }
