@@ -2,4 +2,28 @@
 @inherits ElementAxes<TData>
 @typeparam TData
 
-<polyline points="@Rect.ToPoints()" style="fill:rgb(0 255 0 / 0.10);" />
+@if (Chart.IsInit)
+{
+    <g class="bc-axes-y" transform="translate(@Rect.LT.ToPoint())">
+
+
+        <line x1="@Rect.W" y1="@Rect.H" x2="@Rect.W" y2="0" stroke="#767676" stroke-width="1" />
+
+        @for (int i = 0; i < 6; i++)
+        {
+            var h = (int)(Rect.H - ((double)Rect.H / 5 * i));
+            var v = AxisGroup.AxesYMax / 5 * i;
+
+            <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="#767676" stroke-width="1"></line>
+            <text>
+                <text font-size="@FontSize" fill="#767676" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.end.ToDescription()">@v</text>
+            </text>
+        }
+
+
+    </g>
+
+
+
+    @*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 255 0 / 0.10);" />*@
+}

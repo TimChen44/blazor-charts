@@ -34,6 +34,8 @@ namespace BlazorCharts
 
             Rect.W = Chart.BcAxisGroup.AxesX.Rect.R - Rect.X;
             Rect.H = Chart.BcAxisGroup.AxesX.Rect.T - Rect.Y;
+
+            base.InitLayout();
         }
 
     }

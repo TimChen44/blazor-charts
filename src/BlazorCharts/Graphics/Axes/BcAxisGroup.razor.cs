@@ -27,7 +27,7 @@ namespace BlazorCharts
 
 
         /// <summary>
-        /// Y轴最大值
+        /// Y轴最大值//TODO:最大值应该还需要取整，之后做
         /// </summary>
         public double AxesYMax { get; set; }
         /// <summary>
@@ -83,12 +83,19 @@ namespace BlazorCharts
 
             AxesX?.InitLayout();
 
+            //微调X轴和Y轴，去除重复区域
+            AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft.Rect.Y;
+            AxesX.Rect.X = AxesYLeft.Rect.W;
+            AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
+
             //计算分组在X轴上的位置
             for (int i = 0; i < CategoryValues.Count; i++)
             {
                 //为了解决无法评分时，增量误差，所以每个位置都重新计算
                 CategoryPositions.Add(CategoryValues[i], (int)Math.Round(((double)(AxesX.Rect.W - AxesYLeft.Rect.W)) / (CategoryValues.Count + 1) * (i + 1), 0));
             }
+
+            base.InitLayout();
         }
     }
 }

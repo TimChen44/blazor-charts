@@ -32,10 +32,15 @@ namespace BlazorCharts
         /// </summary>
         public bool Visible { get; set; } = true;
 
+
+
         /// <summary>
         /// 初始布局，主要用于确定各组件的位置和大小
         /// </summary>
-        public virtual void InitLayout() { }
+        public virtual void InitLayout()
+        {
+
+        }
 
         public virtual void UpdateDisplay() { }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlazorCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,6 @@ namespace BlazorCharts
             Rect.B = AxisGroup.Rect.B;
 
             base.InitLayout();
-
-        }
+}
     }
 }

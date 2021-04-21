@@ -18,7 +18,7 @@ namespace BlazorCharts
         /// <summary>
         /// 文本尺寸
         /// </summary>
-        [Parameter] public int FontSize { get; set; } = 9;
+        [Parameter] public int FontSize { get; set; } = 12;
 
     }
 }

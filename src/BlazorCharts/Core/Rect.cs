@@ -263,9 +263,13 @@ namespace BlazorCharts
 
         #endregion 
 
+        /// <summary>
+        /// 输出矩形的svg文本
+        /// </summary>
+        /// <returns></returns>
         public string ToPoints()
         {
-            return $"{LT.ToPoint()} {RT.ToPoint()} {RB.ToPoint()} {LB.ToPoint()} Z";
+            return $"{LT.ToPoint()} {RT.ToPoint()} {RB.ToPoint()} {LB.ToPoint()}";
         }
     }
 
@@ -335,7 +339,7 @@ namespace BlazorCharts
 
         public string ToPoint()
         {
-            return $"{X},{Y}";
+            return $"{X} {Y}";
         }
     }
 

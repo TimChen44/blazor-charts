@@ -2,12 +2,8 @@
 @inherits Element<TData>
 @typeparam TData
 
+@if (Chart.IsInit)
+{
 
-<CascadingValue Value="this">
-    <g>
-        @ChildContent
-    </g>
-</CascadingValue>
-
-
-<polyline points="@Rect.ToPoints()" style="fill:rgb(255 0 0 / 0.20);" />
+    @*<polyline points="@Rect.ToPoints()" style="fill:rgb(255 0 0 / 0.20);" />*@
+}

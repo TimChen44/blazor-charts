@@ -1,29 +1,21 @@
 ﻿@page "/"
 
 <BcChart Height="400" Width="600" Data="githubs" CategoryField="x=>x.Year.ToString()">
-    <BcTitle Title="@b" TData="Github"></BcTitle>
-    <BcAxisGroup TData="Github"></BcAxisGroup>
+    <BcTitle Title="@title" TData="Github"></BcTitle>
     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)"></BcBarSeries>
 </BcChart>
 
-<button @onclick="a">a</button>
-
 @code{
 
-    string b = "不在乎现在有多糟糕，看好将来有多精彩。";
-
-    public void a()
-    {
-        b = DateTime.Now.ToString();
-    }
+    string title = "不在意现在有多糟糕，看好将来有多精彩。";
 
 
     List<Github> githubs = new List<Github>()
 {
-        new Github(){Year=2017,Start=1000,Fork=500},
-        new Github(){Year=2018,Start=1300,Fork=400},
+        new Github(){Year=2017,Start=1000,Fork=400},
+        new Github(){Year=2018,Start=1300,Fork=500},
         new Github(){Year=2019,Start=1500,Fork=600},
-        new Github(){Year=2020,Start=1700,Fork=200},
+        new Github(){Year=2020,Start=1700,Fork=700},
     };
 
 

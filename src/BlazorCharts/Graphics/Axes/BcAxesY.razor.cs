@@ -22,10 +22,10 @@ namespace BlazorCharts
             Rect.W = 20 + maxString.CalcWidth(FontSize) + 10;
             Rect.H = AxisGroup.Rect.H;
 
-
-
             base.InitLayout();
         }
+
+
 
     }
 

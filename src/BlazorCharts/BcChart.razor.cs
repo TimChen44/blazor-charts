@@ -111,18 +111,27 @@ namespace BlazorCharts
         }
 
 
+        /// <summary>
+        /// 是否已经完成初始化，防止在在完成布局前就进行绘制，导致闪屏
+        /// </summary>
+        public bool IsInit { get; set; } = false;
 
 
         public void Drawing()
         {
             if (Data == null) return;
+            //准备数据
             this.DataAnalysis();
 
-
+            //布局元素
             BcTitle?.InitLayout();
             BcAxisGroup?.InitLayout();
-
             BcSeriesGroup?.InitLayout();
+
+            //初始化完成，通知绘制
+            IsInit = true;
+
+
 
 
             StateHasChanged();
