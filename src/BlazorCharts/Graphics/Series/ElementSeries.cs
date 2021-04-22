@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BlazorCharts
@@ -13,11 +14,6 @@ namespace BlazorCharts
         {
             Type = type;
         }
-
-        /// <summary>
-        /// 系列组对象
-        /// </summary>
-        [CascadingParameter] public BcSeriesGroup<TData> SeriesGroup { get; set; }
 
         /// <summary>
         /// 系列类型
@@ -49,13 +45,14 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
-
+            Rect = Chart.BcSeriesGroup.Rect.Copy();
         }
     }
 
     public enum SeriesType
     {
         Bar,
+        Line,
     }
 
 
@@ -63,8 +60,15 @@ namespace BlazorCharts
     /// 系列的数据
     /// </summary>
     /// <typeparam name="TData"></typeparam>
-    public record SeriesData<TData>(string Name)
+    public class SeriesData<TData>
     {
+        public SeriesData(string group)
+        {
+            Group = group;
+        }
+
+        public string Group { get; set; }
+
         public List<TData> Values { get; set; }
 
         public Dictionary<string, double> CategoryValue { get; set; } = new Dictionary<string, double>();

@@ -339,7 +339,7 @@ namespace BlazorCharts
 
         public string ToPoint()
         {
-            return $"{X} {Y}";
+            return $"{X},{Y}";
         }
     }
 

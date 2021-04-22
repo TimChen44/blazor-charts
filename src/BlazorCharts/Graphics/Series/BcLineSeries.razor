@@ -1,6 +1,34 @@
 ﻿@namespace BlazorCharts
-<h3>BcSeriesLine</h3>
+@inherits ElementSeries<TData>
+@typeparam TData
 
-@code {
+@if (Chart.IsInit)
+{
+<g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
+
+    @{
+        var color = (Group ?? "Line").RandomColor().ToHtml();
+        var colorDeepen = (Group ?? "Line").RandomColor().Deepen().ToHtml();
+        List<Point> points = new List<Point>();
+    }
+
+    @foreach (var category in Chart.BcAxisGroup.Categorys)
+    {
+        var rect = Chart.BcSeriesGroup.CategoryRects[category];
+        var value = SeriesDatas.CategoryValue[category];
+
+        points.Add(new Point(rect.C, Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value)));
+
+    }
+
+    <polyline points="@points.ToPoints()" stroke="@color" stroke-width=2 fill="none" />
+
+    @foreach (var item in points)
+    {
+        <rect x="@(item.X-4)" y="@(item.Y-4)" width="8" height="8" fill="@color" stroke="@colorDeepen" stroke-width=2 />
+    }
+
+
+</g>
 
 }

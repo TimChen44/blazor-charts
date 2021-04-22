@@ -15,13 +15,12 @@ namespace BlazorCharts
 
         protected override void OnInitialized()
         {
-            Console.WriteLine("BcBarSeries");
-
             base.OnInitialized();
         }
         public override void InitLayout()
         {
 
+            base.InitLayout();
         }
     }
 }

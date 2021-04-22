@@ -25,6 +25,16 @@ namespace BlazorCharts
             base.InitLayout();
         }
 
+        /// <summary>
+        /// 根据值或者这个值在X轴的高度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int GetHeightByValue(double value)
+        {
+            return (int)Math.Round((double)value / AxisGroup.AxesYMax * Rect.H, 0);        
+        
+        }
 
 
     }

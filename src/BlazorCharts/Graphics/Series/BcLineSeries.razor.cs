@@ -7,7 +7,11 @@ using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public partial class BcLineSeries
+    public partial class BcLineSeries<TData> : ElementSeries<TData>
     {
+        public BcLineSeries() : base(SeriesType.Line)
+        {
+
+        }
     }
 }

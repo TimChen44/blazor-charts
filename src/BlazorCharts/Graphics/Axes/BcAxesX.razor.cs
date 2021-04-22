@@ -19,6 +19,6 @@ namespace BlazorCharts
             Rect.B = AxisGroup.Rect.B;
 
             base.InitLayout();
-}
+        }
     }
 }

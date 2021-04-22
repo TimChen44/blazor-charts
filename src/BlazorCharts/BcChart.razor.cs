@@ -145,7 +145,7 @@ namespace BlazorCharts
         {
             //TODO:先实现功能，性能啥的，不能存在的 :p 
 
-            BcAxisGroup.CategoryValues = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
+            BcAxisGroup.Categorys = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
 
             BcAxisGroup.AxesYMax = double.MinValue;//TODO:此处最大值和最小值应该要取整
             BcAxisGroup.AxesYMin = double.MaxValue;
@@ -158,7 +158,7 @@ namespace BlazorCharts
                 else
                     sData.Values = Data.Where(x => GroupField(x) == series.Group).ToList();
 
-                foreach (var xValue in BcAxisGroup.CategoryValues)
+                foreach (var xValue in BcAxisGroup.Categorys)
                 {
                     var value = series.ValueFunc(sData.Values.Where(x => CategoryField(x) == xValue).ToList());
                     sData.CategoryValue.Add(xValue, value);

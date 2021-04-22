@@ -18,13 +18,17 @@ namespace BlazorCharts
         /// <summary>
         /// 从数据中分析出的分组
         /// </summary>
-        public List<string> CategoryValues { get; set; } = new List<string>();
+        public List<string> Categorys { get; set; } = new List<string>();
 
         /// <summary>
         /// 每一个分组在X轴上的位置
         /// </summary>
         public Dictionary<string, int> CategoryPositions { get; set; } = new Dictionary<string, int>();
 
+        /// <summary>
+        /// 两个分组之间的间隔
+        /// </summary>
+        public int CategoryDistance { get; set; }
 
         /// <summary>
         /// Y轴最大值//TODO:最大值应该还需要取整，之后做
@@ -89,11 +93,14 @@ namespace BlazorCharts
             AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
 
             //计算分组在X轴上的位置
-            for (int i = 0; i < CategoryValues.Count; i++)
+            var distance = (double)AxesX.Rect.W / (Categorys.Count);
+            for (int i = 0; i < Categorys.Count; i++)
             {
                 //为了解决无法评分时，增量误差，所以每个位置都重新计算
-                CategoryPositions.Add(CategoryValues[i], (int)Math.Round((double)AxesX.Rect.W / (CategoryValues.Count + 1) * (i + 1), 0));
+                CategoryPositions.Add(Categorys[i], (int)(distance * i + distance / 2));
             }
+
+            CategoryDistance = (int)Math.Round((double)AxesX.Rect.W / (Categorys.Count + 1), 0);
 
             base.InitLayout();
         }

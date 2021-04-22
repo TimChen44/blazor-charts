@@ -1,3 +1,32 @@
 ﻿@namespace BlazorCharts
 @inherits ElementSeries<TData>
 @typeparam TData
+
+@if (Chart.IsInit)
+{
+<g class="bc-bar-series" transform="translate(@Rect.LT.ToPoint())">
+
+    @{
+        var color = (Group ?? "Bar").RandomColor().ToHtml();
+        var colorStroke = (Group ?? "Bar").RandomColor().Deepen().ToHtml();
+    }
+
+    @foreach (var category in Chart.BcAxisGroup.Categorys)
+    {
+        var rect = Chart.BcSeriesGroup.CategoryRects[category];
+        var value = SeriesDatas.CategoryValue[category];
+
+        var bar = new Rect();
+        bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
+        bar.W = rect.W;
+        bar.C = rect.C;
+        bar.B = rect.B;
+
+        <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1 />
+
+    }
+
+</g>
+
+}
+
