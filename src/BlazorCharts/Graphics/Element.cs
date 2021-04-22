@@ -13,6 +13,9 @@ namespace BlazorCharts
     /// </summary>
     public abstract class Element<TData> : ComponentBase
     {
+        /// <summary>
+        /// 位置大小坐标
+        /// </summary>
         public Rect Rect { get; set; } = new Rect();
 
         protected override void OnInitialized()
@@ -32,6 +35,21 @@ namespace BlazorCharts
         /// </summary>
         public bool Visible { get; set; } = true;
 
+
+        #region 对外属性
+
+        private int? fontSize;
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        [Parameter]
+        public int FontSize
+        {
+            get => fontSize ?? Chart.FontSize; 
+            set => fontSize = value;
+        }
+
+        #endregion
 
 
         /// <summary>

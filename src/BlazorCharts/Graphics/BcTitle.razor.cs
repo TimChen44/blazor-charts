@@ -12,7 +12,7 @@ namespace BlazorCharts
     {
         public BcTitle()
         {
-
+            FontSize = 20;
         }
 
         #region 文本属性
@@ -21,11 +21,6 @@ namespace BlazorCharts
         /// 标题
         /// </summary>
         [Parameter] public string Title { get; set; }
-
-        /// <summary>
-        /// 文本尺寸
-        /// </summary>
-        [Parameter] public int FontSize { get; set; } = 20;
 
         /// <summary>
         /// 文本位置

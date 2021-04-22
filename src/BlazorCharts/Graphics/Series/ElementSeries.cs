@@ -27,10 +27,16 @@ namespace BlazorCharts
         [Parameter] public string Group { get; set; }
 
 
+        private string caption;
         /// <summary>
         /// 系列名字
         /// </summary>
-        [Parameter] public string Caption { get; set; }
+        [Parameter]
+        public string Caption
+        {
+            get => caption ?? Group;
+            set => caption = value;
+        }
 
         /// <summary>
         /// 值字段

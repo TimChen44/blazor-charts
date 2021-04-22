@@ -76,10 +76,10 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
-            //TODO:有了图例后，需要加入图例坐标计算
+      
             Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
             Rect.X = 0;
-            Rect.W = Chart.Width;
+            Rect.W = Chart.Width-Chart.BcLegend.Rect.W;//TODO:目前先假设图例始终在右边
             Rect.H = Chart.Height - Rect.Y;
 
             AxesYLeft?.InitLayout();

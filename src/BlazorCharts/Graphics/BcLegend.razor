@@ -3,6 +3,25 @@
 @typeparam TData
 
 
-<g class="bc-legend">
+<g class="bc-legend" transform="translate(@Rect.LT.ToPoint())">
+
+
+    @*<rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="rgb(64 64 64)" stroke-width=1 />*@
+
+    @for (int i = 0; i < Chart.BcSeriesGroup.Series.Count; i++)
+    {
+        var seties = Chart.BcSeriesGroup.Series[i];
+        var y = FontSize + i * (FontSize * 2);
+        var xIcon = FontSize;
+        var xText = xIcon + FontSize * 1.5;
+
+        var color = (seties.Group ?? seties.Type.ToString()).RandomColor().ToHtml();
+
+        <rect x="@xIcon" y="@y" width="@FontSize" height="@FontSize" fill="@color" />
+        <text>
+            <text x="@xText" y="@(y+FontSize)" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@Chart.BcSeriesGroup.Series[i].Caption</text>
+        </text>
+    }
 
 </g>
+@*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 0 255 / 0.50);" />*@

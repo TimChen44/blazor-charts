@@ -15,10 +15,5 @@ namespace BlazorCharts
         /// </summary>
         public BcAxisGroup<TData> AxisGroup { get; set; }
 
-        /// <summary>
-        /// 文本尺寸
-        /// </summary>
-        [Parameter] public int FontSize { get; set; } = 12;
-
     }
 }

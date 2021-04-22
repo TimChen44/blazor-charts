@@ -45,6 +45,12 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public int Height { get; set; }
 
+        /// <summary>
+        /// 字体尺寸，如果子元素没有设置尺寸，那么默认拿去此处的尺寸
+        /// </summary>
+        [Parameter] public int FontSize { get; set; } = 12;
+
+
         #endregion
 
         #region 图表元素
@@ -125,6 +131,8 @@ namespace BlazorCharts
 
             //布局元素
             BcTitle?.InitLayout();
+            BcLegend?.InitLayout();
+
             BcAxisGroup?.InitLayout();
             BcSeriesGroup?.InitLayout();
 
