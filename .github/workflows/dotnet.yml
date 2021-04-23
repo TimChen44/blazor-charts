@@ -20,5 +20,6 @@ jobs:
     - name: Package and publish to Nuget📦
       run: |
         dotnet build -c Release "./src/BlazorCharts/BlazorCharts.csproj"
+        dotnet test "./src/BlazorCharts.Tests/BlazorCharts.Tests.csproj"
 
 
