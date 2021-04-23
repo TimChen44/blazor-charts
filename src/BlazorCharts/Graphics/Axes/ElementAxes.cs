@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public class ElementAxes<TData> : Element<TData>
+    public abstract class ElementAxes<TData> : Element<TData>
     {
         /// <summary>
         /// 轴组

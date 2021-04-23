@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public class ElementSeries<TData> : Element<TData>
+    public abstract class ElementSeries<TData> : Element<TData>
     {
         public ElementSeries(SeriesType type)
         {
