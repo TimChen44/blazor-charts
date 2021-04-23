@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Package and publish to Nuget📦
+    - name: Build📦
       run: |
         dotnet build -c Release "./src/BlazorCharts/BlazorCharts.csproj"
+        dotnet test "./src/BlazorCharts.Tests/BlazorCharts.Tests.csproj"
 
 
