@@ -19,6 +19,6 @@ jobs:
         dotnet-version: 5.0.x
     - name: Package and publish to Nuget📦
       run: |
-        dotnet build -c Release
+        dotnet build -c Release "./src/BlazorCharts/BlazorCharts.csproj"
 
 
