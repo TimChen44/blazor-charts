@@ -17,15 +17,18 @@ namespace BlazorCharts
         /// <returns></returns>
         public static Color RandomColor(this string value)
         {
-            using (var md5 = MD5.Create())
-            {
-                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(value));
-                return Color.FromArgb(
-                    result[0] < 30 ? result[0] * 2 : result[0],
-                    result[1] < 30 ? result[1] * 2 : result[1],
-                    result[2] < 30 ? result[2] * 2 : result[2]);//防止颜色过深，不好看，将来可以做跟好的调色策略
+            var r = new Random();
+            return  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
+            //TODO:不知道为啥，浏览器尽然不支持MD5了，需要查一下资料他的替代品
+            //using (var md5 = MD5.Create())
+            //{
+            //    var result = md5.ComputeHash(Encoding.UTF8.GetBytes(value));
+            //    return Color.FromArgb(
+            //        result[0] < 30 ? result[0] * 2 : result[0],
+            //        result[1] < 30 ? result[1] * 2 : result[1],
+            //        result[2] < 30 ? result[2] * 2 : result[2]);//防止颜色过深，不好看，将来可以做跟好的调色策略
 
-            }
+            //}
         }
 
         /// <summary>

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorCharts\BlazorCharts.csproj" />
+    <ProjectReference Include="..\..\BlazorCharts.Docs\BlazorCharts.Docs.csproj" />
   </ItemGroup>
 
 </Project>
