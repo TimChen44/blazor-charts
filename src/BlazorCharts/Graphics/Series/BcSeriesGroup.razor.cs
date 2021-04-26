@@ -28,14 +28,6 @@ namespace BlazorCharts
             base.OnInitialized();
         }
 
-
-        /// <summary>
-        /// 每一个分类的图表占用的位置
-        /// 通常多个柱状图会通过平分此区域来显示
-        /// </summary>
-        public Dictionary<string, Rect> CategoryRects = new Dictionary<string, Rect>();
-
-
         public override void InitLayout()
         {
             //计算绘图区
@@ -45,13 +37,6 @@ namespace BlazorCharts
             Rect.W = Chart.BcAxisGroup.AxesX.Rect.R - Rect.X;
             Rect.H = Chart.BcAxisGroup.AxesX.Rect.T - Rect.Y;
 
-            foreach (var category in Chart.BcAxisGroup.Categorys)
-            {
-                var rect = new Rect(0, 0, Chart.BcAxisGroup.CategoryDistance / 2, Rect.H);//此处假设永远占用一般，但是为了显示效果，这里可以做成一个递增比例
-                rect.C = Chart.BcAxisGroup.CategoryPositions[category];
-
-                CategoryRects.Add(category, rect);
-            }
 
             foreach (var item in Series)
             {

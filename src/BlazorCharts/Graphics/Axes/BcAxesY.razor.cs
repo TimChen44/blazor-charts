@@ -18,12 +18,21 @@ namespace BlazorCharts
         {
             Rect.X = 0;
             Rect.Y = AxisGroup.Rect.T;
-            var maxString = AxisGroup.AxesYMax.ToString().Length > AxisGroup.AxesYMin.ToString().Length ? AxisGroup.AxesYMax.ToString() : AxisGroup.AxesYMin.ToString();
+
+            var max = Chart.GroupDatas.Max(x => x.Max);
+            var min = Chart.GroupDatas.Min(x => x.Min);
+
+            var maxString = max.ToString().Length > min.ToString().Length ? max.ToString() : min.ToString();
             Rect.W = 20 + maxString.CalcWidth(FontSize) + 10;
             Rect.H = AxisGroup.Rect.H;
+         
+            AxesYMax = max;
 
+            //TODO:此处还缺少考虑复数
             base.InitLayout();
         }
+
+        public double AxesYMax { get; set; }
 
         /// <summary>
         /// 根据值或者这个值在X轴的高度
@@ -32,11 +41,8 @@ namespace BlazorCharts
         /// <returns></returns>
         public int GetHeightByValue(double value)
         {
-            return (int)Math.Round((double)value / AxisGroup.AxesYMax * Rect.H, 0);        
-        
+            return (int)Math.Round((double)value / AxesYMax * Rect.H, 0);
         }
-
-
     }
 
     public enum AxesYPosition

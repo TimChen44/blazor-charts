@@ -39,20 +39,21 @@ namespace BlazorCharts
         }
 
         /// <summary>
+        /// 使用次坐标轴
+        /// </summary>
+        [Parameter] public bool IsSecondaryAxis { get; set; }
+
+        /// <summary>
         /// 值字段
         /// </summary>
         [Parameter] public Func<List<TData>, double> ValueFunc { get; set; }
-
-        /// <summary>
-        /// 系列的数据，界面就给予这个数据呈现
-        /// </summary>
-        public SeriesData<TData> SeriesDatas { get; set; }
-
 
         public override void InitLayout()
         {
             Rect = Chart.BcSeriesGroup.Rect.Copy();
         }
+
+
     }
 
     public enum SeriesType
@@ -61,22 +62,4 @@ namespace BlazorCharts
         Line,
     }
 
-
-    /// <summary>
-    /// 系列的数据
-    /// </summary>
-    /// <typeparam name="TData"></typeparam>
-    public class SeriesData<TData>
-    {
-        public SeriesData(string group)
-        {
-            Group = group;
-        }
-
-        public string Group { get; set; }
-
-        public List<TData> Values { get; set; }
-
-        public Dictionary<string, double> CategoryValue { get; set; } = new Dictionary<string, double>();
-    }
 }

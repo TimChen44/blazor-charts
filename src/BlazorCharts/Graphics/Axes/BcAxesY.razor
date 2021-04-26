@@ -12,7 +12,7 @@
         @for (int i = 0; i < 6; i++)
         {
             var h = (int)(Rect.H - ((double)Rect.H / 5 * i));
-            var v = AxisGroup.AxesYMax / 5 * i;
+            var v = AxesYMax / 5 * i;
 
             <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="rgb(64 64 64)" stroke-width="1"></line>
             <text>

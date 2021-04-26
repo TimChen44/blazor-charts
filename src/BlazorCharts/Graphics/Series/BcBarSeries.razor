@@ -4,29 +4,31 @@
 
 @if (Chart.IsInit)
 {
-<g class="bc-bar-series" transform="translate(@Rect.LT.ToPoint())">
+    <g class="bc-bar-series" transform="translate(@Rect.LT.ToPoint())">
 
-    @{
-        var color = (Group ?? "Bar").RandomColor().ToHtml();
-        var colorStroke = (Group ?? "Bar").RandomColor().Deepen().ToHtml();
-    }
+        @{
+            var color = (Group ?? "Bar").RandomColor().ToHtml();
+            var colorStroke = (Group ?? "Bar").RandomColor().Deepen().ToHtml();
 
-    @foreach (var category in Chart.BcAxisGroup.Categorys)
-    {
-        var rect = Chart.BcSeriesGroup.CategoryRects[category];
-        var value = SeriesDatas.CategoryValue[category];
+            var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcBarSeries<TData>).Max(x => ((BcBarSeries<TData>)x).SequenceNumber);
+        }
 
-        var bar = new Rect();
-        bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
-        bar.W = rect.W;
-        bar.C = rect.C;
-        bar.B = rect.B;
+        @foreach (var category in Chart.CategoryDatas)
+        {
 
-        <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1 />
+            var value = category.SeriesValues[Group];
 
-    }
+            var bar = new Rect();
+            bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
+            bar.W = (int)(category.AxesWidthRatio * Chart.BcAxisGroup.AxesX.Rect.W / (barCount + 1));//多个bar宽度这里需要做运算
+            bar.C = (int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio);
+            bar.B = Rect.H;
 
-</g>
+            <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1 />
+
+        }
+
+    </g>
 
 }
 

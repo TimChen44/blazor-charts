@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
@@ -30,6 +31,57 @@ namespace BlazorCharts
         /// 分组字段，可以将一个字段中的值分成不同的系列处理
         /// </summary>
         [Parameter] public Func<TData, string> GroupField { get; set; }
+
+
+        /// <summary>
+        /// 分类集合
+        /// </summary>
+        public List<CategoryData<TData>> CategoryDatas { get; set; } = new List<CategoryData<TData>>();
+
+        /// <summary>
+        /// 数值集合
+        /// </summary>
+        public List<GroupData> GroupDatas { get; set; } = new List<GroupData>();
+
+        /// <summary>
+        /// 处理数据
+        /// </summary>
+        public void DataAnalysis()
+        {
+            //TODO:先实现功能，性能啥的，不能存在的 :p 
+            //TODO:将来可以将DataAnalysis部分代码抽象到继承自CategoryData的对象中来应对不同类型的图表一些数据获取上的差异
+
+            //获得所有分组
+            var categorys = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
+
+            for (int i = 0; i < categorys.Count; i++)
+            {
+                var category = categorys[i];
+
+                var categoryData = new CategoryData<TData>(category);
+                CategoryDatas.Add(categoryData);
+
+                categoryData.DataValues = Data.Where(x => CategoryField(x) == category).ToList();
+                foreach (var series in BcSeriesGroup.Series)
+                {
+                    categoryData.SeriesValues.Add(series.Group, series.ValueFunc(categoryData.DataValues));
+                }
+
+                categoryData.AxesWidthRatio = (double)1 / (categorys.Count);
+                categoryData.AxesZeroRatio = categoryData.AxesWidthRatio * i + categoryData.AxesWidthRatio / 2;
+
+            }
+
+            foreach (var series in BcSeriesGroup.Series)
+            {
+                var group = new GroupData(series.Group);
+                GroupDatas.Add(group);
+
+                group.Max = CategoryDatas.Max(x => x.SeriesValues[series.Group]);
+                group.Min = CategoryDatas.Min(x => x.SeriesValues[series.Group]);
+            }
+        }
+
 
         #endregion
 
@@ -146,38 +198,6 @@ namespace BlazorCharts
         }
 
 
-        /// <summary>
-        /// 处理数据
-        /// </summary>
-        public void DataAnalysis()
-        {
-            //TODO:先实现功能，性能啥的，不能存在的 :p 
-
-            BcAxisGroup.Categorys = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
-
-            BcAxisGroup.AxesYMax = double.MinValue;//TODO:此处最大值和最小值应该要取整
-            BcAxisGroup.AxesYMin = double.MaxValue;
-
-            foreach (var series in BcSeriesGroup.Series)
-            {
-                var sData = new SeriesData<TData>(series.Group);
-                if (GroupField == null || string.IsNullOrWhiteSpace(series.Group))
-                    sData.Values = Data.ToList();
-                else
-                    sData.Values = Data.Where(x => GroupField(x) == series.Group).ToList();
-
-                foreach (var xValue in BcAxisGroup.Categorys)
-                {
-                    var value = series.ValueFunc(sData.Values.Where(x => CategoryField(x) == xValue).ToList());
-                    sData.CategoryValue.Add(xValue, value);
-
-                    if (value > BcAxisGroup.AxesYMax) BcAxisGroup.AxesYMax = value;
-                    if (value < BcAxisGroup.AxesYMin) BcAxisGroup.AxesYMin = value;
-                }
-
-                series.SeriesDatas = sData;
-            }
-        }
     }
 }
 

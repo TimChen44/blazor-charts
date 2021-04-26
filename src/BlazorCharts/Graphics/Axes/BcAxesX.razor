@@ -8,13 +8,13 @@
 
         <line x1="0" y1="0" x2="@Rect.W" y2="0" stroke="#767676" stroke-width="1" />
 
-        @foreach (var category in AxisGroup.Categorys)
+        @foreach (var category in Chart.CategoryDatas)
         {
             @*var x = (int)((double)Rect.W / (AxisGroup.CategoryValues.Count + 1) * (i+1));*@
 
             <text>
-                <text font-size="@FontSize" fill="#767676" x="@(AxisGroup.CategoryPositions[category])" y="FontSize"
-                      transform="translate(0,@(FontSize))" text-anchor="@TextAnchor.Middle.ToDescription()">@category</text>
+                <text font-size="@FontSize" fill="#767676" x="@(category.AxesZeroRatio* Rect.W)" y="FontSize"
+                      transform="translate(0,@(FontSize))" text-anchor="@TextAnchor.Middle.ToDescription()">@category.Category</text>
             </text>
 
         }
