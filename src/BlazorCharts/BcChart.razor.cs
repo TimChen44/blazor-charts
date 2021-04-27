@@ -41,7 +41,7 @@ namespace BlazorCharts
         /// <summary>
         /// 图例项（系列）数据集
         /// </summary>
-        public List<GroupData> SeriesDatas { get; set; } = new List<GroupData>();
+        public List<SeriesData> SeriesDatas { get; set; } = new List<SeriesData>();
 
         /// <summary>
         /// 处理数据
@@ -74,7 +74,7 @@ namespace BlazorCharts
 
             foreach (var series in BcSeriesGroup.Series)
             {
-                var group = new GroupData(series.Group);
+                var group = new SeriesData(series.Group);
                 SeriesDatas.Add(group);
 
                 group.Max = CategoryDatas.Max(x => x.SeriesValues[series.Group]);

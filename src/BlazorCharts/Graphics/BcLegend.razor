@@ -2,25 +2,51 @@
 @inherits Element<TData>
 @typeparam TData
 
+@if (Chart.IsInit)
+{
 
-<g class="bc-legend" transform="translate(@Rect.LT.ToPoint())">
+    <g class="bc-legend" transform="translate(@Rect.LT.ToPoint())">
 
-    @*<rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="rgb(64 64 64)" stroke-width=1 />*@
 
-    @for (int i = 0; i < Chart.BcSeriesGroup.Series.Count; i++)
-    {
-        var seties = Chart.BcSeriesGroup.Series[i];
-        var y = FontSize + i * (FontSize * 2);
-        var xIcon = FontSize;
-        var xText = xIcon + FontSize * 1.5;
+        @if (BorderWidth > 0)
+        {
+            <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@BorderColor.ToHtml()" stroke-width="@BorderWidth" />
+        }
 
-        var color = (seties.Group ?? seties.Type.ToString()).RandomColor().ToHtml();
 
-        <rect x="@xIcon" y="@y" width="@FontSize" height="@FontSize" fill="@color" />
-        <text>
-            <text x="@xText" y="@(y+FontSize)" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@Chart.BcSeriesGroup.Series[i].Caption</text>
-        </text>
-    }
+        @for (int i = 0; i < Chart.BcSeriesGroup.Series.Count; i++)
+        {
 
-</g>
-@*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 0 255 / 0.50);" />*@
+            //计算图例项目的基础位置
+            var yBase = 0;
+            var xBase = 0;
+            if (_ItemDirection == "Row")
+            {
+                xBase = Padding.L + _ItemSize.W * i;
+                yBase = Padding.T;
+            }
+            else
+            {
+                xBase = Padding.L;
+                yBase = Padding.T + _ItemSize.H * i;
+            }
+
+            //颜色和文字坐标
+            var xIcon = xBase + ItemSpacing / 2;
+            var yIcon = yBase + ItemSpacing / 2;
+
+            var xText = xIcon + FontSize * 1.5;
+            var yText = yBase + FontSize + ItemSpacing / 2;
+           
+            var series = Chart.BcSeriesGroup.Series[i];
+            var color = series.Group.RandomColor().ToHtml();
+
+            <rect x="@xIcon" y="@yIcon" width="@FontSize" height="@FontSize" fill="@color" />
+            <text>
+                <text x="@xText" y="@yText" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@series.Caption</text>
+            </text>
+        }
+
+    </g>
+    @*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 0 255 / 0.50);" />*@
+}

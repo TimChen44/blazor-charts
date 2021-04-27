@@ -54,15 +54,14 @@ namespace BlazorCharts
     /// <summary>
     /// 分组数据：系列数据，以系列为单位记录记录一些数据
     /// </summary>
-    public class GroupData
+    public class SeriesData
     {
-        public GroupData(string group)
+        public SeriesData(string seriesName)
         {
-            Group = group;
+            SeriesName = seriesName;
         }
 
-        public string Group { get; set; }
-
+        public string SeriesName { get; set; }
 
         public double Max { get; set; }
 

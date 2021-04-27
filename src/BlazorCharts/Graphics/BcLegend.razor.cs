@@ -53,22 +53,75 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public int ItemSpacing { get => _ItemSpacing ?? FontSize / 2; set => _ItemSpacing = value; }
 
+
+        /// <summary>
+        /// 单个项目的大小
+        /// </summary>
+        private Size _ItemSize;
+        /// <summary>
+        /// 项目排版方向 Row,Col
+        /// </summary>
+        private string _ItemDirection;
+
         public override void InitLayout()
         {
             //先算出最大的文本
             var maxString = "";
-            foreach (var item in Chart.CategoryDatas)
+            foreach (var item in Chart.SeriesDatas)
             {
-                if (item.Category.Length > maxString.Length)
-                    maxString = item.Category;
+                if (item.SeriesName.Length > maxString.Length)
+                    maxString = item.SeriesName;
             }
-            Size fontSize = new Size(maxString.CalcWidth(FontSize), FontSize + ItemSpacing);
 
+            _ItemSize = new Size(maxString.CalcWidth(FontSize) + FontSize + FontSize / 2 + ItemSpacing, FontSize + ItemSpacing);
 
-            Rect.W = Padding.L + fontSize.W + Padding.R;
-            Rect.H = fontSize.H * Chart.SeriesDatas.Count;
-            Rect.R = Chart.Width;
-            Rect.M = (Chart.Height - Chart.BcTitle.Rect.H) / 2;
+            //设置图例框的大小
+            switch (Position)
+            {
+                case LegendPosition.Left:
+                case LegendPosition.LeftTop:
+                case LegendPosition.LeftBottom:
+                case LegendPosition.Right:
+                case LegendPosition.RightTop:
+                case LegendPosition.RightBottom:
+                    Rect.W = Padding.L + _ItemSize.W + Padding.R;
+                    Rect.H = Padding.T + _ItemSize.H * Chart.SeriesDatas.Count + Padding.B;
+                    _ItemDirection = "Col";
+                    break;
+
+                case LegendPosition.Top:
+                case LegendPosition.Bottom:
+                    Rect.W = Padding.L + _ItemSize.W * Chart.SeriesDatas.Count + Padding.R;
+                    Rect.H = Padding.T + _ItemSize.H + Padding.B;
+                    _ItemDirection = "Row";
+                    break;
+            }
+
+            Rect.X = Position switch
+            {
+                LegendPosition.Left => 0,
+                LegendPosition.LeftTop => 0,
+                LegendPosition.LeftBottom => 0,
+                LegendPosition.Right => Chart.Width - Rect.W,
+                LegendPosition.RightTop => Chart.Width - Rect.W,
+                LegendPosition.RightBottom => Chart.Width - Rect.W,
+                LegendPosition.Top => Chart.Width / 2 - Rect.W / 2,
+                LegendPosition.Bottom => Chart.Width / 2 - Rect.W / 2,
+                _ => throw new NotImplementedException(),
+            };
+
+            Rect.Y = Position switch
+            {
+                LegendPosition.Top => 0,
+                LegendPosition.LeftTop => 0,
+                LegendPosition.RightTop => 0,
+                LegendPosition.Bottom => Chart.Height - Rect.H,
+                LegendPosition.LeftBottom => Chart.Height - Rect.H,
+                LegendPosition.RightBottom => Chart.Height - Rect.H,
+                LegendPosition.Left => Chart.Height / 2 - Rect.H / 2,
+                LegendPosition.Right => Chart.Height / 2 - Rect.H / 2,
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 
