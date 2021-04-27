@@ -19,8 +19,8 @@ namespace BlazorCharts
             Rect.X = 0;
             Rect.Y = AxisGroup.Rect.T;
 
-            var max = Chart.GroupDatas.Max(x => x.Max);
-            var min = Chart.GroupDatas.Min(x => x.Min);
+            var max = Chart.SeriesDatas.Max(x => x.Max);
+            var min = Chart.SeriesDatas.Min(x => x.Min);
 
             var maxString = max.ToString().Length > min.ToString().Length ? max.ToString() : min.ToString();
             Rect.W = 20 + maxString.CalcWidth(FontSize) + 10;

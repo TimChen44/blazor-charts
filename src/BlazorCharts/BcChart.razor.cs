@@ -34,14 +34,14 @@ namespace BlazorCharts
 
 
         /// <summary>
-        /// 分类集合
+        /// 水平（分类）轴标签 数据集
         /// </summary>
         public List<CategoryData<TData>> CategoryDatas { get; set; } = new List<CategoryData<TData>>();
 
         /// <summary>
-        /// 数值集合
+        /// 图例项（系列）数据集
         /// </summary>
-        public List<GroupData> GroupDatas { get; set; } = new List<GroupData>();
+        public List<GroupData> SeriesDatas { get; set; } = new List<GroupData>();
 
         /// <summary>
         /// 处理数据
@@ -75,7 +75,7 @@ namespace BlazorCharts
             foreach (var series in BcSeriesGroup.Series)
             {
                 var group = new GroupData(series.Group);
-                GroupDatas.Add(group);
+                SeriesDatas.Add(group);
 
                 group.Max = CategoryDatas.Max(x => x.SeriesValues[series.Group]);
                 group.Min = CategoryDatas.Min(x => x.SeriesValues[series.Group]);
