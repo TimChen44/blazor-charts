@@ -18,10 +18,13 @@
 
             var value = category.SeriesValues[Group];
 
+            var barFillWidth = Chart.BcAxisGroup.AxesX.Rect.W * category.AxesWidthRatio; //柱状图全部的宽度
+            var barCenter = Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio;//分类中心位置
+
             var bar = new Rect();
             bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
-            bar.W = (int)(category.AxesWidthRatio * Chart.BcAxisGroup.AxesX.Rect.W / (barCount + 1));//多个bar宽度这里需要做运算
-            bar.C = (int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio);
+            bar.W = (int)(((double)1 / (barCount + 1)) * barFillWidth);//始终保证空开一条柱状图
+            bar.C = (int)(barCenter - (barFillWidth) / 2 + bar.W * SequenceNumber);
             bar.B = Rect.H;
 
             <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1 />
