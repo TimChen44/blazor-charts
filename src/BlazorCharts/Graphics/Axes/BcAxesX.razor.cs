@@ -14,7 +14,7 @@ namespace BlazorCharts
         public override void InitLayout()
         {
             Rect.H = 10 + FontSize + 20;
-            Rect.X = 0;
+            Rect.X = AxisGroup.Rect.X;
             Rect.W = AxisGroup.Rect.W;
             Rect.B = AxisGroup.Rect.B;
 

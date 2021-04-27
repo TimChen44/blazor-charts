@@ -16,7 +16,7 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
-            Rect.X = 0;
+            Rect.X = AxisGroup.Rect.X;
             Rect.Y = AxisGroup.Rect.T;
 
             var max = Chart.SeriesDatas.Max(x => x.Max);

@@ -112,9 +112,9 @@ namespace BlazorCharts
 
             Rect.Y = Position switch
             {
-                LegendPosition.Top => 0,
-                LegendPosition.LeftTop => 0,
-                LegendPosition.RightTop => 0,
+                LegendPosition.Top => Chart.BcTitle.Rect.B,
+                LegendPosition.LeftTop => Chart.BcTitle.Rect.B,
+                LegendPosition.RightTop => Chart.BcTitle.Rect.B,
                 LegendPosition.Bottom => Chart.Height - Rect.H,
                 LegendPosition.LeftBottom => Chart.Height - Rect.H,
                 LegendPosition.RightBottom => Chart.Height - Rect.H,

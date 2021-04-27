@@ -11,7 +11,6 @@ namespace BlazorCharts
     {
         protected override void OnInitialized()
         {
-            Console.WriteLine("BcSeriesGroup");
             base.OnInitialized();
         }
 
@@ -50,11 +49,37 @@ namespace BlazorCharts
 
         public override void InitLayout()
         {
-      
-            Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
-            Rect.X = 0;
-            Rect.W = Chart.Width-Chart.BcLegend.Rect.W;//TODO:目前先假设图例始终在右边
-            Rect.H = Chart.Height - Rect.Y;
+            switch (Chart.BcLegend.Position)
+            {
+                case LegendPosition.Top:
+                    Rect.Y = Chart.BcLegend?.Rect.B ?? 0;
+                    Rect.X = 0;
+                    Rect.W = Chart.Width;
+                    Rect.H = Chart.Height - Rect.Y;
+                    break;
+                case LegendPosition.Bottom:
+                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                    Rect.X = 0;
+                    Rect.W = Chart.Width;
+                    Rect.H = Chart.Height - Chart.BcLegend.Rect.H - Rect.Y;
+                    break;
+                case LegendPosition.Left:
+                case LegendPosition.LeftTop:
+                case LegendPosition.LeftBottom:
+                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                    Rect.X = Chart.BcLegend.Rect.R;
+                    Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
+                    Rect.H = Chart.Height - Rect.Y;
+                    break;
+                case LegendPosition.Right:
+                case LegendPosition.RightTop:
+                case LegendPosition.RightBottom:
+                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                    Rect.X = 0;
+                    Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
+                    Rect.H = Chart.Height - Rect.Y;
+                    break;
+            }
 
             AxesYLeft?.InitLayout();
             AxesYRight?.InitLayout();
@@ -63,7 +88,7 @@ namespace BlazorCharts
 
             //微调X轴和Y轴，去除重复区域
             AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft.Rect.Y;
-            AxesX.Rect.X = AxesYLeft.Rect.W;
+            AxesX.Rect.X = AxesYLeft.Rect.R;
             AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
 
             base.InitLayout();
