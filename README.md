@@ -1,6 +1,9 @@
 # blazor-charts
 基于blazor技术，使用C#编写的charts组件。
 
+# Demo
+
+[https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
 
 ### 当前效果
 
