@@ -1,16 +1,23 @@
 # blazor-charts
+
 基于blazor技术，使用C#编写的charts组件。
 
-# Demo
+DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
 
-[https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
-
-### 当前效果
-
-![image](https://user-images.githubusercontent.com/7581981/116263448-f5cc8680-a7ab-11eb-94d3-3ec488a2f47b.png)
 
 
 ### 使用方法
+
+1. 安装组件包
+
+```bash
+Install-Package BlazorCharts -Version 0.1.0-pre-210428055944
+```
+
+2. 修改`_Imports.razor`文件，添加引用`@using BlazorCharts`
+
+3. 页面中使用
+
 ```html
 <BcChart Height="400" Width="600" Data="githubs" CategoryField="x=>x.Year.ToString()">
     <BcTitle Title="@title" TData="Github"></BcTitle>
@@ -41,3 +48,7 @@ public class Github
     public int Fork { get; set; }
 }
 ```
+
+4. 执行查看效果
+
+![image](https://user-images.githubusercontent.com/7581981/116263448-f5cc8680-a7ab-11eb-94d3-3ec488a2f47b.png)
