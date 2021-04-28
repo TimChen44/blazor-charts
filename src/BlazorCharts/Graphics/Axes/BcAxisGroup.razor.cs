@@ -49,37 +49,49 @@ namespace BlazorCharts
 
         public override void Drawing()
         {
-            switch (Chart.BcLegend.Position)
-            {
-                case LegendPosition.Top:
-                    Rect.Y = Chart.BcLegend?.Rect.B ?? 0;
-                    Rect.X = 0;
-                    Rect.W = Chart.Width;
-                    Rect.H = Chart.Height - Rect.Y;
-                    break;
-                case LegendPosition.Bottom:
-                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
-                    Rect.X = 0;
-                    Rect.W = Chart.Width;
-                    Rect.H = Chart.Height - Chart.BcLegend.Rect.H - Rect.Y;
-                    break;
-                case LegendPosition.Left:
-                case LegendPosition.LeftTop:
-                case LegendPosition.LeftBottom:
-                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
-                    Rect.X = Chart.BcLegend.Rect.R;
-                    Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
-                    Rect.H = Chart.Height - Rect.Y;
-                    break;
-                case LegendPosition.Right:
-                case LegendPosition.RightTop:
-                case LegendPosition.RightBottom:
-                    Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
-                    Rect.X = 0;
-                    Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
-                    Rect.H = Chart.Height - Rect.Y;
-                    break;
+            if (Chart.BcLegend == null)
+            {//不存在时
+                Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                Rect.X = 0;
+                Rect.W = Chart.Width;
+                Rect.H = Chart.Height - Rect.Y;
             }
+            else
+            {//存在图例时
+                switch (Chart.BcLegend.Position)
+                {
+                    case LegendPosition.Top:
+                        Rect.Y = Chart.BcLegend.Rect.B;
+                        Rect.X = 0;
+                        Rect.W = Chart.Width;
+                        Rect.H = Chart.Height - Rect.Y;
+                        break;
+                    case LegendPosition.Bottom:
+                        Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                        Rect.X = 0;
+                        Rect.W = Chart.Width;
+                        Rect.H = Chart.Height - Chart.BcLegend.Rect.H - Rect.Y;
+                        break;
+                    case LegendPosition.Left:
+                    case LegendPosition.LeftTop:
+                    case LegendPosition.LeftBottom:
+                        Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                        Rect.X = Chart.BcLegend.Rect.R;
+                        Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
+                        Rect.H = Chart.Height - Rect.Y;
+                        break;
+                    case LegendPosition.Right:
+                    case LegendPosition.RightTop:
+                    case LegendPosition.RightBottom:
+                        Rect.Y = Chart.BcTitle?.Rect.B ?? 0;
+                        Rect.X = 0;
+                        Rect.W = Chart.Width - Chart.BcLegend.Rect.W;
+                        Rect.H = Chart.Height - Rect.Y;
+                        break;
+                }
+            }
+
+            //TODO:这里暂时没有考虑图例浮与图表上面的情况，将来可以考虑支持
 
             AxesYLeft?.Drawing();
             AxesYRight?.Drawing();
