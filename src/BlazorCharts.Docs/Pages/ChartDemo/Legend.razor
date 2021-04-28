@@ -6,9 +6,9 @@
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="图例" TData="Github"></BcTitle>
-                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
-                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View" Caption="访问"></BcBarSeries>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start" Caption="点赞"></BcBarSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork" Caption="分叉"></BcLineSeries>
                     <BcLegend TData="Github" BorderWidth="@borderWidth" BorderColor="@color" Position="@position" Padding="padding"></BcLegend>
                 </BcChart>
             </div>
