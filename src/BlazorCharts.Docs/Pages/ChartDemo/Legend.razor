@@ -4,31 +4,53 @@
     <ChildContent>
         <div class="card">
             <div class="chart">
-                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="图例" TData="Github"></BcTitle>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
-                    <BcLegend TData="Github" BorderWidth="1" Position="@position"></BcLegend>
+                    <BcLegend TData="Github" BorderWidth="@borderWidth" BorderColor="@color" Position="@position" Padding="padding"></BcLegend>
                 </BcChart>
             </div>
             <div class="prop">
-                <Divider Text="位置"  Orientation="left"></Divider>
+                <Divider Text="位置" Orientation="left"></Divider>
                 <RadioGroup @bind-Value="@position">
                     <Radio Value="LegendPosition.Top">Top</Radio>
                     <Radio Value="LegendPosition.Bottom">Bottom</Radio>
                     <Radio Value="LegendPosition.Left">Left</Radio>
                     <Radio Value="LegendPosition.LeftTop">LeftTop</Radio>
                     <Radio Value="LegendPosition.LeftBottom">LeftBottom</Radio>
+                    <Radio Value="LegendPosition.Right">RightTop</Radio>
                     <Radio Value="LegendPosition.RightTop">RightTop</Radio>
                     <Radio Value="LegendPosition.RightBottom">RightBottom</Radio>
                 </RadioGroup>
+                <Divider Text="边框宽度和颜色" Orientation="left"></Divider>
+                <InputNumber @bind-Value="@borderWidth"></InputNumber>
+                <input type="color" @bind="@color" />
+
+                <Divider Text="内边距" Orientation="left"></Divider>
+                左:<InputNumber @bind-Value="@padding.L"></InputNumber>　上:<InputNumber @bind-Value="@padding.T"></InputNumber>　右:<InputNumber @bind-Value="@padding.R"></InputNumber>　下:<InputNumber @bind-Value="@padding.B"></InputNumber>
+                <Divider></Divider>
+                <Button Type="primary" OnClick="OnClick">应用</Button>
             </div>
         </div>
     </ChildContent>
 </Card>
 
 @code{
-    LegendPosition position= LegendPosition.Top;
+    LegendPosition position = LegendPosition.Top;
+
+    int borderWidth = 1;
+
+    string color;
+
+    Padding padding = new Padding(5);
+
+    BcChart<Github> bcChart;
+
+    public void OnClick()
+    {
+        bcChart.Refresh();
+    }
 
 }

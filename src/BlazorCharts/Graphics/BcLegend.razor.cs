@@ -1,5 +1,4 @@
-﻿using BlazorCharts.Core;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,10 +16,21 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public LegendPosition Position { get; set; } = LegendPosition.Right;
 
+
+        private Padding _Padding;
         /// <summary>
         /// 边框内部距离
         /// </summary>
-        [Parameter] public Padding Padding { get; set; } = new Padding(5);
+        [Parameter]
+        public Padding Padding
+        {
+            get
+            {
+                if (_Padding == null) _Padding = new Padding(5);
+                return _Padding;
+            }
+            set => _Padding = value;
+        }
         /// <summary>
         ///边框左部距离
         /// </summary>
@@ -45,7 +55,7 @@ namespace BlazorCharts
         /// <summary>
         /// 边框颜色
         /// </summary>
-        [Parameter] public Color BorderColor { get; set; } = Color.Silver;
+        [Parameter] public string BorderColor { get; set; }
 
         public int? _ItemSpacing;
         /// <summary>
@@ -63,7 +73,7 @@ namespace BlazorCharts
         /// </summary>
         private string _ItemDirection;
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             //先算出最大的文本
             var maxString = "";

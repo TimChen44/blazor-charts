@@ -28,7 +28,7 @@ namespace BlazorCharts
             base.OnInitialized();
         }
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             //计算绘图区
             Rect.X = Chart.BcAxisGroup.AxesYLeft.Rect.R;
@@ -39,10 +39,10 @@ namespace BlazorCharts
 
             foreach (var item in Series)
             {
-                item.InitLayout();
+                item.Drawing();
             }
 
-            base.InitLayout();
+            base.Drawing();
         }
 
     }

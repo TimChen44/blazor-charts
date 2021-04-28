@@ -10,7 +10,7 @@
 
         @if (BorderWidth > 0)
         {
-            <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@BorderColor.ToHtml()" stroke-width="@BorderWidth" />
+            <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@(BorderColor??"#C0C0C0FF")" stroke-width="@BorderWidth" />
         }
 
 
@@ -37,7 +37,7 @@
 
             var xText = xIcon + FontSize * 1.5;
             var yText = yBase + FontSize + ItemSpacing / 2;
-           
+
             var series = Chart.BcSeriesGroup.Series[i];
             var color = series.Group.RandomColor().ToHtml();
 

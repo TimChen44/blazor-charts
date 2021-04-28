@@ -51,6 +51,9 @@ namespace BlazorCharts
             //TODO:先实现功能，性能啥的，不能存在的 :p 
             //TODO:将来可以将DataAnalysis部分代码抽象到继承自CategoryData的对象中来应对不同类型的图表一些数据获取上的差异
 
+            //初始化数据
+            CategoryDatas.Clear();
+            SeriesDatas.Clear();
             //获得所有分组
             var categorys = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
 
@@ -154,6 +157,19 @@ namespace BlazorCharts
 
         #endregion
 
+        #region 方法
+
+        /// <summary>
+        /// 刷新显示，主要用于设置修改后用新的设置进行显示
+        /// </summary>
+        public void Refresh()
+        {
+            Drawing();
+        }
+
+        #endregion
+
+
         public BcChart()
         {
 
@@ -178,21 +194,19 @@ namespace BlazorCharts
         public void Drawing()
         {
             if (Data == null) return;
+   
             //准备数据
             this.DataAnalysis();
 
             //布局元素
-            BcTitle?.InitLayout();
-            BcLegend?.InitLayout();
+            BcTitle?.Drawing();
+            BcLegend?.Drawing();
 
-            BcAxisGroup?.InitLayout();
-            BcSeriesGroup?.InitLayout();
+            BcAxisGroup?.Drawing();
+            BcSeriesGroup?.Drawing();
 
             //初始化完成，通知绘制
             IsInit = true;
-
-
-
 
             StateHasChanged();
         }

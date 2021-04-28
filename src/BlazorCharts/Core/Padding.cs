@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorCharts.Core
+namespace BlazorCharts
 {
     /// <summary>
     /// 元素内部四周预留空间

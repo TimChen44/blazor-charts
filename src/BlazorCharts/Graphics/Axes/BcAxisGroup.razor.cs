@@ -47,7 +47,7 @@ namespace BlazorCharts
         }
 
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             switch (Chart.BcLegend.Position)
             {
@@ -81,17 +81,17 @@ namespace BlazorCharts
                     break;
             }
 
-            AxesYLeft?.InitLayout();
-            AxesYRight?.InitLayout();
+            AxesYLeft?.Drawing();
+            AxesYRight?.Drawing();
 
-            AxesX?.InitLayout();
+            AxesX?.Drawing();
 
             //微调X轴和Y轴，去除重复区域
             AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft.Rect.Y;
             AxesX.Rect.X = AxesYLeft.Rect.R;
             AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
 
-            base.InitLayout();
+            base.Drawing();
         }
     }
 

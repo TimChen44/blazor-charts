@@ -14,7 +14,7 @@ namespace BlazorCharts
         /// </summary>
         public AxesYPosition Position { get; set; } = AxesYPosition.Left;
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             Rect.X = AxisGroup.Rect.X;
             Rect.Y = AxisGroup.Rect.T;
@@ -29,7 +29,7 @@ namespace BlazorCharts
             AxesYMax = max;
 
             //TODO:此处还缺少考虑复数
-            base.InitLayout();
+            base.Drawing();
         }
 
         public double AxesYMax { get; set; }

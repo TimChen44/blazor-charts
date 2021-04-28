@@ -48,7 +48,7 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public Func<List<TData>, double> ValueFunc { get; set; }
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             Rect = Chart.BcSeriesGroup.Rect.Copy();
         }

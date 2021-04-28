@@ -19,12 +19,18 @@ namespace BlazorCharts
 
         }
 
-        public override void InitLayout()
+        public override void Drawing()
         {
             //给柱状图进行编号
-            this.SequenceNumber = Chart.BcSeriesGroup.Series.Where(x => x is BcBarSeries<TData>).Max(x => ((BcBarSeries<TData>)x).SequenceNumber) + 1;
-
-            base.InitLayout();
+            //如果有多个柱状图存在多次重复执行的问题，性能影响很小，所以以后再说
+            var sn = 1;
+            foreach (BcBarSeries<TData> item in Chart.BcSeriesGroup.Series.Where(x => x is BcBarSeries<TData>))
+            {
+                item.SequenceNumber = sn;
+                sn++;
+            }
+            
+            base.Drawing();
         }
     }
 }
