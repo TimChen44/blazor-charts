@@ -1,0 +1,31 @@
+﻿@namespace BlazorCharts
+@inherits ElementSeries<TData>
+@typeparam TData
+
+@if (Chart.IsInit)
+{
+    <g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
+
+        @{
+            var color = (Group ?? "Scatter").RandomColor().ToHtml();
+            var colorDeepen = (Group ?? "Scatter").RandomColor().Deepen().ToHtml();
+            List<Point> points = new List<Point>();
+        }
+
+        @foreach (var category in Chart.CategoryDatas)
+        {
+            var value = category.SeriesValues[Group];
+
+            points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value)));
+
+        }
+
+        @foreach (var item in points)
+        {
+            <circle cx="@(item.X)" cy="@(item.Y)" r="4" fill="@color" />
+        }
+
+
+    </g>
+
+}
