@@ -60,6 +60,7 @@ namespace BlazorCharts
     {
         Bar,
         Line,
+        Area,
     }
 
 }
