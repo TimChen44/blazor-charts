@@ -1,0 +1,34 @@
+﻿@page "/Legend"
+
+<Card Style="width:100%;" Title="基本使用">
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                    <BcTitle Title="图例" TData="Github"></BcTitle>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
+                    <BcLegend TData="Github" BorderWidth="1" Position="@position"></BcLegend>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Divider Text="位置"  Orientation="left"></Divider>
+                <RadioGroup @bind-Value="@position">
+                    <Radio Value="LegendPosition.Top">Top</Radio>
+                    <Radio Value="LegendPosition.Bottom">Bottom</Radio>
+                    <Radio Value="LegendPosition.Left">Left</Radio>
+                    <Radio Value="LegendPosition.LeftTop">LeftTop</Radio>
+                    <Radio Value="LegendPosition.LeftBottom">LeftBottom</Radio>
+                    <Radio Value="LegendPosition.RightTop">RightTop</Radio>
+                    <Radio Value="LegendPosition.RightBottom">RightBottom</Radio>
+                </RadioGroup>
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+    LegendPosition position= LegendPosition.Top;
+
+}

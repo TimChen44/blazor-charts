@@ -10,11 +10,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AntDesign" Version="0.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorCharts\BlazorCharts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\AxesDemo\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\background.png" />
+    <None Include="wwwroot\chart-demo.css" />
+    <None Include="wwwroot\exampleJsInterop.js" />
   </ItemGroup>
 
 </Project>

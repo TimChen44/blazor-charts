@@ -1,0 +1,25 @@
+﻿@page "/Title"
+
+
+<Card Style="width:100%;" Title="基本使用">
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                    <BcTitle Title="@title" TData="Github"></BcTitle>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Divider Text="标题文本" Orientation="left"></Divider>
+                <Input @bind-Value="title" />
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+    string title = "图表标题";
+}
