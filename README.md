@@ -1,5 +1,7 @@
 # blazor-charts
 
+![无标题](https://user-images.githubusercontent.com/7581981/116421071-1b6f9380-a871-11eb-88a6-9abb8e1b165f.png)
+
 基于blazor技术，使用C#编写的charts组件。
 
 DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
