@@ -86,6 +86,7 @@ namespace BlazorCharts
         }
 
 
+
         #endregion
 
         #region 图表属性
@@ -194,7 +195,7 @@ namespace BlazorCharts
         public void Drawing()
         {
             if (Data == null) return;
-   
+
             //准备数据
             this.DataAnalysis();
 
