@@ -31,6 +31,10 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public int ItemSpacing { get => _ItemSpacing ?? FontSize / 2; set => _ItemSpacing = value; }
 
+        public BcLegend()
+        {
+            Padding = new Padding(5);
+        }
 
         /// <summary>
         /// 单个项目的大小
@@ -62,7 +66,7 @@ namespace BlazorCharts
                 case LegendPosition.Right:
                 case LegendPosition.RightTop:
                 case LegendPosition.RightBottom:
-                    Rect.W = Padding.L + _ItemSize.W + Padding.R + BorderWidth*2;
+                    Rect.W = Padding.L + _ItemSize.W + Padding.R + BorderWidth * 2;
                     Rect.H = Padding.T + _ItemSize.H * Chart.SeriesDatas.Count + Padding.B + BorderWidth * 2;
                     _ItemDirection = "Col";
                     break;

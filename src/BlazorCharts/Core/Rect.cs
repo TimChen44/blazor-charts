@@ -28,6 +28,13 @@ namespace BlazorCharts
             Size = size;
         }
 
+        public Rect(Padding padding, Rect rect)
+        {
+            Point = new Point(padding.L, padding.T);
+            Size = new Size(rect.W - padding.L + padding.R, rect.H - padding.T + padding.B);
+        }
+
+
         #region 坐标
 
         /// <summary>

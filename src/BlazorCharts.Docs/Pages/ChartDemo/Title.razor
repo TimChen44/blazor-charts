@@ -5,8 +5,8 @@
     <ChildContent>
         <div class="card">
             <div class="chart">
-                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="@title" TData="Github"></BcTitle>
+                <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                    <BcTitle Title="@title" FontSize="@fontSize" Padding="@padding" TData="Github"></BcTitle>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
@@ -15,6 +15,12 @@
             <div class="prop">
                 <Divider Text="标题文本" Orientation="left"></Divider>
                 <Input @bind-Value="title" />
+                <Divider Text="字体大小" Orientation="left"></Divider>
+                <InputNumber @bind-Value="fontSize"></InputNumber>
+                <Divider Text="内边距" Orientation="left"></Divider>
+                左:<InputNumber @bind-Value="@padding.L"></InputNumber>　上:<InputNumber @bind-Value="@padding.T"></InputNumber>　右:<InputNumber @bind-Value="@padding.R"></InputNumber>　下:<InputNumber @bind-Value="@padding.B"></InputNumber>
+                <Divider></Divider>
+                <Button Type="primary" OnClick="OnClick">应用</Button>
             </div>
         </div>
     </ChildContent>
@@ -22,4 +28,15 @@
 
 @code{
     string title = "图表标题";
+
+    int fontSize = 20;
+
+    Padding padding = new Padding(10);
+
+    BcChart<Github> bcChart;
+
+    public void OnClick()
+    {
+        bcChart.Refresh();
+    }
 }

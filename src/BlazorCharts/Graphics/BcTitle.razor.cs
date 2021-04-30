@@ -13,6 +13,7 @@ namespace BlazorCharts
         public BcTitle()
         {
             FontSize = 20;
+            Padding = new Padding(20);
         }
 
         #region 文本属性
@@ -35,7 +36,7 @@ namespace BlazorCharts
         {
             get
             {
-                return Rect.C;
+                return PaddingRect.C - PaddingRect.X;
             }
         }
 
@@ -46,24 +47,23 @@ namespace BlazorCharts
         {
             get
             {
-                return Rect.M + FontSize / 2;
+                return FontSize;
             }
         }
 
-    
+
         #endregion
 
         protected override void OnInitialized()
         {
-
             base.OnInitialized();
         }
         public override void Drawing()
         {
-            Rect.Point.X = 0;
-            Rect.Point.Y = 0;
-            Rect.Size.W = Chart.Width;
-            Rect.Size.H = FontSize * 3;
+            Rect.X = 0;
+            Rect.Y = 0;
+            Rect.W = Chart.Width;
+            Rect.H = FontSize + (int)(FontSize*0.2) + Padding.T + Padding.B;
 
             base.Drawing();
         }
