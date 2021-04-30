@@ -7,14 +7,13 @@
 DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
 
 
+| Build | NuGet |
+|--|--|
+|![](https://github.com/TimChen44/blazor-charts/workflows/.NET/badge.svg)|[![](https://img.shields.io/nuget/v/BlazorCharts.svg)](https://www.nuget.org/packages/BlazorCharts)|
 
 ### 使用方法
 
 1. 安装组件包
-
-```bash
-Install-Package BlazorCharts -Version 0.1.0-pre-210428055944
-```
 
 2. 修改`_Imports.razor`文件，添加引用`@using BlazorCharts`
 
