@@ -1,5 +1,5 @@
 ﻿@namespace BlazorCharts
-@inherits Element<TData>
+@inherits ChartElement<TData>
 @typeparam TData
 
 @if (Chart.IsInit)
@@ -32,11 +32,11 @@
             }
 
             //颜色和文字坐标
-            var xIcon = xBase + ItemSpacing / 2;
-            var yIcon = yBase + ItemSpacing / 2;
+            var xIcon = xBase + ItemSpacing / 2 + BorderWidth;
+            var yIcon = yBase + ItemSpacing / 2 + BorderWidth;
 
             var xText = xIcon + FontSize * 1.5;
-            var yText = yBase + FontSize + ItemSpacing / 2;
+            var yText = yBase + FontSize + ItemSpacing / 2 + BorderWidth;
 
             var series = Chart.BcSeriesGroup.Series[i];
             var color = series.Group.RandomColor().ToHtml();

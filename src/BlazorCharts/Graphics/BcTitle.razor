@@ -1,8 +1,8 @@
 ﻿@namespace BlazorCharts
-@inherits Element<TData>
+@inherits ChartElement<TData>
 @typeparam TData
 
-@if (Chart. IsInit)
+@if (Chart.IsInit)
 {
     <g class="bc-title">
         <text x="@TitleX" y="@TitleY" text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Title</text>

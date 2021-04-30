@@ -9,44 +9,12 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcLegend<TData> : Element<TData>
+    public partial class BcLegend<TData> : ChartElement<TData>
     {
         /// <summary>
         /// 图例位置
         /// </summary>
         [Parameter] public LegendPosition Position { get; set; } = LegendPosition.Right;
-
-
-        private Padding _Padding;
-        /// <summary>
-        /// 边框内部距离
-        /// </summary>
-        [Parameter]
-        public Padding Padding
-        {
-            get
-            {
-                if (_Padding == null) _Padding = new Padding(5);
-                return _Padding;
-            }
-            set => _Padding = value;
-        }
-        /// <summary>
-        ///边框左部距离
-        /// </summary>
-        [Parameter] public int PaddingLeft { get => Padding.L; set => Padding.L = value; }
-        /// <summary>
-        ///边框上部距离
-        /// </summary>
-        [Parameter] public int PaddingTop { get => Padding.T; set => Padding.T = value; }
-        /// <summary>
-        ///边框右部距离
-        /// </summary>
-        [Parameter] public int PaddingRight { get => Padding.R; set => Padding.R = value; }
-        /// <summary>
-        ///边框下部距离
-        /// </summary>
-        [Parameter] public int PaddingBottom { get => Padding.B; set => Padding.B = value; }
 
         /// <summary>
         /// 边框宽度
@@ -94,15 +62,15 @@ namespace BlazorCharts
                 case LegendPosition.Right:
                 case LegendPosition.RightTop:
                 case LegendPosition.RightBottom:
-                    Rect.W = Padding.L + _ItemSize.W + Padding.R;
-                    Rect.H = Padding.T + _ItemSize.H * Chart.SeriesDatas.Count + Padding.B;
+                    Rect.W = Padding.L + _ItemSize.W + Padding.R + BorderWidth*2;
+                    Rect.H = Padding.T + _ItemSize.H * Chart.SeriesDatas.Count + Padding.B + BorderWidth * 2;
                     _ItemDirection = "Col";
                     break;
 
                 case LegendPosition.Top:
                 case LegendPosition.Bottom:
-                    Rect.W = Padding.L + _ItemSize.W * Chart.SeriesDatas.Count + Padding.R;
-                    Rect.H = Padding.T + _ItemSize.H + Padding.B;
+                    Rect.W = Padding.L + _ItemSize.W * Chart.SeriesDatas.Count + Padding.R + BorderWidth * 2;
+                    Rect.H = Padding.T + _ItemSize.H + Padding.B + BorderWidth * 2;
                     _ItemDirection = "Row";
                     break;
             }
