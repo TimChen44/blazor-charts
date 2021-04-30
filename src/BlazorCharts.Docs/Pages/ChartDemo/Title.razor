@@ -6,7 +6,7 @@
         <div class="card">
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="@title" FontSize="@fontSize" Padding="@padding" TData="Github"></BcTitle>
+                    <BcTitle Title="@title" FontSize="@fontSize" Padding="@padding" TextAnchor="@textAnchor" TextAlign="@textAlign" TData="Github"></BcTitle>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
@@ -17,6 +17,19 @@
                 <Input @bind-Value="title" />
                 <Divider Text="字体大小" Orientation="left"></Divider>
                 <InputNumber @bind-Value="fontSize"></InputNumber>
+                <Divider Text="文本锚点" Orientation="left"></Divider>
+                <RadioGroup @bind-Value="@textAnchor">
+                    <Radio Value="TextAnchor.Start">Start</Radio>
+                    <Radio Value="TextAnchor.Middle">Middle</Radio>
+                    <Radio Value="TextAnchor.End">End</Radio>
+                    <Radio Value="TextAnchor.Inherit">Inherit</Radio>
+                </RadioGroup>
+                <Divider Text="文本对齐" Orientation="left"></Divider>
+                <RadioGroup @bind-Value="@textAlign">
+                    <Radio Value="TextAlign.Start">Start</Radio>
+                    <Radio Value="TextAlign.Center">Center</Radio>
+                    <Radio Value="TextAlign.End">End</Radio>
+                </RadioGroup>
                 <Divider Text="内边距" Orientation="left"></Divider>
                 左:<InputNumber @bind-Value="@padding.L"></InputNumber>　上:<InputNumber @bind-Value="@padding.T"></InputNumber>　右:<InputNumber @bind-Value="@padding.R"></InputNumber>　下:<InputNumber @bind-Value="@padding.B"></InputNumber>
                 <Divider></Divider>
@@ -32,6 +45,10 @@
     int fontSize = 20;
 
     Padding padding = new Padding(10);
+
+    TextAnchor textAnchor = TextAnchor.Middle;
+
+    TextAlign textAlign = TextAlign.Center;
 
     BcChart<Github> bcChart;
 

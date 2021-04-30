@@ -31,7 +31,7 @@ namespace BlazorCharts
         public Rect(Padding padding, Rect rect)
         {
             Point = new Point(padding.L, padding.T);
-            Size = new Size(rect.W - padding.L + padding.R, rect.H - padding.T + padding.B);
+            Size = new Size(rect.W - padding.L - padding.R, rect.H - padding.T - padding.B);
         }
 
 

@@ -24,10 +24,15 @@ namespace BlazorCharts
         [Parameter] public string Title { get; set; }
 
         /// <summary>
-        /// 文本位置
+        /// 文本锚点
         /// </summary>
-        public TextAnchor TextAnchor { get; set; } = TextAnchor.Middle;
+        [Parameter]  public TextAnchor TextAnchor { get; set; } = TextAnchor.Middle;
 
+        /// <summary>
+        /// 文本对其
+        /// </summary>
+        [Parameter] public TextAlign TextAlign { get; set; } = TextAlign.Center;
+   
         /// <summary>
         /// 标题X坐标
         /// 更具文字对其方式需要做调整
@@ -36,7 +41,13 @@ namespace BlazorCharts
         {
             get
             {
-                return PaddingRect.C - PaddingRect.X;
+                return TextAlign switch
+                {
+                    TextAlign.Start => PaddingRect.L,
+                    TextAlign.Center => PaddingRect.C,
+                    TextAlign.End => PaddingRect.R,
+                    _ => throw new NotImplementedException(),
+                };
             }
         }
 
@@ -71,6 +82,6 @@ namespace BlazorCharts
 
     }
 
-
+    
 
 }

@@ -8,18 +8,15 @@ using System.Threading.Tasks;
 namespace BlazorCharts
 {
     /// <summary>
-    /// 文本(text)锚点
+    /// 文本对齐
     /// </summary>
-    public enum TextAnchor
+   public enum TextAlign
     {
         [Description("start")]
         Start,
         [Description("middle")]
-        Middle,
+        Center,
         [Description("end")]
         End,
-        [Description("inherit")]
-        Inherit,
-
     }
 }
