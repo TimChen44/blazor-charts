@@ -18,6 +18,7 @@ namespace BlazorCharts
         [Parameter] public int? Step { get; set; }
 
 
+
         public override void Drawing()
         {
             Rect.X = AxisGroup.Rect.X;
@@ -32,10 +33,6 @@ namespace BlazorCharts
 
             AxesYMax = Carry(realMax);
 
-            //AxesYMax = Carry(realMax);
-            //group.Min = Carry(realMin);
-
-            //TODO:此处还缺少考虑复数
             base.Drawing();
         }
 
@@ -57,8 +54,8 @@ namespace BlazorCharts
             }
             else if (maxLength > 1)
             {
-                var carry = Math.Pow(10, (maxLength - 1));
-                value = Math.Ceiling(value / carry) * carry;
+                var carry = Math.Pow(10, (maxLength - 2)) * 5;
+                value = value + ( carry - value % ( carry));
             }
 
             if (negative) value *= -1;

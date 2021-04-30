@@ -13,25 +13,34 @@
             int step = Step ?? 0;
             if (step == 0)
             {
-                @*var maxLength = ((int)value).ToString().Length;*@
+                if (Math.Abs(AxesYMax) < 10)
+                {
+                    step = 1;
+                }
+                else
+                {
+                    step = (int)Math.Pow(10, (AxesYMax.ToString().Length - 2)) * 5;
+                }
 
             }
 
-        }
+            var nowValue = 0;//暂时先不考虑负数问题
 
+            }
 
-
-        @for (int i = 0; i < 6; i++)
+        @while(nowValue<=AxesYMax)
         {
-            var h = (int)(Rect.H - ((double)Rect.H / 5 * i));
-            var v = AxesYMax / 5 * i;
+            var h = (int)(Rect.H - (double)Rect.H  * (nowValue/ AxesYMax));
+
 
             <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="rgb(64 64 64)" stroke-width="1"></line>
             <text>
-                <text font-size="@FontSize" fill="#767676" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.End.ToDescription()">@v</text>
+                <text font-size="@FontSize" fill="#767676" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.End.ToDescription()">@nowValue</text>
             </text>
 
             <line x1="@(Rect.W)" y1="@h" x2="@(Rect.W+AxisGroup.AxesX.Rect.W)" y2="@h" stroke="rgb(64 64 64 / 0.3)" stroke-width="1"></line>
+
+            nowValue += step;
         }
 
     </g>
