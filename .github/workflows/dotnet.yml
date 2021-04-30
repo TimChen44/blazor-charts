@@ -1,7 +1,7 @@
 name: .NET
 
 env:
-  Version: 0.2.0
+  Version: 0.3.0
   NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
 
 on:
