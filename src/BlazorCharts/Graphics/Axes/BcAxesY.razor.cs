@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,24 @@ namespace BlazorCharts
         /// </summary>
         public AxesYPosition Position { get; set; } = AxesYPosition.Left;
 
-        [Parameter] public int? Step { get; set; }
+        /// <summary>
+        /// 主要单位
+        /// </summary>
+        [Parameter] public double? UnitsMajor { get; set; }
+
+        /// <summary>
+        /// 次要单位
+        /// </summary>
+        [Parameter] public double? UnitsMinor { get; set; }
+
+       /// <summary>
+       /// 显示主要网格线
+       /// </summary>
+        [Parameter] public bool GridLineMajor { get; set; } = true;
+        /// <summary>
+        /// 显示次要网格线
+        /// </summary>
+        [Parameter] public bool GridLineMinor { get; set; } = false;
 
 
 

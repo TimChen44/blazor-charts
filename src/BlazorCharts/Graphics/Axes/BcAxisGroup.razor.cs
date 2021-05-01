@@ -99,7 +99,7 @@ namespace BlazorCharts
             AxesX?.Drawing();
 
             //微调X轴和Y轴，去除重复区域
-            AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft.Rect.Y;
+            AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft?.Rect.Y??0;
             AxesX.Rect.X = AxesYLeft.Rect.R;
             AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
 

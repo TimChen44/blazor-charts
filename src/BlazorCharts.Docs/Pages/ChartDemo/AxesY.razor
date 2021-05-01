@@ -1,0 +1,46 @@
+﻿@page "/AxesY"
+
+<Card Style="width:100%;" Title="基本使用">
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                    <BcTitle Title="Y轴" TData="Github"></BcTitle>
+                    <BcAxesY TData="Github" UnitsMajor="@unitsMajor" UnitsMinor="@unitsMinor" GridLineMajor="@gridLineMajor" GridLineMinor="@gridLineMinor" ></BcAxesY>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View" Caption="访问"></BcBarSeries>
+                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start" Caption="点赞"></BcBarSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork" Caption="分叉"></BcLineSeries>
+                    <BcLegend TData="Github"></BcLegend>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Divider Text="单位" Orientation="left"></Divider>
+                <span>主要：</span><InputNumber @bind-Value="@unitsMajor"></InputNumber><span>次要：</span><InputNumber @bind-Value="@unitsMinor"></InputNumber>
+                <Divider Text="网格线" Orientation="left"></Divider>
+
+                <Checkbox @bind-Value="@gridLineMajor">主要</Checkbox>  <Checkbox @bind-Value="@gridLineMinor">次要</Checkbox>
+                <Divider></Divider>
+                <Button Type="primary" OnClick="OnClick">应用</Button>
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+
+    double? unitsMajor;
+
+    double? unitsMinor;
+
+    bool gridLineMajor = true;
+
+    bool gridLineMinor = false;
+
+    BcChart<Github> bcChart;
+
+    public void OnClick()
+    {
+        bcChart.Refresh();
+    }
+
+}

@@ -2,8 +2,12 @@
 @inherits Element<TData>
 @typeparam TData
 
+@if (AxesYLeft == null)
+{
+    <BcAxesY TData="TData"></BcAxesY>
+}
 <BcAxesX TData="TData"></BcAxesX>
-<BcAxesY TData="TData"></BcAxesY>
+
 @if (Chart.IsInit)
 {
     @*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 255 0 / 0.10);" />*@

@@ -6,43 +6,56 @@
 {
     <g class="bc-axes-y" transform="translate(@Rect.LT.ToPoint())">
 
-        <line x1="@Rect.W" y1="@Rect.H" x2="@Rect.W" y2="0" stroke="rgb(64 64 64)" stroke-width="1" />
+        <line x1="@Rect.W" y1="@Rect.H" x2="@Rect.W" y2="0" stroke="rgb(110 110 110)" stroke-width="1" />
 
         @{
-            //计算步进
-            int step = Step ?? 0;
-            if (step == 0)
+            //计算主要刻度步进
+            double StepMajor = UnitsMajor ?? 0;
+            if (StepMajor == 0)
             {
-                if (Math.Abs(AxesYMax) < 10)
-                {
-                    step = 1;
-                }
-                else
-                {
-                    step = (int)Math.Pow(10, (AxesYMax.ToString().Length - 2)) * 5;
-                }
-
+                StepMajor = Math.Pow(10, (AxesYMax.ToString().Length - 2)) * 5;
+                if (AxesYMax / StepMajor > 6)
+                    StepMajor = Math.Pow(10, (AxesYMax.ToString().Length - 2)) * 10;
+                else if (AxesYMax / StepMajor < 3)
+                    StepMajor = Math.Pow(10, (AxesYMax.ToString().Length - 2)) * 2;
             }
 
-            var nowValue = 0;//暂时先不考虑负数问题
-
-            }
-
-        @while(nowValue<=AxesYMax)
-        {
-            var h = (int)(Rect.H - (double)Rect.H  * (nowValue/ AxesYMax));
-
-
-            <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="rgb(64 64 64)" stroke-width="1"></line>
-            <text>
-                <text font-size="@FontSize" fill="#767676" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.End.ToDescription()">@nowValue</text>
-            </text>
-
-            <line x1="@(Rect.W)" y1="@h" x2="@(Rect.W+AxisGroup.AxesX.Rect.W)" y2="@h" stroke="rgb(64 64 64 / 0.3)" stroke-width="1"></line>
-
-            nowValue += step;
+            //计算次要刻度步进
+            double StepMinor = UnitsMinor ?? (StepMajor / 5);//默认是主要的一半
         }
 
+        @*绘制次要刻度*@
+        @if (GridLineMinor == true)
+        {
+            double nowMinorValue = 0;//暂时先不考虑负数问题
+            @while (nowMinorValue <= AxesYMax)
+            {
+                var h = (int)(Rect.H - (double)Rect.H * (nowMinorValue / AxesYMax));
+                <line x1="@(Rect.W)" y1="@h" x2="@(Rect.W + AxisGroup.AxesX.Rect.W)" y2="@h" stroke="rgb(242 242 242)" stroke-width="1"></line>
+                nowMinorValue += StepMinor;
+            }
+        }
+
+        @*绘制主要刻度*@
+        @{
+            double nowMajorValue = 0;//暂时先不考虑负数问题
+            while (nowMajorValue < AxesYMax + StepMajor)
+            {
+                var drawValue = nowMajorValue > AxesYMax ? AxesYMax : nowMajorValue;//如果Stpe不是正好与最大值匹配，那么补上最大值
+                var h = (int)(Rect.H - (double)Rect.H * (drawValue / AxesYMax));
+
+                <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="rgb(110 110 110)" stroke-width="1"></line>
+                <text>
+                    <text font-size="@FontSize" fill="rgb(40 40 40)" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.End.ToDescription()">@drawValue</text>
+                </text>
+
+                @if (GridLineMajor == true)
+                {
+                    <line x1="@(Rect.W)" y1="@h" x2="@(Rect.W + AxisGroup.AxesX.Rect.W)" y2="@h" stroke="rgb(217 217 217)" stroke-width="1"></line>
+                }
+                nowMajorValue += StepMajor;
+            }
+        }
     </g>
 
 
