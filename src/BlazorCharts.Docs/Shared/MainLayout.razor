@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<Menu Mode=MenuMode.Horizontal >
+<Menu Mode=MenuMode.Horizontal>
     <MenuItem RouterLink="/">
         <img src="_content/BlazorCharts.Docs/blazorcharts.svg" style="height: 22px;width: 22px;" />
         BlazorCharts.Docs
@@ -27,6 +27,9 @@
             散点图
         </MenuItem>
     </SubMenu>
+    <MenuItem RouterLink="/Log" RouterMatch="NavLinkMatch.Prefix">
+        更新日志
+    </MenuItem>
 
     <MenuItem Style="float: right;">
         <a href="https://github.com/TimChen44/blazor-charts" target="_blank" data-hotkey="g d" aria-label="Homepage " data-ga-click="Header, go to dashboard, icon:logo">

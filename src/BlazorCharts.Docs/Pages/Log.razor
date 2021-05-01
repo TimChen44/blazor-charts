@@ -1,0 +1,52 @@
+﻿@page "/Log"
+
+<Title Level="3">更新日志</Title>
+
+@foreach (var log in logs)
+{
+    var lines = log.Value.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x=>x.Trim());
+    
+
+    <Card Size="small" Title="@log.Key" Style="width:100%;">
+
+        @foreach (var line in lines)
+        {
+            var type = line[0];
+            var text = line.Substring(1);
+            <p>
+                @if (type == '+')
+                {
+                    <Icon Type="plus" Theme="outline" Style="color:green" />
+                }
+                else if (type == '-')
+                {
+                    <Icon Type="minus" Theme="outline" Style="color:red" />
+                }
+                else if (type == '*')
+                {
+                    <Icon Type="arrow-up" Theme="outline" Style="color:blue" />
+                }
+                <span style="margin-left:5px">@text</span>
+            </p>
+        }
+    </Card>
+
+}
+
+
+
+
+
+@code{
+
+    Dictionary<string, string> logs = new()
+    {
+            {
+                @"2021.0511",
+                @"+文档增加更新日志
+                  +Title组件增加文本位置属性"
+            }
+
+
+        };
+}
