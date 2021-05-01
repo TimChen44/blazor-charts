@@ -5,7 +5,7 @@
         <div class="card">
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="Y轴" TData="Github"></BcTitle>
+                    <BcTitle Title="X轴" TData="Github"></BcTitle>
                     <BcAxesX TData="Github"  GridLineMajor="@gridLineMajor" DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"  ></BcAxesX>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View" Caption="访问"></BcBarSeries>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start" Caption="点赞"></BcBarSeries>

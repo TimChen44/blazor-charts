@@ -58,7 +58,7 @@ namespace BlazorCharts
         {
             get
             {
-                return FontSize;
+                return FontSize + Padding.T;
             }
         }
 
@@ -74,7 +74,7 @@ namespace BlazorCharts
             Rect.X = 0;
             Rect.Y = 0;
             Rect.W = Chart.Width;
-            Rect.H = FontSize + (int)(FontSize*0.2) + Padding.T + Padding.B;
+            Rect.H = FontSizeHeight + Padding.T + Padding.B;
 
             base.Drawing();
         }
