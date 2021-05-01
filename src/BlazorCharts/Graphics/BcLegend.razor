@@ -2,7 +2,7 @@
 @inherits ChartElement<TData>
 @typeparam TData
 
-@if (Chart.IsInit)
+@if (Chart.IsInit && Chart.BcLegend == this)
 {
 
     <g class="bc-legend" transform="translate(@Rect.LT.ToPoint())">
@@ -10,7 +10,7 @@
 
         @if (BorderWidth > 0)
         {
-            <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@(BorderColor??"#C0C0C0FF")" stroke-width="@BorderWidth" />
+            <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@(BorderColor ?? "#C0C0C0FF")" stroke-width="@BorderWidth" />
         }
 
 

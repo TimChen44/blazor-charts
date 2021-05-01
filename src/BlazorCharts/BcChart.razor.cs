@@ -139,7 +139,8 @@ namespace BlazorCharts
                     BcTitle = bcTitle;
                     break;
                 case BcLegend<TData> bcLegend:
-                    BcLegend = bcLegend;
+                    if (BcLegend == null)
+                        BcLegend = bcLegend;
                     break;
                 case BcSeriesGroup<TData> bcSeriesGroup:
                     BcSeriesGroup = bcSeriesGroup;
