@@ -35,7 +35,16 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public bool GridLineMinor { get; set; } = false;
 
+        /// <summary>
+        /// 标签位置
+        /// </summary>
+        [Parameter] public AxesLabelPosition LabelPosition { get; set; } = AxesLabelPosition.Axis;
 
+        private int? _DistanceAxis;
+        /// <summary>
+        /// 与坐标轴的距离
+        /// </summary>
+        [Parameter] public int? DistanceAxis { get => _DistanceAxis ?? 10; set => _DistanceAxis = value; }
 
         public override void Drawing()
         {
@@ -46,7 +55,13 @@ namespace BlazorCharts
             var mrealMin = Chart.SeriesDatas.Min(x => x.Min);
 
             var maxString = realMax.ToString().Length > realMax.ToString().Length ? realMax.ToString() : realMax.ToString();
-            Rect.W = 20 + maxString.CalcWidth(FontSize) + 10;
+          
+            Rect.W = LabelPosition switch
+            {
+                AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,
+                AxesLabelPosition.None => 1,
+                _ => throw new NotImplementedException(),
+            };
             Rect.H = AxisGroup.Rect.H;
 
             AxesYMax = Carry(realMax);

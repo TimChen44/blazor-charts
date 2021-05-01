@@ -12,8 +12,6 @@ namespace BlazorCharts
 {
     public partial class BcAxesX<TData> : ElementAxes<TData>
     {
-
-
         /// <summary>
         /// 标签位置
         /// </summary>
@@ -34,7 +32,7 @@ namespace BlazorCharts
         {
             Rect.H = LabelPosition switch
             {
-                AxesLabelPosition.Axis => DistanceAxis.Value + FontSizeHeight,
+                AxesLabelPosition.Axis => DistanceAxis.Value + FontSizeHeight + 10,
                 AxesLabelPosition.None => 1,
                 _ => throw new NotImplementedException(),
             };

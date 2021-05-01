@@ -45,9 +45,12 @@
                 var h = (int)(Rect.H - (double)Rect.H * (drawValue / AxesYMax));
 
                 <line x1="@(Rect.W-5)" y1="@h" x2="@(Rect.W)" y2="@h" stroke="rgb(110 110 110)" stroke-width="1"></line>
-                <text>
-                    <text font-size="@FontSize" fill="rgb(40 40 40)" x="@Rect.W" y="@(h)" transform="translate(-10,@(FontSize/3))" text-anchor="@TextAnchor.End.ToDescription()">@drawValue</text>
-                </text>
+                if (LabelPosition == AxesLabelPosition.Axis)
+                {//显示文本
+                    <text>
+                        <text font-size="@FontSize" fill="rgb(40 40 40)" x="@Rect.W" y="@(h)" transform="translate(@(-DistanceAxis.Value),@(FontSize / 3))" text-anchor="@TextAnchor.End.ToDescription()">@drawValue</text>
+                    </text>
+                }
 
                 @if (GridLineMajor == true)
                 {
