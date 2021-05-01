@@ -14,10 +14,12 @@
     <Paragraph>
         <BcChart Height="600" Width="800" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
             <BcTitle Title="图表示例" TData="Github"></BcTitle>
+            <BcAxesY TData="Github" GridLineMajor="true" GridLineMinor="true"></BcAxesY>
+            <BcLegend TData="Github" BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
             <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
             <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
             <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
-            <BcLegend TData="Github" BorderWidth="1" Position="LegendPosition.Top"></BcLegend>
+
         </BcChart>
     </Paragraph>
 </div>
