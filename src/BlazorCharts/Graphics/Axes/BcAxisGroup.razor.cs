@@ -34,7 +34,8 @@ namespace BlazorCharts
             switch (element)
             {
                 case BcAxesX<TData> bcAxesX:
-                    AxesX = bcAxesX;
+                    if (AxesX == null)
+                        AxesX = bcAxesX;
                     break;
                 case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Left:
                     if (AxesYLeft == null)

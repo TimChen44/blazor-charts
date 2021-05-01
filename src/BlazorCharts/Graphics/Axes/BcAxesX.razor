@@ -2,20 +2,29 @@
 @inherits ElementAxes<TData>
 @typeparam TData
 
-@if (Chart.IsInit)
+@if (Chart.IsInit && AxisGroup?.AxesX == this)
 {
     <g class="bc-axes-x" transform="translate(@Rect.LT.ToPoint())">
 
-        <line x1="0" y1="0" x2="@Rect.W" y2="0" stroke="#767676" stroke-width="1" />
+        <line x1="0" y1="0" x2="@Rect.W" y2="0" stroke="rgb(110 110 110)" stroke-width="1" />
 
         @foreach (var category in Chart.CategoryDatas)
         {
-            @*var x = (int)((double)Rect.W / (AxisGroup.CategoryValues.Count + 1) * (i+1));*@
+            var x = category.AxesZeroRatio * Rect.W;
 
-            <text>
-                <text font-size="@FontSize" fill="#767676" x="@(category.AxesZeroRatio* Rect.W)" y="FontSize"
-                      transform="translate(0,@(FontSize))" text-anchor="@TextAnchor.Middle.ToDescription()">@category.Category</text>
-            </text>
+            if (LabelPosition == AxesLabelPosition.Axis)
+            {//显示文本
+                <text>
+                    <text font-size="@FontSize" fill="rgb(40 40 40)" x="@x" y="@FontSize"
+                          transform="translate(0,@DistanceAxis.Value)" text-anchor="@TextAnchor.Middle.ToDescription()">@category.Category</text>
+                </text>
+            }
+
+            @if (GridLineMajor)
+            {//主要网格线
+                <line x1="@x" y1="@(Rect.H- AxisGroup.Rect.H)" x2="@x" y2="0" stroke="rgb(217 217 217)" stroke-width="1"></line>
+
+            }
 
         }
     </g>

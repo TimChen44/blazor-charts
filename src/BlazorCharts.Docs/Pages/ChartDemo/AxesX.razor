@@ -1,4 +1,4 @@
-﻿@page "/AxesY"
+﻿@page "/AxesX"
 
 <Card Style="width:100%;" Title="基本使用">
     <ChildContent>
@@ -6,18 +6,26 @@
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="Y轴" TData="Github"></BcTitle>
-                    <BcAxesY TData="Github" UnitsMajor="@unitsMajor" UnitsMinor="@unitsMinor" GridLineMajor="@gridLineMajor" GridLineMinor="@gridLineMinor" ></BcAxesY>
+                    <BcAxesX TData="Github"  GridLineMajor="@gridLineMajor" DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"  ></BcAxesX>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View" Caption="访问"></BcBarSeries>
                     <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start" Caption="点赞"></BcBarSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork" Caption="分叉"></BcLineSeries>
+                    
                 </BcChart>
             </div>
             <div class="prop">
-                <Divider Text="单位" Orientation="left"></Divider>
-                <span>主要：</span><InputNumber @bind-Value="@unitsMajor"></InputNumber><span>次要：</span><InputNumber @bind-Value="@unitsMinor"></InputNumber>
-                <Divider Text="网格线" Orientation="left"></Divider>
+                <Divider Text="与坐标轴的距离" Orientation="left"></Divider>
+                <InputNumber @bind-Value="@distanceAxis"></InputNumber>
 
-                <Checkbox @bind-Value="@gridLineMajor">主要</Checkbox>  <Checkbox @bind-Value="@gridLineMinor">次要</Checkbox>
+                <Divider Text="标签位置" Orientation="left"></Divider>
+                <RadioGroup @bind-Value="@labelPosition">
+                    <Radio Value="AxesLabelPosition.Axis">轴旁</Radio>
+                    <Radio Value="AxesLabelPosition.None">无</Radio>
+                </RadioGroup>
+
+                <Divider Text="网格线" Orientation="left"></Divider>
+                <Checkbox @bind-Value="@gridLineMajor">主要</Checkbox>
+
                 <Divider></Divider>
                 <Button Type="primary" OnClick="OnClick">应用</Button>
             </div>
@@ -27,13 +35,11 @@
 
 @code{
 
-    double? unitsMajor;
+    bool gridLineMajor = false;
 
-    double? unitsMinor;
+    int? distanceAxis;
 
-    bool gridLineMajor = true;
-
-    bool gridLineMinor = false;
+    AxesLabelPosition labelPosition=AxesLabelPosition.Axis;
 
     BcChart<Github> bcChart;
 

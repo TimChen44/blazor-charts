@@ -49,6 +49,11 @@ namespace BlazorCharts
             set => fontSize = value;
         }
 
+        /// <summary>
+        /// 字体完整高度，因为字体高度仅包含书写线以上部分，比如g下面的勾不在高度中计算
+        /// </summary>
+        protected int FontSizeHeight => FontSize + (int)(FontSize * 0.2);
+
         #endregion
 
 
