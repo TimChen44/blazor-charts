@@ -37,7 +37,8 @@ namespace BlazorCharts
                     AxesX = bcAxesX;
                     break;
                 case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Left:
-                    AxesYLeft = bcAxesY;
+                    if (AxesYLeft == null)
+                        AxesYLeft = bcAxesY;
                     break;
                 case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Right:
                     AxesYRight = bcAxesY;
@@ -99,7 +100,7 @@ namespace BlazorCharts
             AxesX?.Drawing();
 
             //微调X轴和Y轴，去除重复区域
-            AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft?.Rect.Y??0;
+            AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft?.Rect.Y ?? 0;
             AxesX.Rect.X = AxesYLeft.Rect.R;
             AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
 
