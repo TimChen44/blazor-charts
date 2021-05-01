@@ -5,8 +5,8 @@ env:
   NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
 
 on:
-  push:
-    branches: [ main ]
+#   push:
+#     branches: [ main ]
   pull_request:
     branches: [ main ]
 
