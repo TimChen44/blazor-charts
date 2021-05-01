@@ -4,7 +4,7 @@
 
 @if (Chart.IsInit)
 {
-    <g class="bc-title" transform="translate(@((Rect.LT+PaddingRect.LT).ToPoint()))">
+    <g class="bc-title" transform="translate(@((Rect.LT).ToPoint()))">
 
 
         <text x="@TitleX" y="@TitleY" text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Title</text>
