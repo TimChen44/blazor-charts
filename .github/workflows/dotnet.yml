@@ -1,7 +1,7 @@
 name: .NET
 
 env:
-  Version: 0.2.0
+  Version: 0.3.0
   NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
 
 on:
@@ -25,7 +25,7 @@ jobs:
     - name: Package Nuget 📦
       run: |
         dotnet build -c Release "./src/BlazorCharts/BlazorCharts.csproj"
-        SUFFIX=`date "+%y%m%d%H%M%S"`
+        SUFFIX=`date "+%y%m%d.%H%M%S"`
         dotnet pack "./src/BlazorCharts/BlazorCharts.csproj" /p:PackageVersion=$Version-pre-${SUFFIX} -c Release -o publish --no-build --no-restore
     - name: Publish to Nuget ✔
       run: |
