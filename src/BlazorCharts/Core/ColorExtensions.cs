@@ -24,9 +24,9 @@ namespace BlazorCharts
             byte b = Convert.ToByte(result / 255 / 255 % 255);
 
             return Color.FromArgb(
-                r < 30 ? r * 2 : r,
-                g < 30 ? g * 2 : g,
-               b < 30 ? b * 2 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
+                r < 90 ? r + 90 : r,
+                g < 90 ? g + 90 : g,
+                b < 90 ? b + 90 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
 
             //TODO:Wasm尽然不支持MD5了T_T，详情：https://docs.microsoft.com/zh-cn/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
             //using (var md5 = MD5.Create())
