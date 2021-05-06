@@ -16,8 +16,8 @@
             <BcTitle Title="图表示例" TData="Github"></BcTitle>
             <BcAxesY TData="Github" GridLineMajor="true" GridLineMinor="true"></BcAxesY>
             <BcLegend TData="Github" BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
-            <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
-            <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
+            <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcColumnSeries>
+            <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcColumnSeries>
             <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
 
         </BcChart>

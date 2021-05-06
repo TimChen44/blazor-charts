@@ -10,7 +10,7 @@
             var color = (Group ?? "Bar").RandomColor().ToHtml();
             var colorStroke = (Group ?? "Bar").RandomColor().Deepen().ToHtml();
 
-            var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcBarSeries<TData>).Max(x => ((BcBarSeries<TData>)x).SequenceNumber);
+            var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcColumnSeries<TData>).Max(x => ((BcColumnSeries<TData>)x).SequenceNumber);
         }
 
         @foreach (var category in Chart.CategoryDatas)

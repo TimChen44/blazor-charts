@@ -58,7 +58,7 @@ namespace BlazorCharts
 
     public enum SeriesType
     {
-        Bar,
+        Column,
         Line,
         Area,
     }
