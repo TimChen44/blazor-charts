@@ -4,15 +4,7 @@
 - 图例 Legend
 - 坐标轴 AxisGroup
     - X轴 AxesX (分类轴)
-        - 刻度 Scale
-        - 值 Value
-        - 标题 Title
     - Y轴 AxesY (数值轴)
-        - 左轴
-        - 右轴
-    - 网格 Grid
-        - 横线 LineH
-        - 竖线 LineV
 - 系列组 SeriesGroup
     - 系列 Series
 - 标签 Labels
@@ -42,7 +34,7 @@ SVG
 
 因为Blazor组件与实际svg组件的层级关系存在差异，所以做以下约定
 1. 对象自身的坐标保存为绝对坐标，如：Rect
-1. 对象中属性的坐标采用相对坐标，如：CategoryRects
+1. 对象中属性的坐标采用相对坐标，如：PaddingRect
 1. 在绘制svg时考虑到代码简化有选择的使用偏移(translate)来简化绘制逻辑。
 
 # 数据处理流程

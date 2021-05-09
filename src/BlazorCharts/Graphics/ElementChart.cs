@@ -14,7 +14,10 @@ namespace BlazorCharts
     /// <typeparam name="TData"></typeparam>
     public abstract class ElementChart<TData> : Element<TData>
     {
-        public  Rect PaddingRect => new Rect(Padding, Rect);
+        /// <summary>
+        /// 边框内部距离坐标
+        /// </summary>
+        public Rect PaddingRect => new Rect(Padding, Rect);
 
 
         private Padding _Padding;
@@ -26,7 +29,7 @@ namespace BlazorCharts
         {
             get
             {
-                if (_Padding == null) _Padding = new Padding(5);
+                if (_Padding == null) _Padding = new Padding(0);
                 return _Padding;
             }
             set => _Padding = value;
@@ -47,5 +50,9 @@ namespace BlazorCharts
         ///边框下部距离
         /// </summary>
         [Parameter] public int PaddingBottom { get => Padding.B; set => Padding.B = value; }
+
+
+
+
     }
 }
