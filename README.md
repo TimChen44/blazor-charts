@@ -30,7 +30,7 @@ DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://vic
 ```
 
 ```csharp
-string title = "不在意现在有多糟糕，看好将来有多精彩。";
+string title = "图表示例";
 
 List<Github> githubs = new List<Github>()
 {
