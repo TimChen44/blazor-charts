@@ -1,87 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BlazorCharts.BcAxesX&lt;TData&gt;" Collapsed="true">
-    <Position X="6" Y="3.25" Width="1.75" />
+    <Position X="5.75" Y="6.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ACAAACAAAAAAAAAAAAAAAAAgAAAAAACAAAAAAIAAAAA=</HashCode>
       <FileName>Graphics\Axes\BcAxesX.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcAxesY&lt;TData&gt;" Collapsed="true">
-    <Position X="8" Y="3.25" Width="1.75" />
+    <Position X="7.75" Y="6.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CCAACCAAAAAAAAAgAAAAAAAgAEAAAACAAKAAIIAAAAA=</HashCode>
       <FileName>Graphics\Axes\BcAxesY.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcAxisGroup&lt;TData&gt;" Collapsed="true">
-    <Position X="9" Y="2" Width="2" />
+    <Position X="9.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAKAAEAAAAAAAAAAEAAAAEACAAAAIggCAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAEACAAAAIAgAAA=</HashCode>
       <FileName>Graphics\Axes\BcAxisGroup.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.ElementAxes&lt;TData&gt;" Collapsed="true">
-    <Position X="6.75" Y="2" Width="2" />
+    <Position X="5.75" Y="5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\Axes\ElementAxes.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BlazorCharts.BcBarSeries&lt;TData&gt;" Collapsed="true">
-    <Position X="12.5" Y="3.25" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
-      <FileName>Graphics\Series\BcBarSeries.razor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="BlazorCharts.BcLineSeries&lt;TData&gt;" Collapsed="true">
-    <Position X="10.5" Y="3.25" Width="1.75" />
+    <Position X="7.75" Y="8.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\Series\BcLineSeries.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcSeriesGroup&lt;TData&gt;" Collapsed="true">
-    <Position X="13.5" Y="2" Width="2" />
+    <Position X="11.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAgACAIAAAAAAAAAAAAAAAAAAAACAAAAAAAAAE=</HashCode>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAACAAAAIAAAAE=</HashCode>
       <FileName>Graphics\Series\BcSeriesGroup.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.ElementSeries&lt;TData&gt;" Collapsed="true">
-    <Position X="11.25" Y="2" Width="2" />
+    <Position X="5.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAQEAAAAAIAAAAAAAAAAAAAAAAAAAACQAAAAgAAAA=</HashCode>
+      <HashCode>AAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAIgABAA=</HashCode>
       <FileName>Graphics\Series\ElementSeries.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcLegend&lt;TData&gt;" Collapsed="true">
-    <Position X="4.75" Y="2" Width="1.75" />
+    <Position X="7.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACIAEAAgABAAAAACAABAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Graphics\BcLegend.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcTitle&lt;TData&gt;" Collapsed="true">
-    <Position X="3" Y="2" Width="1.5" />
+    <Position X="5.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAECAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAECAAAAAAAAEAAAAAAAACAAAAIAAAAA=</HashCode>
       <FileName>Graphics\BcTitle.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.Element&lt;TData&gt;" Collapsed="true">
-    <Position X="8.5" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIgAACAAAAAgAAACAAAAAICAABAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAgAACAAAAAgAAACAAAAAICAABAIAAAAA=</HashCode>
       <FileName>Graphics\Element.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlazorCharts.BcChart&lt;TData&gt;" Collapsed="true">
-    <Position X="3" Y="0.5" Width="1.5" />
+    <Position X="2.5" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>EAAAAABgBgABAAAAAAAACkAADCgAABAAAAAAAIAAgAA=</HashCode>
+      <HashCode>ECAAAABiBgBBAAAAAAAACkAADCgAABAAAAAAAIAAgAA=</HashCode>
       <FileName>BcChart.razor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.BcAreaSeries&lt;TData&gt;" Collapsed="true">
+    <Position X="5.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Series\BcAreaSeries.razor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.BcColumnSeries&lt;TData&gt;" Collapsed="true">
+    <Position X="9.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Graphics\Series\BcColumnSeries.razor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.BcScatterSeries&lt;TData&gt;" Collapsed="true">
+    <Position X="11.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Series\BcScatterSeries.razor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.BcBackground&lt;TData&gt;" Collapsed="true">
+    <Position X="13.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\BcBackground.razor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.ElementChart&lt;TData&gt;" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAgAAAAAAAAQBCAAAAAAAIAAAAAAEA=</HashCode>
+      <FileName>Graphics\ElementChart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlazorCharts.Series.BcLabels&lt;TData&gt;" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\BcLabels.razor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

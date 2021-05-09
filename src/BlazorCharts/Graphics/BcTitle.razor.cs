@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcTitle<TData> : ChartElement<TData>
+    public partial class BcTitle<TData> : ElementChart<TData>
     {
         public BcTitle()
         {

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace BlazorCharts
 {
-    public partial class BcAxisGroup<TData> : Element<TData>
+    public partial class BcAxisGroup<TData> : ElementChart<TData>
     {
         protected override void OnInitialized()
         {

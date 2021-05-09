@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public partial class BcLegend<TData> : ChartElement<TData>
+    public partial class BcLegend<TData> : ElementChart<TData>
     {
         /// <summary>
         /// 图例位置

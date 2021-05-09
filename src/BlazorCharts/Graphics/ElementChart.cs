@@ -12,7 +12,7 @@ namespace BlazorCharts
     /// 图表元素对象基类
     /// </summary>
     /// <typeparam name="TData"></typeparam>
-    public class ChartElement<TData> : Element<TData>
+    public abstract class ElementChart<TData> : Element<TData>
     {
         public  Rect PaddingRect => new Rect(Padding, Rect);
 
