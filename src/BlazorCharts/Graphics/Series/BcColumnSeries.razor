@@ -27,11 +27,24 @@
             bar.C = (int)(barCenter - (barFillWidth) / 2 + bar.W * SequenceNumber);
             bar.B = Rect.H;
 
-            <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1 />
-
+            <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1
+                  class="bc-column-translate" />
         }
 
     </g>
 
 }
 
+<style>
+    .bc-column-translate {
+        animation-name: bc-column-animation;
+        animation-duration: 1s
+    }
+
+    @@keyframes bc-column-animation {
+        from {
+            height: 0px;
+            y: @Rect.H
+            }
+    }
+</style>

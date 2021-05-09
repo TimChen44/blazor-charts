@@ -22,10 +22,25 @@
 
         @foreach (var item in points)
         {
-            <circle cx="@(item.X)" cy="@(item.Y)" r="4" fill="@color" />
+            <circle cx="@(item.X)" cy="@(item.Y)" r="4" fill="@color" class="bc-scatter-translate"/>
         }
 
 
     </g>
 
 }
+
+
+
+<style>
+    .bc-scatter-translate {
+        animation-name: bc-scatter-animation;
+        animation-duration: 1s
+    }
+
+    @@keyframes bc-scatter-animation {
+        from {
+            cy: @Rect.H
+        }
+    }
+</style>
