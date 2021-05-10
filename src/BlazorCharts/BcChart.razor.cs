@@ -49,8 +49,7 @@ namespace BlazorCharts
         public void DataAnalysis()
         {
             //TODO:先实现功能，性能啥的，不能存在的 :p 
-            //TODO:将来可以将DataAnalysis部分代码抽象到继承自CategoryData的对象中来应对不同类型的图表一些数据获取上的差异
-
+   
             //初始化数据
             CategoryDatas.Clear();
             SeriesDatas.Clear();

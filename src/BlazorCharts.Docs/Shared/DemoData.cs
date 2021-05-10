@@ -18,6 +18,16 @@ namespace BlazorCharts.Docs.Shared
             new Github(){Year=2019,View =2800,Start=1100,Fork=700},
             new Github(){Year=2020,View =2600,Start=1400,Fork=900},
         };
+
+        public static List<CityValue> CityValues = new List<CityValue>()
+        {
+            new CityValue(){Year=2020,City ="上海",Value=26},
+            new CityValue(){Year=2020,City ="北京",Value=23},
+            new CityValue(){Year=2021,City ="上海",Value=32},
+            new CityValue(){Year=2021,City ="北京",Value=35},
+            new CityValue(){Year=2022,City ="上海",Value=29},
+            new CityValue(){Year=2022,City ="北京",Value=34},
+        };
     }
     public class Github
     {
@@ -26,4 +36,14 @@ namespace BlazorCharts.Docs.Shared
         public int Start { get; set; }
         public int Fork { get; set; }
     }
+
+
+
+    public class CityValue
+    {
+        public int Year { get; set; }
+        public string City { get; set; }
+        public int Value { get; set; }
+    }
+
 }

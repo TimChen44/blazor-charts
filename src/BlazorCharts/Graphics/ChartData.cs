@@ -23,6 +23,7 @@ namespace BlazorCharts
         /// </summary>
         public string Category { get; set; }
 
+        //移动到每个系列对象中自己管理
         /// <summary>
         /// 每个系列的值
         /// </summary>
@@ -37,6 +38,8 @@ namespace BlazorCharts
 
         #region 布局信息
 
+
+        //移动到BcSeriesGroup管理
         /// <summary>
         /// 每一个分组在X轴上相对0点的偏移比例
         /// 此处存储比例目的是为了方便图表缩放
