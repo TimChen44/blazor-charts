@@ -50,12 +50,12 @@ namespace BlazorCharts
         /// <summary>
         /// 系列序号，决定了系列显示顺序
         /// </summary>
-         internal int SeriesNumber { get; set; }
+        internal int SeriesNumber { get; set; }
 
         /// <summary>
         /// 系列宽度占比，比如线图是0，柱状图一根柱子为1，两根为2
         /// </summary>
-        internal int SeriesWidthRatio { get; }
+        abstract internal int SeriesWidthRatio { get; }
 
         /// <summary>
         /// 系列数据
@@ -78,6 +78,9 @@ namespace BlazorCharts
             else
                 groups = datas.GroupBy(x => GroupField(x)).ToDictionary(x => x.Key, x => x.ToList());
 
+            SeriesData.Groups = groups.Select(x => x.Key).ToList();
+
+            //获得具体的值
             foreach (var category in categorys)
             {
                 var categoryData = new CategoryData(category);

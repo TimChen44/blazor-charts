@@ -4,10 +4,10 @@
 
 @foreach (var log in logs)
 {
-    var lines = log.Value.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x=>x.Trim());
-    
+    var lines = log.Value.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
 
-    <Card Size="small" Title="@log.Key" Style="width:100%;">
+
+    <Card Size="small" Title="@log.Key" Style="width:100%;margin-bottom:5px">
 
         @foreach (var line in lines)
         {
@@ -37,20 +37,20 @@
 
     Dictionary<string, string> logs = new()
     {
-        {
-            @"2021.0509",
-            @"+柱状图和点的图增加动画"
-        },
-        {
-            @"2021.0501",
-            @"+文档增加更新日志
+            {
+                @"2021.0509",
+                @"+柱状图和点的图增加动画"
+            },
+            {
+                @"2021.0501",
+                @"+文档增加更新日志
               +Title组件增加文本位置属性
               +Y轴增加主要和次要的单位和网格线
               +X轴增加网格线
               *优化Y轴刻度计算算法
               +坐标轴增加标签位置和文字偏移"
-        }
+            }
 
 
-    };
+        };
 }

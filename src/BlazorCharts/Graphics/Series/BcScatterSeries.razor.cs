@@ -12,5 +12,7 @@ namespace BlazorCharts
         {
 
         }
+
+        internal override int SeriesWidthRatio => 0;
     }
 }
