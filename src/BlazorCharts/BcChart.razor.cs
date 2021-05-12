@@ -12,102 +12,6 @@ namespace BlazorCharts
     {
         [Parameter] public RenderFragment ChildContent { get; set; }
 
-        #region 数据
-
-        /// <summary>
-        /// 数据
-        /// </summary>
-        [Parameter] public List<TData> Data { get; set; }
-
-        /// <summary>
-        /// 轴（类别）字段
-        /// </summary>
-        [Parameter] public Func<TData, string> CategoryField { get; set; }
-        //TODO:暂时只支持本文，应该支持文本，数字，日期，且日期支持自定义排序规则
-        //TODO:目前仅支持一个字段
-
-
-        /// <summary>
-        /// 分组字段，可以将一个字段中的值分成不同的系列处理
-        /// </summary>
-        [Parameter] public Func<TData, string> GroupField { get; set; }
-
-
-        /// <summary>
-        /// 水平（分类）轴标签 数据集
-        /// </summary>
-        public List<CategoryData<TData>> CategoryDatas { get; set; } = new List<CategoryData<TData>>();
-
-        /// <summary>
-        /// 图例项（系列）数据集
-        /// </summary>
-        public List<SeriesData> SeriesDatas { get; set; } = new List<SeriesData>();
-
-        /// <summary>
-        /// 处理数据
-        /// </summary>
-        public void DataAnalysis()
-        {
-            //TODO:先实现功能，性能啥的，不能存在的 :p 
-   
-            //初始化数据
-            CategoryDatas.Clear();
-            SeriesDatas.Clear();
-            //获得所有分组
-            var categorys = Data.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
-
-            for (int i = 0; i < categorys.Count; i++)
-            {
-                var category = categorys[i];
-
-                var categoryData = new CategoryData<TData>(category);
-                CategoryDatas.Add(categoryData);
-
-                categoryData.DataValues = Data.Where(x => CategoryField(x) == category).ToList();
-                foreach (var series in BcSeriesGroup.Series)
-                {
-                    categoryData.SeriesValues.Add(series.Group, series.ValueFunc(categoryData.DataValues));
-                }
-
-                categoryData.AxesWidthRatio = (double)1 / (categorys.Count);
-                categoryData.AxesZeroRatio = categoryData.AxesWidthRatio * i + categoryData.AxesWidthRatio / 2;
-
-            }
-
-            foreach (var series in BcSeriesGroup.Series)
-            {
-                var group = new SeriesData(series.Group);
-                SeriesDatas.Add(group);
-
-                group.Max = CategoryDatas.Max(x => x.SeriesValues[series.Group]);
-                group.Min = CategoryDatas.Min(x => x.SeriesValues[series.Group]);
-            }
-        }
-
-
-
-        #endregion
-
-        #region 图表属性
-
-        /// <summary>
-        /// 宽度
-        /// </summary>
-        [Parameter] public int Width { get; set; }
-
-        /// <summary>
-        /// 高度
-        /// </summary>
-        [Parameter] public int Height { get; set; }
-
-        /// <summary>
-        /// 字体尺寸，如果子元素没有设置尺寸，那么默认拿去此处的尺寸
-        /// </summary>
-        [Parameter] public int FontSize { get; set; } = 12;
-
-
-        #endregion
-
         #region 图表元素
 
         /// <summary>
@@ -158,7 +62,43 @@ namespace BlazorCharts
 
         #endregion
 
-        #region 方法
+        #region 数据
+
+        /// <summary>
+        /// 数据
+        /// </summary>
+        [Parameter] public List<TData> Data { get; set; }
+
+        /// <summary>
+        /// 轴（类别）字段
+        /// </summary>
+        [Parameter] public Func<TData, string> CategoryField { get; set; }
+
+        /// <summary>
+        /// 数据筛选：可以通过它筛选筛选数据
+        /// </summary>
+        [Parameter] public Func<TData, bool> DataFilter { get; set; }
+
+        /// <summary>
+        /// 处理数据
+        /// </summary>
+        internal void DataAnalysis()
+        {
+            //TODO:先实现功能，性能啥的，不能存在的 :p 
+
+            var filteredData = Data.Where(x => DataFilter == null ? true : DataFilter(x)).ToList();
+
+            //获得所有分组
+            var categorys = filteredData.GroupBy(x => CategoryField(x)).Select(x => x.Key).ToList();
+
+            BcSeriesGroup.DataAnalysis(filteredData, categorys);
+        }
+
+
+
+        #endregion
+
+        #region 绘图
 
         /// <summary>
         /// 刷新显示，主要用于设置修改后用新的设置进行显示
@@ -168,20 +108,12 @@ namespace BlazorCharts
             Drawing();
         }
 
-        #endregion
-
-
-        public BcChart()
-        {
-
-        }
 
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
             {
                 Drawing();
-
             }
         }
 
@@ -212,7 +144,27 @@ namespace BlazorCharts
             StateHasChanged();
         }
 
+        #endregion
 
+        #region 图表属性
+
+        /// <summary>
+        /// 宽度
+        /// </summary>
+        [Parameter] public int Width { get; set; }
+
+        /// <summary>
+        /// 高度
+        /// </summary>
+        [Parameter] public int Height { get; set; }
+
+        /// <summary>
+        /// 字体尺寸，如果子元素没有设置尺寸，那么默认拿去此处的尺寸
+        /// </summary>
+        [Parameter] public int FontSize { get; set; } = 12;
+
+
+        #endregion
     }
 }
 

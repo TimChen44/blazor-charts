@@ -18,15 +18,32 @@ namespace BlazorCharts
         public List<ElementSeries<TData>> Series { get; set; } = new List<ElementSeries<TData>>();
         public void AddSeries(ElementSeries<TData> element)
         {
+            var lastSeriesNumber = Series.LastOrDefault()?.SeriesNumber ?? 0;
+            element.SeriesNumber = lastSeriesNumber + 1;
             Series.Add(element);
         }
 
+        //这两个值需要在这里统一给出
+        ///// <summary>
+        ///// 每一个分组在X轴上相对0点的偏移比例
+        ///// 此处存储比例目的是为了方便图表缩放
+        ///// </summary>
+        //public double AxesZeroRatio { get; set; }
 
-        protected override void OnInitialized()
+        ///// <summary>
+        ///// 分类在轴上拥有的宽度
+        ///// </summary>
+        //public double AxesWidthRatio { get; set; }
+
+
+        internal void DataAnalysis(List<TData> datas, List<string> categorys)
         {
-            Console.WriteLine("BcSeriesGroup");
-            base.OnInitialized();
+            foreach (var item in Series)
+            {
+                item.DataAnalysis(datas, categorys);
+            }
         }
+
 
         public override void Drawing()
         {

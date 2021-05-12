@@ -20,33 +20,25 @@ namespace BlazorCharts
         /// </summary>
         public SeriesType Type { get; set; }
 
+        /// <summary>
+        /// 分组名称，这个系列的固定名称，与SeriesField属性互斥
+        /// </summary>
+        [Parameter] public string GroupName { get; set; }
 
         /// <summary>
-        /// 分组字段，可以将一个字段中的值分成不同的系列处理
+        /// 分组字段，通过某一给字段拆分成多个组，与GroupName属性互斥
         /// </summary>
-        [Parameter] public string Group { get; set; }
+        [Parameter] public Func<TData, string> GroupField { get; set; }
 
-
-        private string caption;
         /// <summary>
-        /// 系列名字
+        /// 实际的值
         /// </summary>
-        [Parameter]
-        public string Caption
-        {
-            get => caption ?? Group;
-            set => caption = value;
-        }
+        [Parameter] public Func<IEnumerable<TData>, double> ValueFunc { get; set; }
 
         /// <summary>
         /// 使用次坐标轴
         /// </summary>
         [Parameter] public bool IsSecondaryAxis { get; set; }
-
-        /// <summary>
-        /// 值字段
-        /// </summary>
-        [Parameter] public Func<List<TData>, double> ValueFunc { get; set; }
 
         public override void Drawing()
         {
@@ -58,31 +50,56 @@ namespace BlazorCharts
         /// <summary>
         /// 系列序号，决定了系列显示顺序
         /// </summary>
-        public int SeriesNumber { get; set; }
+         internal int SeriesNumber { get; set; }
 
         /// <summary>
-        /// 系列宽度，决定了系列占用多少空间，影响后续系列位置
+        /// 系列宽度占比，比如线图是0，柱状图一根柱子为1，两根为2
         /// </summary>
-        public int SeriesWidth { get; set; }
+        internal int SeriesWidthRatio { get; }
 
         /// <summary>
-        /// 最大值：用于计算坐标轴
+        /// 系列数据
         /// </summary>
-        public double MaxValue { get; set; }
-
-        /// <summary>
-        /// 最小值：用于计算坐标轴
-        /// </summary>
-        public double MinValue { get; set; }
+        public SeriesData SeriesData { get; set; }
 
         /// <summary>
         /// 数据分析
         /// </summary>
-        public virtual void DataAnalysis()
+        public virtual void DataAnalysis(List<TData> datas, List<string> categorys)
         {
+            SeriesData = new SeriesData();
+
+            SeriesData.Categories = categorys;
+
+            //获得分组及每个分组的数据
+            Dictionary<string, List<TData>> groups;
+            if (string.IsNullOrWhiteSpace(GroupName) == false)
+                groups = new Dictionary<string, List<TData>>() { { GroupName, datas } };
+            else
+                groups = datas.GroupBy(x => GroupField(x)).ToDictionary(x => x.Key, x => x.ToList());
+
+            foreach (var category in categorys)
+            {
+                var categoryData = new CategoryData(category);
+                SeriesData.CategoryDatas.Add(category, categoryData);
+
+                foreach (var group in groups)
+                {
+                    var groupData = new GroupData(group.Key);
+                    categoryData.GroupDatas.Add(group.Key, groupData);
+
+                    //TODO:此处可以将获取值做一个虚函数，具体获得值由各类型的系列自己实现
+                    double value = ValueFunc(group.Value.Where(x => Chart.CategoryField(x) == category));
+
+                    groupData.Data = new SingleValueData(value);
+                }
+            }
+
+            //TODO:具体获得最大最小值应该由各类型的系列单独实现，应为有些最大值是连个组合并所得
+            SeriesData.MaxValue = SeriesData.CategoryDatas.Max(x => x.Value.GroupDatas.Max(y => y.Value.Data.Max));
+            SeriesData.MinValue = SeriesData.CategoryDatas.Min(x => x.Value.GroupDatas.Min(y => y.Value.Data.Max));
 
         }
-
 
         #endregion
 
@@ -93,6 +110,7 @@ namespace BlazorCharts
         Column,
         Line,
         Area,
+        Scatter,
     }
 
 }

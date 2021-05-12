@@ -39,7 +39,7 @@
             var yText = yBase + FontSize + ItemSpacing / 2 + BorderWidth;
 
             var series = Chart.BcSeriesGroup.Series[i];
-            var color = series.Group.RandomColor().ToHtml();
+            var color = series.GroupName.RandomColor().ToHtml();
 
             <rect x="@xIcon" y="@yIcon" width="@FontSize" height="@FontSize" fill="@color" />
             <text>
