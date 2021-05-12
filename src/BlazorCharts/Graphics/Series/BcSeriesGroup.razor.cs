@@ -23,19 +23,6 @@ namespace BlazorCharts
             Series.Add(element);
         }
 
-        //这两个值需要在这里统一给出
-        ///// <summary>
-        ///// 每一个分组在X轴上相对0点的偏移比例
-        ///// 此处存储比例目的是为了方便图表缩放
-        ///// </summary>
-        //public double AxesZeroRatio { get; set; }
-
-        ///// <summary>
-        ///// 分类在轴上拥有的宽度
-        ///// </summary>
-        //public double AxesWidthRatio { get; set; }
-
-
         internal void DataAnalysis(List<TData> datas, List<string> categorys)
         {
             foreach (var item in Series)
@@ -43,7 +30,6 @@ namespace BlazorCharts
                 item.DataAnalysis(datas, categorys);
             }
         }
-
 
         public override void Drawing()
         {
@@ -60,6 +46,15 @@ namespace BlazorCharts
             }
 
             base.Drawing();
+        }
+
+        /// <summary>
+        /// 获得所有组名
+        /// </summary>
+        /// <returns></returns>
+        public  List<string> GetGroupNames()
+        {
+            return Series.SelectMany(x => x.SeriesData.Groups).ToList();
         }
 
     }

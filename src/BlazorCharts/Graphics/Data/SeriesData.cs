@@ -12,16 +12,6 @@ namespace BlazorCharts
     /// </summary>
     public class SeriesData
     {
-        //public SeriesData(string name)
-        //{
-        //    Name = name;
-        //}
-
-        ///// <summary>
-        ///// 系列名称
-        ///// </summary>
-        //public string Name { get; set; }
-
         public List<string> Categories { get; set; } = new List<string>();
 
         public List<string> Groups { get; set; } = new List<string>();

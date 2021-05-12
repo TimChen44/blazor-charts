@@ -43,7 +43,7 @@ namespace BlazorCharts
         /// <summary>
         /// 默认值
         /// </summary>
-        public static readonly IValueData DefaultValueData = new SingleValueData() { Value = 0 };
+        public static readonly IValueData DefaultValueData = new SingleValueData(0);
 
         /// <summary>
         /// 最小值
