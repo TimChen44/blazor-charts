@@ -14,7 +14,7 @@
         }
 
 
-        @for (int i = 0; i < Chart.BcSeriesGroup.Series.Count; i++)
+        @for (int i = 0; i < Chart.BcSeriesGroup.GroupNames.Count; i++)
         {
 
             //计算图例项目的基础位置
@@ -38,12 +38,12 @@
             var xText = xIcon + FontSize * 1.5;
             var yText = yBase + FontSize + ItemSpacing / 2 + BorderWidth;
 
-            var series = Chart.BcSeriesGroup.Series[i];
-            var color = series.GroupName.RandomColor().ToHtml();
+            var groupName = Chart.BcSeriesGroup.GroupNames[i];
+            var color = groupName.RandomColor().ToHtml();
 
             <rect x="@xIcon" y="@yIcon" width="@FontSize" height="@FontSize" fill="@color" />
             <text>
-                <text x="@xText" y="@yText" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@series.GroupName</text>
+                <text x="@xText" y="@yText" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@groupName</text>
             </text>
         }
 

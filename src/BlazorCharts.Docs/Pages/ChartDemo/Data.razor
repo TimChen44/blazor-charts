@@ -1,0 +1,47 @@
+﻿@page "/Data"
+
+<Card Title="固定分组">
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+
+                </BcChart>
+            </div>
+            <div class="prop">
+
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+
+
+
+}
+
+<Card Title="字段分组">
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" Data="DemoData.CityValues" CategoryField="x=>x.Year.ToString()">
+                    <BcLineSeries TData="CityValue" ValueFunc="x=>x.Sum(y=>y.Value)" GroupField="x=>x.City"></BcLineSeries>
+
+                </BcChart>
+            </div>
+            <div class="prop">
+
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+
+
+
+}

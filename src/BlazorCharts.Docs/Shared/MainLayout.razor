@@ -6,6 +6,9 @@
         BlazorCharts.Docs
     </MenuItem>
     <SubMenu Title="图表元素示例">
+        <MenuItem RouterLink="/Data" RouterMatch="NavLinkMatch.Prefix">
+            数据 Data
+        </MenuItem>
         <MenuItem RouterLink="/Title" RouterMatch="NavLinkMatch.Prefix">
             标题 Title
         </MenuItem>
@@ -44,7 +47,11 @@
     </MenuItem>
 </Menu>
 
-<div style="height: calc( 100vh - 48px );overflow-y:auto;padding-left:15px;padding-right:15px;padding-top:15px">
+<div style="height: calc( 100vh - 48px );
+        overflow-y: auto;
+        padding-left: 150px;
+        padding-right: 150px;
+        padding-top: 15px;">
     @Body
 </div>
 

@@ -24,9 +24,9 @@ namespace BlazorCharts
             byte b = Convert.ToByte(result / 255 / 255 % 255);
 
             return Color.FromArgb(
-                r < 90 ? r + 90 : r,
-                g < 90 ? g + 90 : g,
-                b < 90 ? b + 90 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
+                r < 100 ? r + 100 : r,
+                g < 100 ? g + 100 : g,
+                b < 100 ? b + 100 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
 
             //TODO:Wasm尽然不支持MD5了T_T，详情：https://docs.microsoft.com/zh-cn/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
             //using (var md5 = MD5.Create())
@@ -81,6 +81,8 @@ namespace BlazorCharts
         //生成CRC32码表
         static public void GetCRC32Table()
         {
+            if (Crc32Table != null) return;
+
             ulong Crc;
             Crc32Table = new ulong[256];
             int i, j;
@@ -102,7 +104,7 @@ namespace BlazorCharts
         {
             //生成码表
             GetCRC32Table();
-            byte[] buffer = System.Text.ASCIIEncoding.ASCII.GetBytes(sInputString); ulong value = 0xffffffff;
+            byte[] buffer = System.Text.ASCIIEncoding.Unicode.GetBytes(sInputString); ulong value = 0xffffffff;
             int len = buffer.Length;
             for (int i = 0; i < len; i++)
             {
