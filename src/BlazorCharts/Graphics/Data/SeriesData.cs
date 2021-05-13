@@ -15,7 +15,7 @@ namespace BlazorCharts
         /// <summary>
         /// 系列拥有的分类
         /// </summary>
-        public List<string> Categories { get; set; } = new List<string>();
+        public List<CategoryData> CategoryDatas { get; set; } = new List<CategoryData>();
         /// <summary>
         /// 系列拥有的组
         /// </summary>
@@ -32,11 +32,11 @@ namespace BlazorCharts
         /// <param name="category"></param>
         /// <param name="group"></param>
         /// <returns></returns>
-        public IValueData GetGroupData(string category, string group)
+        public T GetValueData<T>(string category, string group) where T: IValueData
         {
             var value = SeriesValues.FirstOrDefault(x => x.Category == category && x.Group == group);
-            if (value == null) return IValueData.DefaultValueData;
-            return value.Data;
+            if (value == null) return (T)IValueData.DefaultValueData;
+            return (T)value.Data;
         }
 
 
@@ -64,5 +64,19 @@ namespace BlazorCharts
         public string Category { get; set; }
         public string Group { get; set; }
         public IValueData Data { get; set; }
+    }
+
+
+    /// <summary>
+    /// 分类数据
+    /// </summary>
+    public class CategoryData
+    {
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 分类在轴上的位置比，真实值需要乘以轴的长度
+        /// </summary>
+        public double LocationRatio { get; set; }
     }
 }

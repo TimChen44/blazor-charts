@@ -25,11 +25,23 @@ namespace BlazorCharts
 
         internal void DataAnalysis(List<TData> datas, List<string> categorys)
         {
+            //计算拥有的分类以及分类的位置
+            CategoryDatas = new List<CategoryData>();
+            for (int i = 0; i < categorys.Count; i++)
+            {
+                CategoryDatas.Add(new CategoryData()
+                {
+                    Name = categorys[i],
+                    LocationRatio = (i + 0.5) / categorys.Count,
+                });
+            }
+
+            //计算每个系列的数据
             foreach (var item in Series)
             {
-                item.DataAnalysis(datas, categorys);
+                item.DataAnalysis(datas, CategoryDatas);
             }
-            Categories = categorys.Select(x => new CategoryAxes(x)).ToList();
+
 
             GroupNames = Series.SelectMany(x => x.SeriesData.Groups).ToList();
         }
@@ -43,11 +55,7 @@ namespace BlazorCharts
             Rect.W = Chart.BcAxisGroup.AxesX.Rect.R - Rect.X;
             Rect.H = Chart.BcAxisGroup.AxesX.Rect.T - Rect.Y;
 
-            for (int i = 0; i < Categories.Count; i++)
-            {
-                var cat = Categories[i];
-                cat.LocationRatio = (i + 0.5) / Categories.Count;
-            }
+
 
             foreach (var item in Series)
             {
@@ -58,9 +66,9 @@ namespace BlazorCharts
         }
 
         /// <summary>
-        /// 所有分类名称
+        /// 分类的数据
         /// </summary>
-        public List<CategoryAxes> Categories { get; set; } = new List<CategoryAxes>();
+        public List<CategoryData> CategoryDatas { get; set; } = new List<CategoryData>();
 
         /// <summary>
         /// 所有组名称
@@ -71,7 +79,7 @@ namespace BlazorCharts
         /// <summary>
         /// 分类在轴上占用的宽度比，真实值需要乘以轴的长度
         /// </summary>
-        public double WidthRatio => 1 / (Categories.Count == 0 ? 1 : Categories.Count);
+        public double WidthRatio => 1 / (CategoryDatas.Count == 0 ? 1 : CategoryDatas.Count);
 
 
         ///// <summary>
@@ -80,24 +88,6 @@ namespace BlazorCharts
         //public int SeriesWidth { get => (int)(Rect.W / (Categories.Count == 0 ? 1 : Categories.Count)); }
     }
 
-    /// <summary>
-    /// 分类的区域，
-    /// </summary>
-    public class CategoryAxes
-    {
-        public CategoryAxes(string name)
-        {
-            Name = name;
-        }
-
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 分类在轴上的位置比，真实值需要乘以轴的长度
-        /// </summary>
-        public double LocationRatio { get; set; }
-
-    }
 
 
 }

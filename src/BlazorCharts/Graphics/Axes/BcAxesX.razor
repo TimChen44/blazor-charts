@@ -8,7 +8,7 @@
 
         <line x1="0" y1="0" x2="@Rect.W" y2="0" stroke="rgb(110 110 110)" stroke-width="1" />
 
-        @foreach (var category in Chart.BcSeriesGroup.Categories)
+        @foreach (var category in Chart.BcSeriesGroup.CategoryDatas)
         {
             var x = category.LocationRatio * Rect.W;
 

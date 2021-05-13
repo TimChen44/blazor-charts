@@ -65,11 +65,11 @@ namespace BlazorCharts
         /// <summary>
         /// 数据分析
         /// </summary>
-        public virtual void DataAnalysis(List<TData> datas, List<string> categorys)
+        public virtual void DataAnalysis(List<TData> datas, List<CategoryData> categoryDatas)
         {
             SeriesData = new SeriesData();
 
-            SeriesData.Categories = categorys;
+            SeriesData.CategoryDatas = categoryDatas;
 
             //获得分组及每个分组的数据
             Dictionary<string, List<TData>> groups;
@@ -81,15 +81,14 @@ namespace BlazorCharts
             SeriesData.Groups = groups.Select(x => x.Key).ToList();
 
             //获得具体的值
-            foreach (var category in categorys)
+            foreach (var category in categoryDatas)
             {
- 
-                foreach (var group in groups)
+                 foreach (var group in groups)
                 {
-                    var seriesValue = new SeriesValue(category, group.Key);
+                    var seriesValue = new SeriesValue(category.Name, group.Key);
 
                     //TODO:此处可以将获取值做一个虚函数，具体获得值由各类型的系列自己实现
-                    double value = ValueFunc(group.Value.Where(x => Chart.CategoryField(x) == category));
+                    double value = ValueFunc(group.Value.Where(x => Chart.CategoryField(x) == category.Name));
 
                     seriesValue.Data = new SingleValueData(value);
 
