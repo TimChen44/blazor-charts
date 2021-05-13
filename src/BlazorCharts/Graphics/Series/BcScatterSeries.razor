@@ -4,28 +4,29 @@
 
 @if (Chart.IsInit)
 {
-    <g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
-
+    <g class="bc-scatter-series" transform="translate(@Rect.LT.ToPoint())">
         @{
-            var color = (SeriesData.Groups.First() ?? "Scatter").RandomColor().ToHtml();
-            var colorDeepen = (SeriesData.Groups.First() ?? "Scatter").RandomColor().Deepen().ToHtml();
-            List<Point> points = new List<Point>();
+            //一个分组就是一组散点
+            foreach (var group in SeriesData.Groups)
+            {
+                var color = (group ?? "Scatter").RandomColor().ToHtml();
+                var colorDeepen = (group ?? "Scatter").RandomColor().Deepen().ToHtml();
+                List<Point> points = new List<Point>();
+
+                foreach (var category in SeriesData.CategoryDatas)
+                {
+                    var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
+
+                    points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.LocationRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
+                }
+
+                foreach (var item in points)
+                {
+                    <circle cx="@(item.X)" cy="@(item.Y)" r="4" fill="@color" class="bc-scatter-translate" />
+                }
+
+            }
         }
-
-        @*@foreach (var category in Chart.CategoryDatas)
-        {
-            var value = category.SeriesValues[Group];
-
-            points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value)));
-
-        }*@
-
-        @foreach (var item in points)
-        {
-            <circle cx="@(item.X)" cy="@(item.Y)" r="4" fill="@color" class="bc-scatter-translate"/>
-        }
-
-
     </g>
 
 }
