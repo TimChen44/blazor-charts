@@ -7,9 +7,9 @@
             <div class="chart">
                 <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="折线图" TData="Github"></BcTitle>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcLineSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcLineSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcLineSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcLineSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
                 </BcChart>
             </div>
             <div class="prop">
