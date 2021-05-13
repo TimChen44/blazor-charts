@@ -83,24 +83,23 @@ namespace BlazorCharts
             //获得具体的值
             foreach (var category in categorys)
             {
-                var categoryData = new CategoryData(category);
-                SeriesData.CategoryDatas.Add(category, categoryData);
-
+ 
                 foreach (var group in groups)
                 {
-                    var groupData = new GroupData(group.Key);
-                    categoryData.GroupDatas.Add(group.Key, groupData);
+                    var seriesValue = new SeriesValue(category, group.Key);
 
                     //TODO:此处可以将获取值做一个虚函数，具体获得值由各类型的系列自己实现
                     double value = ValueFunc(group.Value.Where(x => Chart.CategoryField(x) == category));
 
-                    groupData.Data = new SingleValueData(value);
+                    seriesValue.Data = new SingleValueData(value);
+
+                    SeriesData.SeriesValues.Add(seriesValue);
                 }
             }
 
             //TODO:具体获得最大最小值应该由各类型的系列单独实现，应为有些最大值是连个组合并所得
-            SeriesData.MaxValue = SeriesData.CategoryDatas.Max(x => x.Value.GroupDatas.Max(y => y.Value.Data.Max));
-            SeriesData.MinValue = SeriesData.CategoryDatas.Min(x => x.Value.GroupDatas.Min(y => y.Value.Data.Max));
+            SeriesData.MaxValue = SeriesData.SeriesValues.Max(x => x.Data.Max);
+            SeriesData.MinValue = SeriesData.SeriesValues.Min(x => x.Data.Min);
 
         }
 

@@ -7,13 +7,13 @@
     <g class="bc-bar-series" transform="translate(@Rect.LT.ToPoint())">
 
         @{
-            var color = (Group ?? "Bar").RandomColor().ToHtml();
-            var colorStroke = (Group ?? "Bar").RandomColor().Deepen().ToHtml();
+            var color = (SeriesData.Groups.First() ?? "Bar").RandomColor().ToHtml();
+            var colorStroke = (SeriesData.Groups.First() ?? "Bar").RandomColor().Deepen().ToHtml();
 
-            var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcColumnSeries<TData>).Max(x => ((BcColumnSeries<TData>)x).SequenceNumber);
+            @*var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcColumnSeries<TData>).Max(x => ((BcColumnSeries<TData>)x).SequenceNumber);*@
         }
 
-        @foreach (var category in Chart.CategoryDatas)
+        @*@foreach (var category in Chart.CategoryDatas)
         {
 
             var value = category.SeriesValues[Group];
@@ -29,7 +29,7 @@
 
             <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1
                   class="bc-column-translate" />
-        }
+        }*@
 
     </g>
 

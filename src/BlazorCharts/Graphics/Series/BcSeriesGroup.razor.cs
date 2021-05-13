@@ -29,6 +29,9 @@ namespace BlazorCharts
             {
                 item.DataAnalysis(datas, categorys);
             }
+            Categories = categorys.Select(x => new CategoryAxes(x)).ToList();
+
+            GroupNames = Series.SelectMany(x => x.SeriesData.Groups).ToList();
         }
 
         public override void Drawing()
@@ -40,6 +43,12 @@ namespace BlazorCharts
             Rect.W = Chart.BcAxisGroup.AxesX.Rect.R - Rect.X;
             Rect.H = Chart.BcAxisGroup.AxesX.Rect.T - Rect.Y;
 
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                var cat = Categories[i];
+                cat.LocationRatio = (i + 0.5) / Categories.Count;
+            }
+
             foreach (var item in Series)
             {
                 item.Drawing();
@@ -49,13 +58,44 @@ namespace BlazorCharts
         }
 
         /// <summary>
-        /// 获得所有组名
+        /// 所有分类名称
         /// </summary>
-        /// <returns></returns>
-        public  List<string> GetGroupNames()
+        public List<CategoryAxes> Categories { get; set; } = new List<CategoryAxes>();
+
+        /// <summary>
+        /// 所有组名称
+        /// </summary>
+        public List<string> GroupNames { get; set; } = new List<string>();
+
+
+        /// <summary>
+        /// 分类在轴上占用的宽度比，真实值需要乘以轴的长度
+        /// </summary>
+        public double WidthRatio => 1 / (Categories.Count == 0 ? 1 : Categories.Count);
+
+
+        ///// <summary>
+        ///// 系列的宽度
+        ///// </summary>
+        //public int SeriesWidth { get => (int)(Rect.W / (Categories.Count == 0 ? 1 : Categories.Count)); }
+    }
+
+    /// <summary>
+    /// 分类的区域，
+    /// </summary>
+    public class CategoryAxes
+    {
+        public CategoryAxes(string name)
         {
-            return Series.SelectMany(x => x.SeriesData.Groups).ToList();
+            Name = name;
         }
+
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 分类在轴上的位置比，真实值需要乘以轴的长度
+        /// </summary>
+        public double LocationRatio { get; set; }
 
     }
 

@@ -12,11 +12,19 @@ namespace BlazorCharts
     /// </summary>
     public class SeriesData
     {
+        /// <summary>
+        /// 系列拥有的分类
+        /// </summary>
         public List<string> Categories { get; set; } = new List<string>();
-
+        /// <summary>
+        /// 系列拥有的组
+        /// </summary>
         public List<string> Groups { get; set; } = new List<string>();
 
-        public Dictionary<string, CategoryData> CategoryDatas { get; set; } = new Dictionary<string, CategoryData>();
+        /// <summary>
+        /// 系列中的值
+        /// </summary>
+        public List<SeriesValue> SeriesValues = new List<SeriesValue>();
 
         /// <summary>
         /// 获得具体值
@@ -26,13 +34,9 @@ namespace BlazorCharts
         /// <returns></returns>
         public IValueData GetGroupData(string category, string group)
         {
-            CategoryDatas.TryGetValue(category, out var categoryData);
-            if (categoryData == null) return IValueData.DefaultValueData;
-
-            categoryData.GroupDatas.TryGetValue(group, out var groupData);
-            if (groupData == null) return IValueData.DefaultValueData;
-
-            return groupData.Data;
+            var value = SeriesValues.FirstOrDefault(x => x.Category == category && x.Group == group);
+            if (value == null) return IValueData.DefaultValueData;
+            return value.Data;
         }
 
 
@@ -49,36 +53,16 @@ namespace BlazorCharts
     }
 
 
-    public class CategoryData
+    public class SeriesValue
     {
-        public CategoryData(string name)
+        public SeriesValue(string category, string group)
         {
-            Name = name;
+            Category = category;
+            Group = group;
         }
 
-        /// <summary>
-        /// 分类名称
-        /// </summary>
-        public string Name { get; set; }
-
-        public Dictionary<string, GroupData> GroupDatas { get; set; } = new Dictionary<string, GroupData>();
-
-    }
-
-    public class GroupData
-    {
-        public GroupData(string name)
-        {
-            Name = name;
-        }
-
-        /// <summary>
-        /// 组名称
-        /// </summary>
-        public string Name { get; set; }
-
+        public string Category { get; set; }
+        public string Group { get; set; }
         public IValueData Data { get; set; }
     }
-
-
 }

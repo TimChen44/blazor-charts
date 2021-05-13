@@ -48,7 +48,7 @@ namespace BlazorCharts
         public override void Drawing()
         {
 
-            var groupNames = Chart.BcSeriesGroup.GetGroupNames();
+            var groupNames = Chart.BcSeriesGroup.GroupNames;
 
             //先算出最大的文本
             var maxString = "";
