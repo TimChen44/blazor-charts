@@ -39,14 +39,20 @@ namespace BlazorCharts
             //}
         }
 
-        /// <summary>
-        /// 加深颜色，用于边框
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static Color Deepen(this Color value)
         {
             return Color.FromArgb(value.R - (value.R / 2), value.G - (value.G / 2), value.B - (value.B / 2));
+        }
+
+        /// <summary>
+        /// 调整透明度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="alpha">0~255</param>
+        /// <returns></returns>
+        public static Color Transparent(this Color value,int alpha=230)
+        {
+            return Color.FromArgb(alpha, value);
         }
 
         /// <summary>
@@ -59,6 +65,8 @@ namespace BlazorCharts
             return Color.FromArgb(value.R + ((255 - value.R) / 2), value.G + ((255 - value.G) / 2), value.B + ((255 - value.B) / 2));
         }
 
+
+
         /// <summary>
         /// 转换成html需要的格式
         /// </summary>
@@ -68,6 +76,8 @@ namespace BlazorCharts
         {
             return $"rgb({value.R} {value.G} {value.B} / {Math.Round((double)value.A / 255, 2)})";
         }
+
+
     }
 
 
