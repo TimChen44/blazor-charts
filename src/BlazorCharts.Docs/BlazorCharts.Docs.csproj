@@ -24,4 +24,8 @@
     <None Include="wwwroot\exampleJsInterop.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>

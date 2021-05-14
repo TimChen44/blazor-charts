@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,13 @@ namespace BlazorCharts
         /// <summary>
         /// 与坐标轴的距离
         /// </summary>
+        [Display(Name = "标签与坐标轴的距离")]
         [Parameter] public int? DistanceAxis { get => _DistanceAxis ?? 5; set => _DistanceAxis = value; }
 
         /// <summary>
         /// 显示主要网格线
         /// </summary>
+        [Display(Name = "显示主要网格线")]
         [Parameter] public bool GridLineMajor { get; set; } = false;
 
         public override void Drawing()

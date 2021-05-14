@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,36 +20,43 @@ namespace BlazorCharts
         /// <summary>
         /// 主要单位
         /// </summary>
+        [Display(Name = "主要单位的刻度")]
         [Parameter] public double? UnitsMajor { get; set; }
 
         /// <summary>
         /// 次要单位
         /// </summary>
+        [Display(Name = "次要单位的刻度")]
         [Parameter] public double? UnitsMinor { get; set; }
 
-       /// <summary>
-       /// 显示主要网格线
-       /// </summary>
+        /// <summary>
+        /// 显示主要网格线
+        /// </summary>
+        [Display(Name = "显示主要网格线")]
         [Parameter] public bool GridLineMajor { get; set; } = true;
         /// <summary>
         /// 显示次要网格线
         /// </summary>
+        [Display(Name = "显示次要网格线")]
         [Parameter] public bool GridLineMinor { get; set; } = false;
 
         /// <summary>
         /// 标签位置
         /// </summary>
+        [Display(Name = "标签位置")]
         [Parameter] public AxesLabelPosition LabelPosition { get; set; } = AxesLabelPosition.Axis;
 
         private int? _DistanceAxis;
         /// <summary>
         /// 与坐标轴的距离
         /// </summary>
+        [Display(Name = "标签与坐标轴的距离")]
         [Parameter] public int? DistanceAxis { get => _DistanceAxis ?? 10; set => _DistanceAxis = value; }
 
         /// <summary>
         /// 是否是第二坐标轴
         /// </summary>
+        [Display(Name = "是否是第二坐标轴")]
         [Parameter] public bool IsSecondaryAxis { get; set; } = false;
 
         public override void Drawing()

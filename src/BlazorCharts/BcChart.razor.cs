@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace BlazorCharts
 {
     public partial class BcChart<TData>
     {
+        [Display(Name = "子内容", Description = "标题，图例，系列等图表元素放置于此")]
         [Parameter] public RenderFragment ChildContent { get; set; }
 
         #region 图表元素
@@ -67,16 +69,19 @@ namespace BlazorCharts
         /// <summary>
         /// 数据
         /// </summary>
+        [Display(Name = "数据")]
         [Parameter] public List<TData> Data { get; set; }
 
         /// <summary>
         /// 轴（类别）字段
         /// </summary>
+        [Display(Name = "轴（类别）字段", Description = "通过一个方法来定义图表的分类")]
         [Parameter] public Func<TData, string> CategoryField { get; set; }
 
         /// <summary>
-        /// 数据筛选：可以通过它筛选筛选数据
+        /// 数据筛选：可以通过它筛选数据
         /// </summary>
+        [Display(Name = "数据筛选", Description = "可以通过它筛选数据")]
         [Parameter] public Func<TData, bool> DataFilter { get; set; }
 
         /// <summary>
@@ -151,16 +156,19 @@ namespace BlazorCharts
         /// <summary>
         /// 宽度
         /// </summary>
+        [Display(Name = "宽度")]
         [Parameter] public int Width { get; set; }
 
         /// <summary>
         /// 高度
         /// </summary>
+        [Display(Name = "高度")]
         [Parameter] public int Height { get; set; }
 
         /// <summary>
-        /// 字体尺寸，如果子元素没有设置尺寸，那么默认拿去此处的尺寸
+        /// 字体尺寸，如果子元素没有设置尺寸，默认使用此尺寸
         /// </summary>
+        [Display(Name = "字体尺寸", Description = "如果子元素没有设置尺寸，默认使用此尺寸")]
         [Parameter] public int FontSize { get; set; } = 12;
 
 
