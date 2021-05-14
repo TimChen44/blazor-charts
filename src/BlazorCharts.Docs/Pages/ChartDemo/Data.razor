@@ -13,11 +13,11 @@
             </div>
             <div class="prop">
                 <Divider Text="起始年份" Orientation="left"></Divider>
-              <InputNumber @bind-Value="@startYear"></InputNumber>
+                <InputNumber @bind-Value="@startYear"></InputNumber>
 
                 <Divider></Divider>
                 <Button Type="primary" OnClick="OnClick">应用</Button>
-
+                <Button Type="primary" OnClick="OnRandomData">随机数据并应用</Button>
             </div>
         </div>
     </ChildContent>
@@ -38,6 +38,18 @@
 
     public void OnClick()
     {
+        bcChart.Refresh();
+    }
+
+    public void OnRandomData()
+    {
+        Random random = new Random();
+        foreach (var item in DemoData.Githubs)
+        {
+            item.View = random.Next(2000);
+            item.Start = random.Next(2000);
+            item.Fork = random.Next(2000);
+        }
         bcChart.Refresh();
     }
 

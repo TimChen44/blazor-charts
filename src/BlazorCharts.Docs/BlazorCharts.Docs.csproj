@@ -4,6 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <Content Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -22,10 +29,6 @@
     <None Include="wwwroot\background.png" />
     <None Include="wwwroot\chart-demo.css" />
     <None Include="wwwroot\exampleJsInterop.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>
