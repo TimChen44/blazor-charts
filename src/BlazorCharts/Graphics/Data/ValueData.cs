@@ -25,17 +25,25 @@ namespace BlazorCharts
     /// <summary>
     /// 区间值
     /// </summary>
-    public class IntervalValueData
+    public class IntervalValueData : IValueData
     {
+        public double Min => Value;
 
+        public double Max => Value;
+
+        public double Value { get; set; }
     }
 
     /// <summary>
     /// 区间值
     /// </summary>
-    public class KValueData
+    public class KValueData : IValueData
     {
+        public double Min => Value;
 
+        public double Max => Value;
+
+        public double Value { get; set; }
     }
 
     public interface IValueData
