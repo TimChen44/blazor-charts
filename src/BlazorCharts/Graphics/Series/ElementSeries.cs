@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,16 +24,19 @@ namespace BlazorCharts
         /// <summary>
         /// 分组名称，这个系列的固定名称，与SeriesField属性互斥
         /// </summary>
+        [Display(Name = "分组名称", Description = "使用一个固定分组名字，与SeriesField属性互斥")]
         [Parameter] public string GroupName { get; set; }
 
         /// <summary>
         /// 分组字段，通过某一给字段拆分成多个组，与GroupName属性互斥
         /// </summary>
+        [Display(Name = "分组字段", Description = "通过某一给字段拆分成多个组，与GroupName属性互斥")]
         [Parameter] public Func<TData, string> GroupField { get; set; }
 
         /// <summary>
         /// 实际的值
         /// </summary>
+        [Display(Name = "值方法", Description = "通过一个方法返回实际的值")]
         [Parameter] public Func<IEnumerable<TData>, double> ValueFunc { get; set; }
 
         /// <summary>
@@ -89,7 +93,7 @@ namespace BlazorCharts
             //获得具体的值
             foreach (var category in categoryDatas)
             {
-                 foreach (var group in groups)
+                foreach (var group in groups)
                 {
                     var seriesValue = new SeriesValue(category.Name, group.Key);
 

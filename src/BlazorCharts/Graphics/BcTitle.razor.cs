@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
@@ -16,23 +18,26 @@ namespace BlazorCharts
             Padding = new Padding(20);
         }
 
-        #region 文本属性
 
+        #region 文本属性
         /// <summary>
         /// 标题
         /// </summary>
+        [Display(Name = "标题")]
         [Parameter] public string Title { get; set; }
 
         /// <summary>
         /// 文本锚点
         /// </summary>
-        [Parameter]  public TextAnchor TextAnchor { get; set; } = TextAnchor.Middle;
+        [Display(Name = "文本锚点")]
+        [Parameter] public TextAnchor TextAnchor { get; set; } = TextAnchor.Middle;
 
         /// <summary>
-        /// 文本对其
+        /// 文本对齐
         /// </summary>
+        [Display(Name = "文本对齐")]
         [Parameter] public TextAlign TextAlign { get; set; } = TextAlign.Center;
-   
+
         /// <summary>
         /// 标题X坐标
         /// 更具文字对其方式需要做调整
@@ -82,6 +87,6 @@ namespace BlazorCharts
 
     }
 
-    
+
 
 }

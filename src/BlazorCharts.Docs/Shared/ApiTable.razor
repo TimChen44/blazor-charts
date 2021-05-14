@@ -1,0 +1,108 @@
+﻿@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel
+
+<Table DataSource="@ApiItems">
+    <Column @bind-Field="@context.Key" />
+    <Column @bind-Field="@context.Type" />
+    <Column @bind-Field="@context.Name" />
+    <Column @bind-Field="@context.Description" />
+</Table>
+
+
+@code {
+
+    [Parameter] public Type Component { get; set; }
+
+    List<ApiItem> ApiItems = new List<ApiItem>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Component == null) return;
+
+        var parameterTypes = Component.GetProperties().Where(x => x.GetCustomAttributes(typeof(ParameterAttribute), false).Count() > 0);
+
+        ApiItems.Clear();
+        foreach (var pType in parameterTypes)
+        {
+
+            List<Type> typeChain = new List<Type>();
+            GetTypeChain(pType.PropertyType, typeChain);
+
+            string fieldCode = $"<Type>";
+            foreach (var type in typeChain)
+            {
+                if (type == typeof(IEnumerable<>))
+                {
+                    fieldCode = fieldCode.Replace("<Type>", "IEnumerable<<Type>>");
+                }
+                if (type == typeof(List<>))
+                {
+                    fieldCode = fieldCode.Replace("<Type>", "List<<Type>>");
+                }
+                else if (type == typeof(Nullable<>))
+                {
+                    fieldCode = fieldCode.Replace("<Type>", "<Type>?");
+                }
+                else if (type.Name.StartsWith("Func"))
+                {
+                    var sonType = pType.PropertyType.GetGenericArguments();
+                    List<string> pars = new List<string>();
+                    for (int i = 1; i < sonType.Length; i++)
+                    {
+                        pars.Add(sonType[i].Name);//此处如果参数是复杂类型就有问题，现就这样吧，这毕竟不是重点，将来该进
+                    }
+
+                    fieldCode = fieldCode.Replace("<Type>", $"Func<<Type>, {pars.Aggregate((a, b) => a + ", " + b)}>");
+                }
+                else
+                {
+                    fieldCode = fieldCode.Replace("<Type>", type.Name);
+                }
+            }
+
+            ApiItems.Add(new ApiItem()
+            {
+                Key = pType.Name,
+                Type = fieldCode,
+                Name = pType.GetCustomAttribute<DisplayAttribute>()?.Name ?? pType.Name,
+                Description = pType.GetCustomAttribute<DisplayAttribute>()?.Description ?? "",
+            });
+
+        }
+    }
+
+    //获得真时的类型
+    public static void GetTypeChain(Type type, List<Type> typeChain)
+    {
+        if (type.IsGenericType)
+        {
+            var genericType = type.GetGenericTypeDefinition();
+            typeChain.Add(genericType);
+        }
+        else
+        {
+            typeChain.Add(type);
+        }
+
+        var sonType = type.GetGenericArguments();
+        if (sonType.Length == 0) return;
+
+        GetTypeChain(sonType[0], typeChain);
+    }
+
+    public record ApiItem
+    {
+        [DisplayName("字段")]
+        public string Key { get; set; }
+        [DisplayName("类型")]
+        public string Type { get; set; }
+        [DisplayName("名称")]
+        public string Name { get; set; }
+        [DisplayName("描述")]
+        public string Description { get; set; }
+    }
+
+}

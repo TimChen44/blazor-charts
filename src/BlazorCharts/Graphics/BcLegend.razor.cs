@@ -1,34 +1,40 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
     public partial class BcLegend<TData> : ElementChart<TData>
-    {
-        /// <summary>
-        /// 图例位置
-        /// </summary>
+{
+/// <summary>
+/// 图例位置
+/// </summary>
+        [Display(Name = "图例位置")]
         [Parameter] public LegendPosition Position { get; set; } = LegendPosition.Right;
 
         /// <summary>
         /// 边框宽度
         /// </summary>
+        [Display(Name = "边框宽度")]
         [Parameter] public int BorderWidth { get; set; } = 0;
         /// <summary>
         /// 边框颜色
         /// </summary>
+        [Display(Name = "边框颜色")]
         [Parameter] public string BorderColor { get; set; }
 
         public int? _ItemSpacing;
         /// <summary>
         /// 项目之间的间距
         /// </summary>
+        [Display(Name = "间距")]
         [Parameter] public int ItemSpacing { get => _ItemSpacing ?? FontSize / 2; set => _ItemSpacing = value; }
 
         public BcLegend()

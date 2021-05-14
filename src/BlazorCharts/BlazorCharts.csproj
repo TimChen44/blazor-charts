@@ -18,6 +18,10 @@
 	  <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />

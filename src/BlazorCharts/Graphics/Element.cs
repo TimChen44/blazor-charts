@@ -2,9 +2,11 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlazorCharts
 {
@@ -42,10 +44,11 @@ namespace BlazorCharts
         /// <summary>
         /// 字体大小
         /// </summary>
+        [Display(Name = "字体大小")]
         [Parameter]
         public int FontSize
         {
-            get => fontSize ?? Chart.FontSize; 
+            get => fontSize ?? Chart.FontSize;
             set => fontSize = value;
         }
 
