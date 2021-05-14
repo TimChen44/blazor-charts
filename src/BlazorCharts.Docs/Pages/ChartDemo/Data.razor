@@ -1,17 +1,22 @@
 ﻿@page "/Data"
 
-<Card Title="固定分组">
+<Card>
     <ChildContent>
         <div class="card">
             <div class="chart">
-                <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+                <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()" DataFilter="DataFilter">
+                    <BcTitle Title="数据筛选" TData="Github"></BcTitle>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
-
                 </BcChart>
             </div>
             <div class="prop">
+                <Divider Text="起始年份" Orientation="left"></Divider>
+              <InputNumber @bind-Value="@startYear"></InputNumber>
+
+                <Divider></Divider>
+                <Button Type="primary" OnClick="OnClick">应用</Button>
 
             </div>
         </div>
@@ -19,29 +24,19 @@
 </Card>
 
 @code{
+    BcChart<Github> bcChart;
 
+    int? startYear;
 
+    bool DataFilter(Github data)
+    {
+        if (startYear.HasValue == false) return true;
+        return data.Year >= startYear.Value;
+    }
 
-}
-
-<Card Title="字段分组">
-    <ChildContent>
-        <div class="card">
-            <div class="chart">
-                <BcChart Height="400" Width="600" Data="DemoData.CityValues" CategoryField="x=>x.Year.ToString()">
-                    <BcLineSeries TData="CityValue" ValueFunc="x=>x.Sum(y=>y.Value)" GroupField="x=>x.City"></BcLineSeries>
-
-                </BcChart>
-            </div>
-            <div class="prop">
-
-            </div>
-        </div>
-    </ChildContent>
-</Card>
-
-@code{
-
-
+    public void OnClick()
+    {
+        bcChart.Refresh();
+    }
 
 }
