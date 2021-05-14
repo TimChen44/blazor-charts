@@ -53,9 +53,15 @@ namespace BlazorCharts
         internal int SeriesNumber { get; set; }
 
         /// <summary>
+        /// 系列位置序号，考虑不到有些系列有多个组，所以位置需要要考虑组占用的空间
+        /// </summary>
+        internal int SeriesPositionNumber => Chart.BcSeriesGroup.Series.Where(x => x.SeriesNumber < SeriesNumber).Sum(x => (int?)x.SeriesWidthRatio) ?? 0;
+
+        /// <summary>
         /// 系列宽度占比，比如线图是0，柱状图一根柱子为1，两根为2
         /// </summary>
         abstract internal int SeriesWidthRatio { get; }
+
 
         /// <summary>
         /// 系列数据

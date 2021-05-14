@@ -18,8 +18,7 @@ namespace BlazorCharts
         public List<ElementSeries<TData>> Series { get; set; } = new List<ElementSeries<TData>>();
         public void AddSeries(ElementSeries<TData> element)
         {
-            var lastSeriesNumber = Series.LastOrDefault()?.SeriesNumber ?? 0;
-            element.SeriesNumber = lastSeriesNumber + 1;
+            element.SeriesNumber = (Series.LastOrDefault()?.SeriesNumber ?? -1) + 1;//设置系列的顺序号
             Series.Add(element);
         }
 
@@ -32,7 +31,7 @@ namespace BlazorCharts
                 CategoryDatas.Add(new CategoryData()
                 {
                     Name = categorys[i],
-                    LocationRatio = (i + 0.5) / categorys.Count,
+                    ZeroOffsetRatio = (i + 0.5) / categorys.Count,
                 });
             }
 
@@ -41,7 +40,6 @@ namespace BlazorCharts
             {
                 item.DataAnalysis(datas, CategoryDatas);
             }
-
 
             GroupNames = Series.SelectMany(x => x.SeriesData.Groups).ToList();
         }
@@ -75,17 +73,28 @@ namespace BlazorCharts
         /// </summary>
         public List<string> GroupNames { get; set; } = new List<string>();
 
+        /// <summary>
+        /// 分类在轴上占用的宽度比，真实值需要乘以轴的长度,包含分类之间的空白区域
+        /// </summary>
+        public double CategoryWidthRatio => (double)1 / (CategoryDatas.Count == 0 ? 1 : CategoryDatas.Count);
 
         /// <summary>
-        /// 分类在轴上占用的宽度比，真实值需要乘以轴的长度
+        /// 单个分类的宽度,包含分类之间的空白区域
         /// </summary>
-        public double WidthRatio => 1 / (CategoryDatas.Count == 0 ? 1 : CategoryDatas.Count);
+        public double CategoryWidth => Chart.BcAxisGroup.AxesX.Rect.W * Chart.BcSeriesGroup.CategoryWidthRatio; //所有系列的所有分组的宽度
+
+        /// <summary>
+        /// 单个分类内部宽度,就是只有显示图形的宽度，已经排除了分类之间空白的空间
+        /// </summary>
+        public double CategoryWidthInner => CategoryWidth- GroupWidth; //所有系列的所有分组的宽度
+
+        /// <summary>
+        /// 单个分组的宽度，已经考虑分类之间空白，所以宽度有所减少
+        /// </summary>
+        public double GroupWidth => (double)1 / (GroupNames.Count + 1) * CategoryWidth;
 
 
-        ///// <summary>
-        ///// 系列的宽度
-        ///// </summary>
-        //public int SeriesWidth { get => (int)(Rect.W / (Categories.Count == 0 ? 1 : Categories.Count)); }
+        
     }
 
 

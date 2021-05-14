@@ -5,35 +5,41 @@
 @if (Chart.IsInit)
 {
     <g class="bc-bar-series" transform="translate(@Rect.LT.ToPoint())">
-
         @{
-            var color = (SeriesData.Groups.First() ?? "Bar").RandomColor().ToHtml();
-            var colorStroke = (SeriesData.Groups.First() ?? "Bar").RandomColor().Deepen().ToHtml();
+            for (int i = 0; i < SeriesData.Groups.Count; i++)
+            {
+                var group = SeriesData.Groups[i];
 
-            @*var barCount = Chart.BcSeriesGroup.Series.Where(x => x is BcColumnSeries<TData>).Max(x => ((BcColumnSeries<TData>)x).SequenceNumber);*@
+                var color = (group ?? "Bar").RandomColor().Transparent().ToHtml();
+                var colorStroke = (group ?? "Bar").RandomColor().Deepen().ToHtml();
+
+                //分组偏移的位置
+                var groupOffset = (double)(i + SeriesPositionNumber) / Chart.BcSeriesGroup.GroupNames.Count * Chart.BcSeriesGroup.CategoryWidthInner;
+
+                @foreach (var category in SeriesData.CategoryDatas)
+                {
+                    var categoryX = (Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio);
+
+                    var categoryStart = categoryX - Chart.BcSeriesGroup.CategoryWidthInner / 2;
+
+                    var groupX = categoryStart + groupOffset;
+
+                    var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
+
+                    var bar = new Rect();
+                    bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value);
+                    bar.W = (int)Chart.BcSeriesGroup.GroupWidth;
+                    bar.L = (int)groupX;
+                    bar.B = Rect.H;
+
+                    <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1
+                          class="bc-column-translate" />
+                }
+            }
         }
-
-        @*@foreach (var category in Chart.CategoryDatas)
-        {
-
-            var value = category.SeriesValues[Group];
-
-            var barFillWidth = Chart.BcAxisGroup.AxesX.Rect.W * category.AxesWidthRatio; //分类全部的宽度
-            var barCenter = Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio;//分类中心位置
-
-            var bar = new Rect();
-            bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
-            bar.W = (int)(((double)1 / (barCount + 1)) * barFillWidth);//始终保证空开一条柱状图
-            bar.C = (int)(barCenter - (barFillWidth) / 2 + bar.W * SequenceNumber);
-            bar.B = Rect.H;
-
-            <rect x="@bar.X" y="@bar.Y" width="@bar.W" height="@bar.H" fill="@color" stroke="@colorStroke" stroke-width=1
-                  class="bc-column-translate" />
-        }*@
-
     </g>
-
 }
+
 
 <style>
     .bc-column-translate {

@@ -18,14 +18,14 @@
             if (SeriesData.CategoryDatas.Count > 0)
             {
                 var first = SeriesData.CategoryDatas.First();
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * first.LocationRatio), Rect.H));
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * first.ZeroOffsetRatio), Rect.H));
             }
 
             @*连线*@
             foreach (var category in SeriesData.CategoryDatas)
             {
                 var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.LocationRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
             }
 
 
@@ -33,7 +33,7 @@
             if (SeriesData.CategoryDatas.Count > 1)
             {
                 var end = SeriesData.CategoryDatas.Last();
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * end.LocationRatio), Rect.H));
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * end.ZeroOffsetRatio), Rect.H));
             }
 
             <polygon points="@points.ToPoints()" stroke="@color" stroke-width=0 fill="@color" />

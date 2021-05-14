@@ -17,7 +17,7 @@
                 {
                     var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
 
-                    points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.LocationRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
+                    points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
                 }
 
                 foreach (var item in points)

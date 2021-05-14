@@ -77,6 +77,6 @@ namespace BlazorCharts
         /// <summary>
         /// 分类在轴上的位置比，真实值需要乘以轴的长度
         /// </summary>
-        public double LocationRatio { get; set; }
+        public double ZeroOffsetRatio { get; set; }
     }
 }

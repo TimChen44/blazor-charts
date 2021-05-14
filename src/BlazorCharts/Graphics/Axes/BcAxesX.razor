@@ -10,7 +10,7 @@
 
         @foreach (var category in Chart.BcSeriesGroup.CategoryDatas)
         {
-            var x = category.LocationRatio * Rect.W;
+            var x = category.ZeroOffsetRatio * Rect.W;
 
             if (LabelPosition == AxesLabelPosition.Axis)
             {//显示文本
