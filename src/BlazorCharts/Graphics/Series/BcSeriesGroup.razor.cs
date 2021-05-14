@@ -18,7 +18,7 @@ namespace BlazorCharts
         public List<ElementSeries<TData>> Series { get; set; } = new List<ElementSeries<TData>>();
         public void AddSeries(ElementSeries<TData> element)
         {
-            element.SeriesNumber = (Series.LastOrDefault()?.SeriesNumber ?? -1) + 1;//设置系列的顺序号
+            element.SerialNumber = (Series.LastOrDefault()?.SerialNumber ?? -1) + 1;//设置系列的顺序号
             Series.Add(element);
         }
 
@@ -74,6 +74,16 @@ namespace BlazorCharts
         public List<string> GroupNames { get; set; } = new List<string>();
 
         /// <summary>
+        /// 分组数量
+        /// </summary>
+        public int GroupCount => GroupNames.Count;
+
+        /// <summary>
+        /// 占用图标空间的分组数量
+        /// </summary>
+        public int GroupKeepCount => Series.Sum(x => x.GroupKeepRatio);
+
+        /// <summary>
         /// 分类在轴上占用的宽度比，真实值需要乘以轴的长度,包含分类之间的空白区域
         /// </summary>
         public double CategoryWidthRatio => (double)1 / (CategoryDatas.Count == 0 ? 1 : CategoryDatas.Count);
@@ -84,17 +94,17 @@ namespace BlazorCharts
         public double CategoryWidth => Chart.BcAxisGroup.AxesX.Rect.W * Chart.BcSeriesGroup.CategoryWidthRatio; //所有系列的所有分组的宽度
 
         /// <summary>
-        /// 单个分类内部宽度,就是只有显示图形的宽度，已经排除了分类之间空白的空间
+        /// 分类占用的空间，就是排除了分组之间的留空
         /// </summary>
-        public double CategoryWidthInner => CategoryWidth- GroupWidth; //所有系列的所有分组的宽度
+        public double CategoryKeepWidth => CategoryWidth - GroupWidth; //所有系列的所有分组的宽度
 
         /// <summary>
         /// 单个分组的宽度，已经考虑分类之间空白，所以宽度有所减少
         /// </summary>
-        public double GroupWidth => (double)1 / (GroupNames.Count + 1) * CategoryWidth;
+        public double GroupWidth => (double)1 / (Series.Sum(x => x.GroupKeepRatio) + 1) * CategoryWidth;
 
 
-        
+
     }
 
 

@@ -14,7 +14,7 @@ namespace BlazorCharts
 
         }
 
-        internal override int SeriesWidthRatio => SeriesData.Groups.Count ;
+        internal override int GroupKeepRatio => SeriesData.Groups.Count ;
 
     }
 }

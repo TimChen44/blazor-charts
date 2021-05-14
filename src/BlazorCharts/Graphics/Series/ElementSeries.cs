@@ -50,17 +50,17 @@ namespace BlazorCharts
         /// <summary>
         /// 系列序号，决定了系列显示顺序
         /// </summary>
-        internal int SeriesNumber { get; set; }
+        internal int SerialNumber { get; set; }
 
         /// <summary>
-        /// 系列位置序号，考虑不到有些系列有多个组，所以位置需要要考虑组占用的空间
+        /// 分组的序号
         /// </summary>
-        internal int SeriesPositionNumber => Chart.BcSeriesGroup.Series.Where(x => x.SeriesNumber < SeriesNumber).Sum(x => (int?)x.SeriesWidthRatio) ?? 0;
+        internal int GroupSerialNumber => Chart.BcSeriesGroup.Series.Where(x => x.SerialNumber < SerialNumber).Sum(x => (int?)x.GroupKeepRatio) ?? 0;
 
         /// <summary>
-        /// 系列宽度占比，比如线图是0，柱状图一根柱子为1，两根为2
+        /// 分组占用的空间的宽度，比如线图是0，柱状图一根柱子为1，两根为2
         /// </summary>
-        abstract internal int SeriesWidthRatio { get; }
+        abstract internal int GroupKeepRatio { get; }
 
 
         /// <summary>

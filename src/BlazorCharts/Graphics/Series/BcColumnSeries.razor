@@ -14,13 +14,13 @@
                 var colorStroke = (group ?? "Bar").RandomColor().Deepen().ToHtml();
 
                 //分组偏移的位置
-                var groupOffset = (double)(i + SeriesPositionNumber) / Chart.BcSeriesGroup.GroupNames.Count * Chart.BcSeriesGroup.CategoryWidthInner;
+                var groupOffset = (double)(i + GroupSerialNumber) / Chart.BcSeriesGroup.GroupKeepCount * Chart.BcSeriesGroup.CategoryKeepWidth;
 
                 @foreach (var category in SeriesData.CategoryDatas)
                 {
                     var categoryX = (Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio);
 
-                    var categoryStart = categoryX - Chart.BcSeriesGroup.CategoryWidthInner / 2;
+                    var categoryStart = categoryX - Chart.BcSeriesGroup.CategoryKeepWidth / 2;
 
                     var groupX = categoryStart + groupOffset;
 

@@ -13,6 +13,6 @@ namespace BlazorCharts
 
         }
 
-        internal override int SeriesWidthRatio => 0;
+        internal override int GroupKeepRatio => 0;
     }
 }
