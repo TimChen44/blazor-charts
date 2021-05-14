@@ -8,9 +8,11 @@ namespace BlazorCharts
 {
     public partial class BcScatterSeries<TData> : ElementSeries<TData>
     {
-        public BcScatterSeries() : base(SeriesType.Line)
+        public BcScatterSeries() : base(SeriesType.Scatter)
         {
 
         }
+
+        internal override int SeriesWidthRatio => 0;
     }
 }

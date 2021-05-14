@@ -4,40 +4,44 @@
 
 @if (Chart.IsInit)
 {
-    <g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
+<g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
 
-        @{
-            var color = (Group ?? "Area").RandomColor().ToHtml();
-            var colorDeepen = (Group ?? "Area").RandomColor().Deepen().ToHtml();
+    @{
+        foreach (var group in SeriesData.Groups)
+        {
+            var color = (group ?? "Area").RandomColor().Transparent().ToHtml();
+            var colorDeepen = (group ?? "Area").RandomColor().Deepen().ToHtml();
             List<Point> points = new List<Point>();
 
 
             @*起始点*@
-            if (Chart.CategoryDatas.Count > 0)
+            if (SeriesData.CategoryDatas.Count > 0)
             {
-                var first = Chart.CategoryDatas.First();
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * first.AxesZeroRatio), Rect.H));
+                var first = SeriesData.CategoryDatas.First();
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * first.ZeroOffsetRatio), Rect.H));
             }
 
             @*连线*@
-            foreach (var category in Chart.CategoryDatas)
+            foreach (var category in SeriesData.CategoryDatas)
             {
-                var value = category.SeriesValues[Group];
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value)));
+                var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
             }
 
 
             @*结束点*@
-            if (Chart.CategoryDatas.Count > 1)
+            if (SeriesData.CategoryDatas.Count > 1)
             {
-                var end = Chart.CategoryDatas.Last();
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * end.AxesZeroRatio), Rect.H));
+                var end = SeriesData.CategoryDatas.Last();
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * end.ZeroOffsetRatio), Rect.H));
             }
 
+            <polygon points="@points.ToPoints()" stroke="@color" stroke-width=0 fill="@color" />
         }
 
-        <polygon points="@points.ToPoints()" stroke="@color" stroke-width=0 fill="@color" />
 
-    </g>
+    }
+
+</g>
 
 }

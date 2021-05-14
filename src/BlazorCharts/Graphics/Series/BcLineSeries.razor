@@ -7,25 +7,32 @@
 <g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
 
     @{
-        var color = (Group ?? "Line").RandomColor().ToHtml();
-        var colorDeepen = (Group ?? "Line").RandomColor().Deepen().ToHtml();
-        List<Point> points = new List<Point>();
+        //每一个分组一条线
+        foreach (var group in SeriesData.Groups)
+        {
+            var color = (group ?? "Line").RandomColor().ToHtml();
+            var colorDeepen = (group ?? "Line").RandomColor().Deepen().ToHtml();
+            List<Point> points = new List<Point>();
+
+            foreach (var category in SeriesData.CategoryDatas)
+            {
+                var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
+
+                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value)));
+            }
+
+
+            <polyline points="@points.ToPoints()" stroke="@color" stroke-width=2 fill="none" />
+
+            @foreach (var item in points)
+            {
+                <rect x="@(item.X-4)" y="@(item.Y-4)" width="8" height="8" fill="@color" stroke="@colorDeepen" stroke-width=2 />
+            }
+
+        }
     }
 
-    @foreach (var category in Chart.CategoryDatas)
-    {
-        var value = category.SeriesValues[Group];
 
-        points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.AxesZeroRatio), Rect.H - Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value)));
-
-    }
-
-    <polyline points="@points.ToPoints()" stroke="@color" stroke-width=2 fill="none" />
-
-    @foreach (var item in points)
-    {
-        <rect x="@(item.X-4)" y="@(item.Y-4)" width="8" height="8" fill="@color" stroke="@colorDeepen" stroke-width=2 />
-    }
 
 
 </g>

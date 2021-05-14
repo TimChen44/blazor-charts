@@ -10,6 +10,7 @@ namespace BlazorCharts
     {
         public static string ToPoints(this List<Point> value)
         {
+            if (value.Count==0) return "";
             return value.Select(x => x.ToPoint()).Aggregate((a, b) => a + " " + b);
         }
     }

@@ -4,10 +4,10 @@
 
 @foreach (var log in logs)
 {
-    var lines = log.Value.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x=>x.Trim());
-    
+    var lines = log.Value.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
 
-    <Card Size="small" Title="@log.Key" Style="width:100%;">
+
+    <Card Size="small" Title="@log.Key" Style="width:100%;margin-bottom:5px">
 
         @foreach (var line in lines)
         {
@@ -37,6 +37,10 @@
 
     Dictionary<string, string> logs = new()
     {
+        {
+            @"2021.0514",
+            @"+支持某个字段作为分组依据进行分组"
+        },
         {
             @"2021.0509",
             @"+柱状图和点的图增加动画"

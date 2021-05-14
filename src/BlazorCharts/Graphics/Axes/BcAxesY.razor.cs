@@ -46,13 +46,18 @@ namespace BlazorCharts
         /// </summary>
         [Parameter] public int? DistanceAxis { get => _DistanceAxis ?? 10; set => _DistanceAxis = value; }
 
+        /// <summary>
+        /// 是否是第二坐标轴
+        /// </summary>
+        [Parameter] public bool IsSecondaryAxis { get; set; } = false;
+
         public override void Drawing()
         {
             Rect.X = AxisGroup.Rect.X;
             Rect.Y = AxisGroup.Rect.T;
 
-            var realMax = Chart.SeriesDatas.Max(x => x.Max);
-            var mrealMin = Chart.SeriesDatas.Min(x => x.Min);
+            var realMax = Chart.BcSeriesGroup.Series.Where(x=>x.IsSecondaryAxis== IsSecondaryAxis).Max(x=>x.SeriesData.MaxValue);
+            var mrealMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => x.SeriesData.MinValue);
 
             var maxString = realMax.ToString().Length > realMax.ToString().Length ? realMax.ToString() : realMax.ToString();
           

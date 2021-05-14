@@ -1,15 +1,14 @@
 ﻿@page "/Area"
 
-
-<Card Style="width:100%;" Title="基本使用">
+<Card>
     <ChildContent>
         <div class="card">
             <div class="chart">
                 <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="折线图" TData="Github"></BcTitle>
-                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcAreaSeries>
-                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcAreaSeries>
-                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcAreaSeries>
+                    <BcTitle Title="基本使用" TData="Github"></BcTitle>
+                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcAreaSeries>
+                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcAreaSeries>
+                    <BcAreaSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcAreaSeries>
                 </BcChart>
             </div>
             <div class="prop">
@@ -19,5 +18,20 @@
     </ChildContent>
 </Card>
 
+<Card>
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" Data="DemoData.CityValues" CategoryField="x=>x.Year.ToString()">
+                    <BcTitle Title="字段分组" TData="CityValue"></BcTitle>
+                    <BcAreaSeries TData="CityValue" ValueFunc="x=>x.Sum(y=>y.Value)" GroupField="x=>x.City"></BcAreaSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+
+            </div>
+        </div>
+    </ChildContent>
+</Card>
 
 

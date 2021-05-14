@@ -24,9 +24,9 @@ namespace BlazorCharts
             byte b = Convert.ToByte(result / 255 / 255 % 255);
 
             return Color.FromArgb(
-                r < 90 ? r + 90 : r,
-                g < 90 ? g + 90 : g,
-                b < 90 ? b + 90 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
+                r < 100 ? r + 100 : r,
+                g < 100 ? g + 100 : g,
+                b < 100 ? b + 100 : b);//防止颜色过深，不好看，将来可以做跟好的调色策略
 
             //TODO:Wasm尽然不支持MD5了T_T，详情：https://docs.microsoft.com/zh-cn/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
             //using (var md5 = MD5.Create())
@@ -39,14 +39,20 @@ namespace BlazorCharts
             //}
         }
 
-        /// <summary>
-        /// 加深颜色，用于边框
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static Color Deepen(this Color value)
         {
             return Color.FromArgb(value.R - (value.R / 2), value.G - (value.G / 2), value.B - (value.B / 2));
+        }
+
+        /// <summary>
+        /// 调整透明度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="alpha">0~255</param>
+        /// <returns></returns>
+        public static Color Transparent(this Color value,int alpha=230)
+        {
+            return Color.FromArgb(alpha, value);
         }
 
         /// <summary>
@@ -59,6 +65,8 @@ namespace BlazorCharts
             return Color.FromArgb(value.R + ((255 - value.R) / 2), value.G + ((255 - value.G) / 2), value.B + ((255 - value.B) / 2));
         }
 
+
+
         /// <summary>
         /// 转换成html需要的格式
         /// </summary>
@@ -68,6 +76,8 @@ namespace BlazorCharts
         {
             return $"rgb({value.R} {value.G} {value.B} / {Math.Round((double)value.A / 255, 2)})";
         }
+
+
     }
 
 
@@ -81,6 +91,8 @@ namespace BlazorCharts
         //生成CRC32码表
         static public void GetCRC32Table()
         {
+            if (Crc32Table != null) return;
+
             ulong Crc;
             Crc32Table = new ulong[256];
             int i, j;
@@ -102,7 +114,7 @@ namespace BlazorCharts
         {
             //生成码表
             GetCRC32Table();
-            byte[] buffer = System.Text.ASCIIEncoding.ASCII.GetBytes(sInputString); ulong value = 0xffffffff;
+            byte[] buffer = System.Text.ASCIIEncoding.Unicode.GetBytes(sInputString); ulong value = 0xffffffff;
             int len = buffer.Length;
             for (int i = 0; i < len; i++)
             {

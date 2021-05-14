@@ -20,7 +20,7 @@ namespace BlazorCharts
 
         protected override void OnInitialized()
         {
-            this.Chart.AddElement(this);
+            this.Chart?.AddElement(this);
             base.OnInitialized();
         }
 

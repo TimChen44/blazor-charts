@@ -1,15 +1,15 @@
 ﻿@page "/AxesX"
 
-<Card Style="width:100%;" Title="基本使用">
+<Card>
     <ChildContent>
         <div class="card">
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="X轴" TData="Github"></BcTitle>
+                    <BcTitle Title="X轴基本使用" TData="Github"></BcTitle>
                     <BcAxesX TData="Github"  GridLineMajor="@gridLineMajor" DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"  ></BcAxesX>
-                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View" Caption="访问"></BcBarSeries>
-                    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start" Caption="点赞"></BcBarSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork" Caption="分叉"></BcLineSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View" ></BcColumnSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" ></BcLineSeries>
                     
                 </BcChart>
             </div>

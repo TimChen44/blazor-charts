@@ -47,12 +47,15 @@ namespace BlazorCharts
 
         public override void Drawing()
         {
+
+            var groupNames = Chart.BcSeriesGroup.GroupNames;
+
             //先算出最大的文本
             var maxString = "";
-            foreach (var item in Chart.SeriesDatas)
+            foreach (var item in groupNames)
             {
-                if (item.SeriesName.Length > maxString.Length)
-                    maxString = item.SeriesName;
+                if (item.Length > maxString.Length)
+                    maxString = item;
             }
 
             _ItemSize = new Size(maxString.CalcWidth(FontSize) + FontSize + FontSize / 2 + ItemSpacing, FontSize + ItemSpacing);
@@ -67,13 +70,13 @@ namespace BlazorCharts
                 case LegendPosition.RightTop:
                 case LegendPosition.RightBottom:
                     Rect.W = Padding.L + _ItemSize.W + Padding.R + BorderWidth * 2;
-                    Rect.H = Padding.T + _ItemSize.H * Chart.SeriesDatas.Count + Padding.B + BorderWidth * 2;
+                    Rect.H = Padding.T + _ItemSize.H * groupNames.Count + Padding.B + BorderWidth * 2;
                     _ItemDirection = "Col";
                     break;
 
                 case LegendPosition.Top:
                 case LegendPosition.Bottom:
-                    Rect.W = Padding.L + _ItemSize.W * Chart.SeriesDatas.Count + Padding.R + BorderWidth * 2;
+                    Rect.W = Padding.L + _ItemSize.W * groupNames.Count + Padding.R + BorderWidth * 2;
                     Rect.H = Padding.T + _ItemSize.H + Padding.B + BorderWidth * 2;
                     _ItemDirection = "Row";
                     break;
