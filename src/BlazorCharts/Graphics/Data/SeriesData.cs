@@ -24,7 +24,7 @@ namespace BlazorCharts
         /// <summary>
         /// 系列中的值
         /// </summary>
-        public List<SeriesValue> SeriesValues = new List<SeriesValue>();
+        public List<SeriesValue> SeriesValues { get; set; } = new List<SeriesValue>();
 
         /// <summary>
         /// 获得具体值

@@ -43,6 +43,16 @@ namespace BlazorCharts
 
         public double Max => Value;
 
+        /// <summary>
+        /// 开始值
+        /// </summary>
+        public double Beging { get; set; }
+        /// <summary>
+        /// 结束值
+        /// </summary>
+        public double End { get; set; }
+
+
         public double Value { get; set; }
     }
 

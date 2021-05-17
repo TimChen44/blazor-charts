@@ -2,13 +2,10 @@
 @inherits ElementChart<TData>
 @typeparam TData
 
-@if (Chart?.IsInit??false)
+@if (Chart?.IsInit ?? false)
 {
     <g class="bc-title" transform="translate(@((Rect.LT).ToPoint()))">
-
-
         <text x="@TitleX" y="@TitleY" text-anchor="@TextAnchor.ToDescription()" font-size="@FontSize">@Title</text>
-
     </g>
-    @*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 0 255 / 0.50);" />*@
 }
+

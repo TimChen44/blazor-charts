@@ -41,24 +41,18 @@ namespace BlazorCharts
             switch (element)
             {
                 case BcTitle<TData> bcTitle:
-                    BcTitle = bcTitle;
-                    break;
+                    BcTitle = bcTitle; break;
                 case BcLegend<TData> bcLegend:
-                    if (BcLegend == null)
-                        BcLegend = bcLegend;
+                    if (BcLegend == null) BcLegend = bcLegend;
                     break;
                 case BcSeriesGroup<TData> bcSeriesGroup:
-                    BcSeriesGroup = bcSeriesGroup;
-                    break;
+                    BcSeriesGroup = bcSeriesGroup; break;
                 case ElementSeries<TData> bcElementSeries:
-                    BcSeriesGroup.AddSeries(bcElementSeries);
-                    break;
+                    BcSeriesGroup.AddSeries(bcElementSeries); break;
                 case BcAxisGroup<TData> bcAxisGroup:
-                    BcAxisGroup = bcAxisGroup;
-                    break;
+                    BcAxisGroup = bcAxisGroup; break;
                 case ElementAxes<TData> axes:
-                    BcAxisGroup.AddAxes(axes);
-                    break;
+                    BcAxisGroup.AddAxes(axes); break;
             }
         }
 
