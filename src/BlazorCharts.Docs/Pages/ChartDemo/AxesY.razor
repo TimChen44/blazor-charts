@@ -12,7 +12,7 @@
                              Visible="@visible"></BcAxesY>
 
 
-                    <BcAxesY TData="Github" IsSecondaryAxis="true"></BcAxesY>
+                    <BcAxesY TData="Github" Visible="@visibleSecondary" IsSecondaryAxis="true"></BcAxesY>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
@@ -33,9 +33,9 @@
                     <Radio Value="AxesLabelPosition.None">无</Radio>
                 </RadioGroup>
 
-                <Divider Text="属性" Orientation="left"></Divider>
-                <Checkbox @bind-Value="@visible">显示/隐藏</Checkbox>
-
+                <Divider Text="显示/隐藏轴" Orientation="left"></Divider>
+                <Checkbox @bind-Value="@visible">主要</Checkbox>
+                <Checkbox @bind-Value="@visibleSecondary">次要</Checkbox>
 
                 <Divider></Divider>
                 <Button Type="primary" OnClick="OnClick">应用</Button>
@@ -59,6 +59,8 @@
     int? distanceAxis;
 
     bool visible = true;
+
+    bool visibleSecondary = true;
 
     AxesLabelPosition labelPosition = AxesLabelPosition.Axis;
 
