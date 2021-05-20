@@ -1,3 +1,4 @@
+using BlazorCharts.Docs.Pages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorCharts.Server
@@ -28,6 +30,26 @@ namespace BlazorCharts.Server
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddAntDesign();
+
+#if DEBUG
+            //README.md文件中增加更新日志
+            var readmeFile = System.IO.Path.Combine(System.IO.Path.GetFullPath("..\\..\\..\\"), "README.md");
+            var readme = System.IO.File.ReadAllText(readmeFile);
+            readme = readme.Substring(0, readme.IndexOf("### 更新日志") + "### 更新日志".Length);
+
+            StringBuilder logStr = new StringBuilder();
+            foreach (var item in Log.logs)
+            {
+                logStr.AppendLine($"**{item.Key}**");
+                item.Value.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => $"- {x.Trim().Substring(1)}")
+                    .ToList().ForEach(x => logStr.AppendLine(x));
+                logStr.AppendLine();
+            }
+            readme += "\r\n\r\n";
+            readme += logStr.ToString();
+            System.IO.File.WriteAllText(readmeFile,readme);
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
