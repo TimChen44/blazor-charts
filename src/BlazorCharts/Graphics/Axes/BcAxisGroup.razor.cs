@@ -34,15 +34,13 @@ namespace BlazorCharts
             switch (element)
             {
                 case BcAxesX<TData> bcAxesX:
-                    if (AxesX == null)
-                        AxesX = bcAxesX;
+                    if (AxesX == null) AxesX = bcAxesX;
                     break;
-                case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Left:
-                    if (AxesYLeft == null)
-                        AxesYLeft = bcAxesY;
+                case BcAxesY<TData> bcAxesY when bcAxesY.IsSecondaryAxis == false:
+                    if (AxesYLeft == null) AxesYLeft = bcAxesY;
                     break;
-                case BcAxesY<TData> bcAxesY when bcAxesY.Position == AxesYPosition.Right:
-                    AxesYRight = bcAxesY;
+                case BcAxesY<TData> bcAxesY when bcAxesY.IsSecondaryAxis == true:
+                    if (AxesYRight == null) AxesYRight = bcAxesY;
                     break;
             }
             element.AxisGroup = this;
@@ -102,8 +100,13 @@ namespace BlazorCharts
 
             //微调X轴和Y轴，去除重复区域
             AxesYLeft.Rect.H = AxesX.Rect.Y - AxesYLeft?.Rect.Y ?? 0;
+            if (AxesYRight != null)
+            {
+                AxesYRight.Rect.H = AxesYLeft.Rect.H;
+            }
+
             AxesX.Rect.X = AxesYLeft.Rect.R;
-            AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W;
+            AxesX.Rect.W = AxesX.Rect.W - AxesYLeft.Rect.W - (AxesYRight?.Rect.W ?? 0);
 
             base.Drawing();
         }
