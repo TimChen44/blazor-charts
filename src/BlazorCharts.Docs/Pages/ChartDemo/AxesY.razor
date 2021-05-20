@@ -7,19 +7,19 @@
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="Y轴基本使用" TData="Github"></BcTitle>
                     <BcAxesY TData="Github" UnitsMajor="@unitsMajor" UnitsMinor="@unitsMinor"
-                             GridLineMajor="@gridLineMajor" GridLineMinor="@gridLineMinor" 
-                             DistanceAxis="@distanceAxis" LabelPosition="@labelPosition" ></BcAxesY>
-                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View" ></BcColumnSeries>
+                             GridLineMajor="@gridLineMajor" GridLineMinor="@gridLineMinor"
+                             DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"
+                             Visible="@visible"></BcAxesY>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" ></BcLineSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
                 </BcChart>
             </div>
             <div class="prop">
-                <Divider Text="单位" Orientation="left"></Divider>
-                <span>主要：</span><InputNumber @bind-Value="@unitsMajor"></InputNumber><span>次要：</span><InputNumber @bind-Value="@unitsMinor"></InputNumber>
-               
-                <Divider Text="网格线" Orientation="left"></Divider>
-                <Checkbox @bind-Value="@gridLineMajor">主要</Checkbox>  <Checkbox @bind-Value="@gridLineMinor">次要</Checkbox>
+                <Divider Text="刻度线" Orientation="left"></Divider>
+                <span>主要：</span><Checkbox @bind-Value="@gridLineMajor">网格线</Checkbox><span>单位：</span><InputNumber @bind-Value="@unitsMajor"></InputNumber>
+                <span style="width:30px"></span>
+                <span>次要：</span><Checkbox @bind-Value="@gridLineMinor">网格线</Checkbox><span>单位：</span><InputNumber @bind-Value="@unitsMinor"></InputNumber>
 
                 <Divider Text="与坐标轴的距离" Orientation="left"></Divider>
                 <InputNumber @bind-Value="@distanceAxis"></InputNumber>
@@ -29,6 +29,10 @@
                     <Radio Value="AxesLabelPosition.Axis">轴旁</Radio>
                     <Radio Value="AxesLabelPosition.None">无</Radio>
                 </RadioGroup>
+
+                <Divider Text="属性" Orientation="left"></Divider>
+                <Checkbox @bind-Value="@visible">显示/隐藏</Checkbox>
+
 
                 <Divider></Divider>
                 <Button Type="primary" OnClick="OnClick">应用</Button>
@@ -50,6 +54,8 @@
     bool gridLineMinor = false;
 
     int? distanceAxis;
+
+    bool visible = true;
 
     AxesLabelPosition labelPosition = AxesLabelPosition.Axis;
 

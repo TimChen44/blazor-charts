@@ -59,22 +59,35 @@ namespace BlazorCharts
         [Display(Name = "是否是第二坐标轴")]
         [Parameter] public bool IsSecondaryAxis { get; set; } = false;
 
+        /// <summary>
+        /// 是否可见
+        /// </summary>
+        [Display(Name = "可见的")]
+        [Parameter] public bool Visible { get; set; } = true;
+
         public override void Drawing()
         {
             Rect.X = AxisGroup.Rect.X;
             Rect.Y = AxisGroup.Rect.T;
 
             var realMax = Chart.BcSeriesGroup.Series.Where(x=>x.IsSecondaryAxis== IsSecondaryAxis).Max(x=>x.SeriesData.MaxValue);
-            var mrealMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => x.SeriesData.MinValue);
+            var realMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => x.SeriesData.MinValue);
 
-            var maxString = realMax.ToString().Length > realMax.ToString().Length ? realMax.ToString() : realMax.ToString();
-          
-            Rect.W = LabelPosition switch
+            if (Visible == true)
+            {//可见的时候计算宽度
+                var maxString = realMax.ToString().Length > realMax.ToString().Length ? realMax.ToString() : realMax.ToString();
+                Rect.W = LabelPosition switch
+                {
+                    AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,
+                    AxesLabelPosition.None => 1,
+                    _ => throw new NotImplementedException(),
+                };
+            }
+            else
             {
-                AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,
-                AxesLabelPosition.None => 1,
-                _ => throw new NotImplementedException(),
-            };
+                //不可见时宽度为0
+                Rect.W = 0;
+            }
             Rect.H = AxisGroup.Rect.H;
 
             AxesYMax = Carry(realMax);

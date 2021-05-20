@@ -2,7 +2,7 @@
 @inherits ElementAxes<TData>
 @typeparam TData
 
-@if (Chart.IsInit && (AxisGroup?.AxesYLeft == this || AxisGroup?.AxesYRight == this))
+@if (Chart.IsInit && (AxisGroup?.AxesYLeft == this || AxisGroup?.AxesYRight == this) && Visible == true)
 {
     <g class="bc-axes-y" transform="translate(@Rect.LT.ToPoint())">
 
