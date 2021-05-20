@@ -4,15 +4,11 @@
 
 @if (Chart.IsInit && Chart.BcLegend == this)
 {
-
     <g class="bc-legend" transform="translate(@Rect.LT.ToPoint())">
-
-
         @if (BorderWidth > 0)
         {
             <rect x="0" y="0" width="@Rect.W" height="@Rect.H" fill="none" stroke="@(BorderColor ?? "#C0C0C0FF")" stroke-width="@BorderWidth" />
         }
-
 
         @for (int i = 0; i < Chart.BcSeriesGroup.GroupNames.Count; i++)
         {
@@ -46,7 +42,6 @@
                 <text x="@xText" y="@yText" text-anchor="@TextAnchor.Start.ToDescription()" font-size="@FontSize">@groupName</text>
             </text>
         }
-
     </g>
-    @*<polyline points="@Rect.ToPoints()" style="fill:rgb(0 0 255 / 0.50);" />*@
 }
+

@@ -49,6 +49,19 @@ namespace BlazorCharts
             Rect = Chart.BcSeriesGroup.Rect.Copy();
         }
 
+        /// <summary>
+        /// 根据值或者这个值在X轴的高度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int GetHeightByValue(double value)
+        {
+            if (IsSecondaryAxis == false)
+                return Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(value);
+            else
+                return Chart.BcAxisGroup.AxesYRight.GetHeightByValue(value);
+        }
+
         #region 数据处理
 
         /// <summary>

@@ -27,7 +27,7 @@
                     var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
 
                     var bar = new Rect();
-                    bar.H = Chart.BcAxisGroup.AxesYLeft.GetHeightByValue(data.Value);
+                    bar.H = GetHeightByValue(data.Value);
                     bar.W = (int)Chart.BcSeriesGroup.GroupWidth;
                     bar.L = (int)groupX;
                     bar.B = Rect.H;

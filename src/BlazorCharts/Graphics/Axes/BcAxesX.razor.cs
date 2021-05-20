@@ -31,14 +31,26 @@ namespace BlazorCharts
         [Display(Name = "显示主要网格线")]
         [Parameter] public bool GridLineMajor { get; set; } = false;
 
+        /// <summary>
+        /// 是否可见
+        /// </summary>
+        [Display(Name = "可见的")]
+        [Parameter] public bool Visible { get; set; } = true;
+
         public override void Drawing()
         {
-            Rect.H = LabelPosition switch
+            if (Visible == true)
             {
-                AxesLabelPosition.Axis => DistanceAxis.Value + FontSizeHeight + 10,
-                AxesLabelPosition.None => 1,
-                _ => throw new NotImplementedException(),
-            };
+                Rect.H = LabelPosition switch
+                {
+                    AxesLabelPosition.Axis => DistanceAxis.Value + FontSizeHeight + 10,
+                    AxesLabelPosition.None => 1,
+                    _ => throw new NotImplementedException(),
+                };
+            }else
+            {
+                Rect.H = 0;
+            }
             Rect.X = AxisGroup.Rect.X;
             Rect.W = AxisGroup.Rect.W;
             Rect.B = AxisGroup.Rect.B;

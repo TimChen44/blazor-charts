@@ -13,11 +13,6 @@ namespace BlazorCharts
     public partial class BcAxesY<TData> : ElementAxes<TData>
     {
         /// <summary>
-        /// Y轴摆放的位置
-        /// </summary>
-        public AxesYPosition Position { get; set; } = AxesYPosition.Left;
-
-        /// <summary>
         /// 主要单位
         /// </summary>
         [Display(Name = "主要单位的刻度")]
@@ -57,27 +52,53 @@ namespace BlazorCharts
         /// 是否是第二坐标轴
         /// </summary>
         [Display(Name = "是否是第二坐标轴")]
-        [Parameter] public bool IsSecondaryAxis { get; set; } = false;
+        [Parameter] public bool IsSecondaryAxis { get; set; }
+
+        /// <summary>
+        /// 是否可见
+        /// </summary>
+        [Display(Name = "可见的")]
+        [Parameter] public bool Visible { get; set; } = true;
 
         public override void Drawing()
         {
-            Rect.X = AxisGroup.Rect.X;
+
             Rect.Y = AxisGroup.Rect.T;
 
-            var realMax = Chart.BcSeriesGroup.Series.Where(x=>x.IsSecondaryAxis== IsSecondaryAxis).Max(x=>x.SeriesData.MaxValue);
-            var mrealMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => x.SeriesData.MinValue);
 
-            var maxString = realMax.ToString().Length > realMax.ToString().Length ? realMax.ToString() : realMax.ToString();
-          
-            Rect.W = LabelPosition switch
-            {
-                AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,
-                AxesLabelPosition.None => 1,
-                _ => throw new NotImplementedException(),
-            };
-            Rect.H = AxisGroup.Rect.H;
+            var realMax = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Max(x => (double?)x.SeriesData.MaxValue) ?? 0;
+            var realMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => (double?)x.SeriesData.MinValue) ?? 0;
 
             AxesYMax = Carry(realMax);
+            AxesYMin = realMin;
+
+            if (Visible == true)
+            {//可见的时候计算宽度
+                var maxString = AxesYMax.ToString().Length > AxesYMin.ToString().Length ? AxesYMax.ToString() : AxesYMin.ToString();
+                Rect.W = LabelPosition switch
+                {
+                    AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,
+                    AxesLabelPosition.None => 1,
+                    _ => throw new NotImplementedException(),
+                };
+            }
+            else
+            {
+                //不可见时宽度为0
+                Rect.W = 0;
+            }
+            Rect.H = AxisGroup.Rect.H;
+
+            if (IsSecondaryAxis == false)
+            {//主轴在左侧
+                Rect.L = AxisGroup.Rect.X;
+            }
+            else
+            {
+                Rect.R = AxisGroup.Rect.W;
+            }
+
+
 
             base.Drawing();
         }
@@ -101,7 +122,7 @@ namespace BlazorCharts
             else if (maxLength > 1)
             {
                 var carry = Math.Pow(10, (maxLength - 2)) * 5;
-                value = value + ( carry - value % ( carry));
+                value = value + (carry - value % (carry));
             }
 
             if (negative) value *= -1;
@@ -109,7 +130,15 @@ namespace BlazorCharts
 
         }
 
+        /// <summary>
+        /// 轴的最大值
+        /// </summary>
         public double AxesYMax { get; set; }
+
+        /// <summary>
+        /// 轴的最小值
+        /// </summary>
+        public double AxesYMin { get; set; }
 
         /// <summary>
         /// 根据值或者这个值在X轴的高度
@@ -122,9 +151,4 @@ namespace BlazorCharts
         }
     }
 
-    public enum AxesYPosition
-    {
-        Left,
-        Right,
-    }
 }

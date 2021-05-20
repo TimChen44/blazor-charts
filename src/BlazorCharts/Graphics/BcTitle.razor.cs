@@ -74,6 +74,7 @@ namespace BlazorCharts
         {
             base.OnInitialized();
         }
+
         public override void Drawing()
         {
             Rect.X = 0;

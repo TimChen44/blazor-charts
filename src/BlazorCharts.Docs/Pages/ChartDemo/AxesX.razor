@@ -6,7 +6,8 @@
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
                     <BcTitle Title="X轴基本使用" TData="Github"></BcTitle>
-                    <BcAxesX TData="Github"  GridLineMajor="@gridLineMajor" DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"  ></BcAxesX>
+                    <BcAxesX TData="Github"  GridLineMajor="@gridLineMajor" DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"  
+                             Visible="@visible"></BcAxesX>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View" ></BcColumnSeries>
                     <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
                     <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" ></BcLineSeries>
@@ -26,6 +27,9 @@
                 <Divider Text="网格线" Orientation="left"></Divider>
                 <Checkbox @bind-Value="@gridLineMajor">主要</Checkbox>
 
+                <Divider Text="属性" Orientation="left"></Divider>
+                <Checkbox @bind-Value="@visible">显示/隐藏</Checkbox>
+
                 <Divider></Divider>
                 <Button Type="primary" OnClick="OnClick">应用</Button>
             </div>
@@ -40,6 +44,8 @@
     bool gridLineMajor = false;
 
     int? distanceAxis;
+
+    bool visible = true;
 
     AxesLabelPosition labelPosition=AxesLabelPosition.Axis;
 

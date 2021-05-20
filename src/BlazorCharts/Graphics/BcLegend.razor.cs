@@ -12,10 +12,10 @@ using System.Xml.Linq;
 namespace BlazorCharts
 {
     public partial class BcLegend<TData> : ElementChart<TData>
-{
-/// <summary>
-/// 图例位置
-/// </summary>
+    {
+        /// <summary>
+        /// 图例位置
+        /// </summary>
         [Display(Name = "图例位置")]
         [Parameter] public LegendPosition Position { get; set; } = LegendPosition.Right;
 
@@ -53,18 +53,18 @@ namespace BlazorCharts
 
         public override void Drawing()
         {
-
             var groupNames = Chart.BcSeriesGroup.GroupNames;
 
             //先算出最大的文本
-            var maxString = "";
+            var maxWidth = 0;
             foreach (var item in groupNames)
             {
-                if (item.Length > maxString.Length)
-                    maxString = item;
+                var width = item.CalcWidth(FontSize);
+                if (width > maxWidth)
+                    maxWidth = width;
             }
 
-            _ItemSize = new Size(maxString.CalcWidth(FontSize) + FontSize + FontSize / 2 + ItemSpacing, FontSize + ItemSpacing);
+            _ItemSize = new Size(maxWidth + FontSize + FontSize / 2 + ItemSpacing, FontSize + ItemSpacing);
 
             //设置图例框的大小
             switch (Position)

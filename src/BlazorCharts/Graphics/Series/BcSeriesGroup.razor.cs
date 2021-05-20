@@ -19,6 +19,7 @@ namespace BlazorCharts
         public void AddSeries(ElementSeries<TData> element)
         {
             element.SerialNumber = (Series.LastOrDefault()?.SerialNumber ?? -1) + 1;//设置系列的顺序号
+            this.NeedSecondaryAxis = this.NeedSecondaryAxis || element.IsSecondaryAxis;
             Series.Add(element);
         }
 
@@ -63,6 +64,7 @@ namespace BlazorCharts
             base.Drawing();
         }
 
+
         /// <summary>
         /// 分类的数据
         /// </summary>
@@ -103,7 +105,10 @@ namespace BlazorCharts
         /// </summary>
         public double GroupWidth => (double)1 / (Series.Sum(x => x.GroupKeepRatio) + 1) * CategoryWidth;
 
-
+        /// <summary>
+        /// 需要次坐标，如果某个系列需要次坐标，那么默认就要显示
+        /// </summary>
+        public bool NeedSecondaryAxis { get; set; } = false;
 
     }
 
