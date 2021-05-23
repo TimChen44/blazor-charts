@@ -2,14 +2,19 @@
 
 ![无标题](https://user-images.githubusercontent.com/7581981/116421071-1b6f9380-a871-11eb-88a6-9abb8e1b165f.png)
 
-基于blazor技术，使用C#编写的charts组件。
+基于blazor技术，使用C#编写的web前端charts组件。
 
 DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://victorious-meadow-0c2078000.azurestaticapps.net/)
-
 
 | Build | NuGet |
 |--|--|
 |![](https://github.com/TimChen44/blazor-charts/workflows/.NET/badge.svg)|[![](https://img.shields.io/nuget/v/BlazorCharts.svg)](https://www.nuget.org/packages/BlazorCharts)|
+
+### 特点
+
+✨ 完全使用C#语言编写
+✨ 使用Razor语法定义图表
+✨ 图表组件灵活组合使用
 
 ### 使用方法
 
