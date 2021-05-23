@@ -13,7 +13,9 @@ DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://vic
 ### 特点
 
 ✨ 完全使用C#语言编写
+
 ✨ 使用Razor语法定义图表
+
 ✨ 图表组件灵活组合使用
 
 ### 使用方法
