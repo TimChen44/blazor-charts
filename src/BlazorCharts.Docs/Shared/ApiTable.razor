@@ -2,7 +2,7 @@
 @using System.ComponentModel.DataAnnotations
 @using System.ComponentModel
 
-<Table DataSource="@ApiItems">
+<Table DataSource="@ApiItems" Bordered="true" Title="@Component.Name.TrimEnd(new char[] { '`','1'})" >
     <Column @bind-Field="@context.Key" />
     <Column @bind-Field="@context.Type" />
     <Column @bind-Field="@context.Name" />
@@ -19,7 +19,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
+        
         if (Component == null) return;
 
         var parameterTypes = Component.GetProperties().Where(x => x.GetCustomAttributes(typeof(ParameterAttribute), false).Count() > 0);

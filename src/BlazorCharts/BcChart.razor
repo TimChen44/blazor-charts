@@ -7,6 +7,11 @@
         <BcAxisGroup TData="TData"></BcAxisGroup>
         @ChildContent
         <BcLegend TData="TData"></BcLegend>
+
+        @if (DataSource == null)
+        {
+            <ListDataSource Data="@Data" TData="TData"></ListDataSource>
+        }
     </svg>
 </CascadingValue>
 

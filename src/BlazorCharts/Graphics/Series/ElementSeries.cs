@@ -120,8 +120,8 @@ namespace BlazorCharts
             }
 
             //TODO:具体获得最大最小值应该由各类型的系列单独实现，应为有些最大值是连个组合并所得
-            SeriesData.MaxValue = SeriesData.SeriesValues.Max(x => x.Data.Max);
-            SeriesData.MinValue = SeriesData.SeriesValues.Min(x => x.Data.Min);
+            SeriesData.MaxValue = SeriesData.SeriesValues.Max(x => (double?)x.Data.Max)??0;
+            SeriesData.MinValue = SeriesData.SeriesValues.Min(x => (double?)x.Data.Min)??0;
 
         }
 

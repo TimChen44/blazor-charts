@@ -1,6 +1,6 @@
 ﻿@page "/Data"
 
-<Card>
+@*<Card>
     <ChildContent>
         <div class="card">
             <div class="chart">
@@ -21,9 +21,8 @@
             </div>
         </div>
     </ChildContent>
-</Card>
+</Card>*@
 
-<ApiTable Component="typeof(BcChart<object>)"></ApiTable>
 
 @code{
     BcChart<Github> bcChart;
@@ -54,3 +53,79 @@
     }
 
 }
+
+<Card>
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" CategoryField="x=>x.Year.ToString()" DataFilter="DataFilter" TData="Github">
+                    <BcTitle Title="ListDataSource" TData="Github"></BcTitle>
+                    <ListDataSource Data="@listData" TData="Github"></ListDataSource>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Button Type="primary" OnClick="OnRandomListData">更新绑定数据</Button>
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+
+@code{
+
+    protected override void OnInitialized()
+    {
+        OnRandomListData();
+        base.OnInitialized();
+    }
+
+
+    List<Github> listData;
+
+    public void OnRandomListData()
+    {
+        listData = new List<Github>();
+
+        Random random = new Random();
+        for (int i = 2015; i <= 2020; i++)
+        {
+            listData.Add(new Github()
+            {
+                Year = i,
+                View = random.Next(2000),
+                Start = random.Next(2000),
+                Fork = random.Next(2000),
+            });
+        }
+    }
+
+}
+
+
+@*<Card>
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" CategoryField="x=>x.Year.ToString()" DataFilter="DataFilter" TData="Github">
+                    <BcTitle Title="ListDataSource" TData="Github"></BcTitle>
+                    <RemoteDataSource TData="Github"></RemoteDataSource>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Button Type="primary" OnClick="OnRandomListData">更新绑定数据</Button>
+            </div>
+        </div>
+    </ChildContent>
+</Card>*@
+
+<ApiTable Component="typeof(BcChart<object>)"></ApiTable>
+
+<ApiTable Component="typeof(ListDataSource<object>)"></ApiTable>
+
+<ApiTable Component="typeof(RemoteDataSource<object>)"></ApiTable>
