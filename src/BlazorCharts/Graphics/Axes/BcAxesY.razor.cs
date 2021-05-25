@@ -62,9 +62,7 @@ namespace BlazorCharts
 
         public override void Drawing()
         {
-
             Rect.Y = AxisGroup.Rect.T;
-
 
             var realMax = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Max(x => (double?)x.SeriesData.MaxValue) ?? 0;
             var realMin = Chart.BcSeriesGroup.Series.Where(x => x.IsSecondaryAxis == IsSecondaryAxis).Min(x => (double?)x.SeriesData.MinValue) ?? 0;
@@ -74,7 +72,7 @@ namespace BlazorCharts
 
             if (Visible == true)
             {//可见的时候计算宽度
-                var maxString = AxesYMax.ToString().Length > AxesYMin.ToString().Length ? AxesYMax.ToString() : AxesYMin.ToString();
+                var maxString = AxesYMax.ToString();//TODO:缺少最小值取整算法//AxesYMax.ToString().Length > AxesYMin.ToString().Length ? AxesYMax.ToString() : AxesYMin.ToString();
                 Rect.W = LabelPosition switch
                 {
                     AxesLabelPosition.Axis => DistanceAxis.Value + maxString.CalcWidth(FontSize) + 10,

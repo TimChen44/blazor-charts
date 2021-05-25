@@ -2,7 +2,7 @@
 @using System.ComponentModel.DataAnnotations
 @using System.ComponentModel
 
-<Table DataSource="@ApiItems" Bordered="true" Title="@Component.Name.TrimEnd(new char[] { '`','1'})" >
+<Table DataSource="@ApiItems" Bordered="true" Title="@Component.Name.TrimEnd(new char[] { '`','1'})">
     <Column @bind-Field="@context.Key" />
     <Column @bind-Field="@context.Type" />
     <Column @bind-Field="@context.Name" />
@@ -19,7 +19,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        
+
         if (Component == null) return;
 
         var parameterTypes = Component.GetProperties().Where(x => x.GetCustomAttributes(typeof(ParameterAttribute), false).Count() > 0);
@@ -54,8 +54,8 @@
                     {
                         pars.Add(sonType[i].Name);//此处如果参数是复杂类型就有问题，现就这样吧，这毕竟不是重点，将来该进
                     }
-
-                    fieldCode = fieldCode.Replace("<Type>", $"Func<<Type>, {pars.Aggregate((a, b) => a + ", " + b)}>");
+                    if (pars.Count > 0)
+                        fieldCode = fieldCode.Replace("<Type>", $"Func<<Type>, {pars.Aggregate((a, b) => a + ", " + b)}>");
                 }
                 else
                 {

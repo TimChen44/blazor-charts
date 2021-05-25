@@ -111,7 +111,6 @@ namespace BlazorCharts
                 {
                     Refresh();
                 }
-
             }
         }
         // 当前数据的hash值
@@ -150,6 +149,9 @@ namespace BlazorCharts
             {
                 DataAnalysis();
                 Repaint();
+
+                //初始化完成，通知绘制
+                IsInit = true;
             }
         }
 
@@ -173,7 +175,7 @@ namespace BlazorCharts
             BcSeriesGroup?.Drawing();
 
             //初始化完成，通知绘制
-            IsInit = true;
+            IsInit = true;//TODO:初始化完成机制需要再优化
 
             StateHasChanged();
         }

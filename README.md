@@ -63,6 +63,9 @@ public class Github
 
 ### 更新日志
 
+**2021.0525**
+- 增加自定义数据源功能，默认提供ListDataSource和RemoteDataSource两种类型的数据源
+
 **2021.0520**
 - X轴和Y轴增加隐藏功能
 - Y轴增加次要轴功能
