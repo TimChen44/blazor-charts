@@ -67,11 +67,17 @@ namespace BlazorCharts
 
         #region 数据
 
+
         /// <summary>
         /// 数据
         /// </summary>
         [Display(Name = "数据集合")]
-        [Parameter] public IEnumerable<TData> Data { get; set; }
+        [Parameter]
+        public IEnumerable<TData> Data
+        {
+            get => RealData;
+            set => DataChange(value);
+        }
 
         /// <summary>
         /// 轴（类别）字段
