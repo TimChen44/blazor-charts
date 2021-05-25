@@ -38,7 +38,7 @@ namespace BlazorCharts.Server
             readme = readme.Substring(0, readme.IndexOf("### 更新日志") + "### 更新日志".Length);
 
             StringBuilder logStr = new StringBuilder();
-            foreach (var item in Log.logs)
+            foreach (var item in Log.logs.Take(5))
             {
                 logStr.AppendLine($"**{item.Key}**");
                 item.Value.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)

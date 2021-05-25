@@ -8,6 +8,11 @@ namespace BlazorCharts
 {
    public static class PointExtensions
     {
+        /// <summary>
+        /// 坐标转svg格式
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string ToPoints(this List<Point> value)
         {
             if (value.Count==0) return "";

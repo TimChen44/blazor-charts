@@ -1,4 +1,6 @@
 ﻿@page "/Data"
+@using System.Net.Http
+@using System.Net.Http.Json
 
 <Card>
     <ChildContent>
@@ -23,7 +25,6 @@
     </ChildContent>
 </Card>
 
-<ApiTable Component="typeof(BcChart<object>)"></ApiTable>
 
 @code{
     BcChart<Github> bcChart;
@@ -54,3 +55,161 @@
     }
 
 }
+
+<Card>
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" CategoryField="x=>x.Year.ToString()" TData="Github">
+                    <BcTitle Title="ListDataSource" TData="Github"></BcTitle>
+                    <ListDataSource Data="@listData" TData="Github"></ListDataSource>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Button Type="primary" OnClick="OnRandomListData">更新绑定数据</Button>
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+
+@code{
+
+    protected override void OnInitialized()
+    {
+        OnRandomListData();
+        base.OnInitialized();
+    }
+
+
+    List<Github> listData;
+
+    public void OnRandomListData()
+    {
+        listData = new List<Github>();
+
+        Random random = new Random();
+        for (int i = 2015; i <= 2020; i++)
+        {
+            listData.Add(new Github()
+            {
+                Year = i,
+                View = random.Next(2000),
+                Start = random.Next(2000),
+                Fork = random.Next(2000),
+            });
+        }
+    }
+
+}
+
+
+<Card>
+    <ChildContent>
+        <div class="card">
+            <div class="chart">
+                <BcChart Height="400" Width="600" CategoryField="x=>x.city" TData="CityWeather">
+                    <BcTitle Title="RemoteDataSource" TData="CityWeather"></BcTitle>
+                    <RemoteDataSource TData="CityWeather" LoadDataFunc="LoadDataFunc" Interval="@interval" AutoRefresh="@autoRefresh"></RemoteDataSource>
+                    <BcColumnSeries TData="CityWeather" ValueFunc="x=>x.Sum(y=>y.temp)" GroupName="温度"></BcColumnSeries>
+                    <BcColumnSeries TData="CityWeather" ValueFunc="x=>x.Sum(y=>y.SD)" GroupName="湿度"></BcColumnSeries>
+                    <BcColumnSeries TData="CityWeather" ValueFunc="x=>x.Sum(y=>y.AP)" GroupName="气压" IsSecondaryAxis="true"></BcColumnSeries>
+                </BcChart>
+            </div>
+            <div class="prop">
+                <Divider Text="自动刷新" Orientation="left"></Divider>
+                <Checkbox @bind-Value="@autoRefresh">启用自动刷新</Checkbox> <span>刷新间隔</span><InputNumber @bind-Value="@interval"></InputNumber>
+            </div>
+        </div>
+    </ChildContent>
+</Card>
+
+@code{
+    string url = "http://www.weather.com.cn/data/sk/{0}.html";
+
+    HttpClient httpClient = new HttpClient();
+
+    int interval = 10000;
+
+    bool autoRefresh = false;
+
+    private async Task<IEnumerable<CityWeather>> LoadDataFunc()
+    {
+        List<CityWeather> weathers = new List<CityWeather>();
+
+        var bj = await httpClient.GetFromJsonAsync<WeatherSource>(string.Format(url, "101010100"));//北京
+        weathers.Add(ConvertData(bj));
+
+        var sh = await httpClient.GetFromJsonAsync<WeatherSource>(string.Format(url, "101020100"));//上海
+        weathers.Add(ConvertData(sh));
+
+        var gz = await httpClient.GetFromJsonAsync<WeatherSource>(string.Format(url, "101280101"));//广州
+        weathers.Add(ConvertData(gz));
+
+        var cx = await httpClient.GetFromJsonAsync<WeatherSource>(string.Format(url, "101121007"));//曹县
+        weathers.Add(ConvertData(cx));
+
+        Console.WriteLine(DateTime.Now);
+
+        //此处模拟返回的数据发生了变化
+        Random random = new Random();
+        foreach (var item in weathers)
+        {
+            item.temp += random.NextDouble() * 2 - 1;
+            item.SD += random.NextDouble() * 4 - 2;
+            item.AP += random.NextDouble() * 40 - 20;
+        }
+
+
+        return weathers;
+    }
+
+    private CityWeather ConvertData(WeatherSource source)
+    {
+        CityWeather cw = new CityWeather()
+        {
+            city = source.weatherinfo.city,
+            temp = Convert.ToDouble(source.weatherinfo.temp),
+            SD = Convert.ToDouble(source.weatherinfo.SD.Replace("%", "")),
+            AP = Convert.ToDouble(source.weatherinfo.AP.Replace("hPa", "")),
+        };
+        return cw;
+
+    }
+
+
+    public class CityWeather
+    {
+        public string city { get; set; }
+        public double temp { get; set; }
+        public double SD { get; set; }//82%
+        public double AP { get; set; }//1001.3hPa
+    }
+
+
+    public class WeatherSource
+    {
+        public Weatherinfo weatherinfo { get; set; }
+    }
+
+    public class Weatherinfo
+    {
+        public string city { get; set; }
+        public string temp { get; set; }
+        public string SD { get; set; }//82%
+        public string AP { get; set; }//1001.3hPa
+    }
+
+}
+
+
+
+
+<ApiTable Component="typeof(BcChart<object>)"></ApiTable>
+
+<ApiTable Component="typeof(ListDataSource<object>)"></ApiTable>
+
+<ApiTable Component="typeof(RemoteDataSource<object>)"></ApiTable>
