@@ -11,6 +11,12 @@ namespace BlazorCharts
 {
     public static class StringExtensions
     {
+        /// <summary>
+        /// 计算文本的宽度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fontSize"></param>
+        /// <returns></returns>
         public static int CalcWidth(this string value, int fontSize)
         {
             var length = value.Length + Regex.Matches(value, @"[\u4e00-\u9fa5]").Count;
