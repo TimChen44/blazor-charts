@@ -27,12 +27,13 @@ DemoSite: [https://victorious-meadow-0c2078000.azurestaticapps.net/](https://vic
 3. 页面中使用
 
 ```html
-<BcChart Height="400" Width="600" Data="githubs" CategoryField="x=>x.Year.ToString()">
-    <BcTitle Title="@title" TData="Github"></BcTitle>
-    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" Group="View"></BcBarSeries>
-    <BcBarSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" Group="Start"></BcBarSeries>
-    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" Group="Fork"></BcLineSeries>
-    <BcLegend TData="Github" BorderWidth="1" Position="@LegendPosition.Bottom"></BcLegend>
+<BcChart Height="600" Width="800" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
+	<BcTitle Title="图表示例" TData="Github"></BcTitle>
+	<BcAxesY TData="Github" GridLineMajor="true" GridLineMinor="true"></BcAxesY>
+	<BcLegend TData="Github" BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
+	<BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+	<BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+	<BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
 </BcChart>
 ```
 
@@ -59,7 +60,7 @@ public class Github
 
 4. 执行查看效果
 
-![image](https://user-images.githubusercontent.com/7581981/116768715-5b01cf80-aa6b-11eb-940f-c0a2145f9a3d.png)
+![image](https://user-images.githubusercontent.com/7581981/119677769-95e00300-be71-11eb-869b-7755b06df2a5.png)
 
 ### 更新日志
 
