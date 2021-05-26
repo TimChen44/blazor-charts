@@ -107,8 +107,8 @@ namespace BlazorCharts
             {
                 currentDataHashCode = newDataHashCode;
                 RealData = data;
-                if (IsInit == true)
-                {
+                if (IsRendered == true)
+                {//只有完成显示后修改数据才触发重绘
                     Refresh();
                 }
             }
@@ -143,6 +143,7 @@ namespace BlazorCharts
             Repaint();
         }
 
+        bool IsRendered = false;
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
@@ -150,8 +151,7 @@ namespace BlazorCharts
                 DataAnalysis();
                 Repaint();
 
-                //初始化完成，通知绘制
-                IsInit = true;
+                IsRendered = true;
             }
         }
 

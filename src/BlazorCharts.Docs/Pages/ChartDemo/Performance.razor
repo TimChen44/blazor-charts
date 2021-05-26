@@ -1,0 +1,47 @@
+﻿@page "/Performance"
+
+<Card>
+	<ChildContent>
+		<div class="card">
+			<div class="chart">
+				<BcChart Height="400" Width="1000" Data="@listData" CategoryField="x=>x.Key.ToString()">
+					<BcTitle Title="显示性能" TData="KeyValue"></BcTitle>
+					<BcAxesX Visible="false" TData="KeyValue"></BcAxesX>
+					<BcAreaSeries TData="KeyValue" ValueFunc="x=>x.Sum(y=>y.Value)" GroupName="Value"></BcAreaSeries>
+				</BcChart>
+			</div>
+			<div class="prop">
+				<Divider Text="数量" Orientation="left"></Divider>
+				<InputNumber @bind-Value="@quantity"></InputNumber>
+				<Divider></Divider>
+				<Button Type="primary" OnClick="OnRandomData">显示</Button>
+			</div>
+		</div>
+	</ChildContent>
+</Card>
+
+
+@code {
+	List<KeyValue> listData;
+
+	int quantity = 1000;
+
+
+	public void OnRandomData()
+	{
+		listData = new List<KeyValue>();
+
+		Random random = new Random();
+
+		double last = random.Next(500);
+		for (int i = 0; i <= quantity; i++)
+		{
+			last = last + random.NextDouble() * 4 - 2;
+			if (last < 0) last = 0;
+			listData.Add(new KeyValue(i, last));
+		}
+	}
+
+	public record KeyValue(int Key, double Value);
+
+}
