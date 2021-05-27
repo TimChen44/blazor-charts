@@ -27,6 +27,11 @@ namespace BlazorCharts
         public BcLegend<TData> BcLegend { get; set; }
 
         /// <summary>
+        /// 图例
+        /// </summary>
+        public BcLabels<TData> BcLabels { get; set; }
+
+        /// <summary>
         /// 轴
         /// </summary>
         public BcAxisGroup<TData> BcAxisGroup { get; set; }
@@ -48,8 +53,9 @@ namespace BlazorCharts
                 case BcTitle<TData> bcTitle:
                     BcTitle = bcTitle; break;
                 case BcLegend<TData> bcLegend:
-                    if (BcLegend == null) BcLegend = bcLegend;
-                    break;
+                    if (BcLegend == null) BcLegend = bcLegend; break;
+                case BcLabels<TData> bcLabels:
+                    if (BcLabels == null) BcLabels = bcLabels; break;
                 case BcSeriesGroup<TData> bcSeriesGroup:
                     BcSeriesGroup = bcSeriesGroup; break;
                 case ElementSeries<TData> bcElementSeries:

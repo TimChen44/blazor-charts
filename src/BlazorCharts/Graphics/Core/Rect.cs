@@ -344,6 +344,8 @@ namespace BlazorCharts
 
         #endregion 
 
+
+
         public string ToPoint()
         {
             return $"{X},{Y}";

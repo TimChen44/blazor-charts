@@ -1,0 +1,13 @@
+﻿@namespace BlazorCharts
+@typeparam TData
+
+<g transform="translate(@AnchorX,@AnchorY)">
+	@{
+		var w = DisplayText.CalcWidth(FontSize);
+		var h = FontSizeHeight + 2;
+
+	}
+
+ @*<rect x="@(-w/2)" y="@(-h/2)" width="@w" height="@h" fill="rgb(50, 50, 50)"></rect>*@
+ <text x="0" y="0"  text-anchor="@BcLabels.TextAnchor.ToDescription()" >@DisplayText</text>
+</g>

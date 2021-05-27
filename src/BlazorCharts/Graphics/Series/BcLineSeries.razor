@@ -4,37 +4,42 @@
 
 @if (Chart.IsInit)
 {
-<g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
+	<g class="bc-line-series" transform="translate(@Rect.LT.ToPoint())">
 
-    @{
-        //每一个分组一条线
-        foreach (var group in SeriesData.Groups)
-        {
-            var color = (group ?? "Line").RandomColor().ToHtml();
-            var colorDeepen = (group ?? "Line").RandomColor().Deepen().ToHtml();
-            List<Point> points = new List<Point>();
+		@*每一个分组一条线*@
+		@foreach (var group in SeriesData.Groups)
+		{
+			var color = (group ?? "Line").RandomColor().ToHtml();
+			var colorDeepen = (group ?? "Line").RandomColor().Deepen().ToHtml();
+			List<Point> points = new List<Point>();
 
-            foreach (var category in SeriesData.CategoryDatas)
-            {
-                var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
+			foreach (var category in SeriesData.CategoryDatas)
+			{
+				var data = SeriesData.GetValueData<SingleValueData>(category.Name, group);
 
-                points.Add(new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - GetHeightByValue(data.Value)));
-            }
-
-
-            <polyline points="@points.ToPoints()" stroke="@color" stroke-width=2 fill="none" />
-
-            @foreach (var item in points)
-            {
-                <rect x="@(item.X-4)" y="@(item.Y-4)" width="8" height="8" fill="@color" stroke="@colorDeepen" stroke-width=2 />
-            }
-
-        }
-    }
+				var p = new Point((int)(Chart.BcAxisGroup.AxesX.Rect.W * category.ZeroOffsetRatio), Rect.H - GetHeightByValue(data.Value));
+				points.Add(p);
 
 
+				@if (Chart.BcLabels.Visible == true)
+				{//是否显示标签  //TODO:此处需要通过一种设计对界面显示和为了显示计算的数据进行有效的分离，目前混杂在一起及其不宜维护
+				 <BcLabelText AnchorX="@(p.X)" AnchorY="@(p.Y-8)" Value="@data.Value" TData="TData"></BcLabelText>
+				}
+			}
 
 
-</g>
+		 <polyline points="@points.ToPoints()" stroke="@color" stroke-width=2 fill="none" />
+
+			@foreach (var item in points)
+			{
+			 <rect x="@(item.X-4)" y="@(item.Y-4)" width="8" height="8" fill="@color" stroke="@colorDeepen" stroke-width=2 />
+			}
+
+
+
+		}
+
+
+	</g>
 
 }
