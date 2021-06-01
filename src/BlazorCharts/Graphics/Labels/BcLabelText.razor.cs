@@ -61,6 +61,6 @@ namespace BlazorCharts
         protected int FontSizeHeight => FontSize + (int)(FontSize * 0.2);
 
 
-
+    
     }
 }
