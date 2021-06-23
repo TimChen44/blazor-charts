@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCharts
 {
-    public class Rect
+    public record Rect
     {
         public Rect()
         {
@@ -247,27 +247,6 @@ namespace BlazorCharts
             return new Rect(rect.Point, rect.Size - size);
         }
 
-        /// <summary>
-        /// 相等判断
-        /// </summary>
-        public static bool operator ==(Rect r1, Rect r2)
-        {
-            return r1.Point == r2.Point && r1.Size == r2.Size;
-        }
-
-        public static bool operator !=(Rect r1, Rect r2)
-        {
-            return !(r1.Point == r2.Point && r1.Size == r2.Size);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is Rect rect)
-                return this == rect;
-            else
-                return false;
-        }
-
         #endregion 
 
         /// <summary>
@@ -280,7 +259,7 @@ namespace BlazorCharts
         }
     }
 
-    public class Point
+    public record Point
     {
         public Point()
         {
@@ -321,27 +300,6 @@ namespace BlazorCharts
             return new Point(p1.X - p2.X, p1.Y - p2.Y);
         }
 
-        /// <summary>
-        /// 相等判断
-        /// </summary>
-        public static bool operator ==(Point p1, Point p2)
-        {
-            return p1.X == p2.X && p1.Y == p2.Y;
-        }
-
-        public static bool operator !=(Point p1, Point p2)
-        {
-            return !(p1.X == p2.X && p1.Y == p2.Y);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is Point point)
-                return this == point;
-            else
-                return false;
-        }
-
         #endregion 
 
 
@@ -352,7 +310,7 @@ namespace BlazorCharts
         }
     }
 
-    public class Size
+    public record Size
     {
         public Size()
         {
@@ -392,27 +350,6 @@ namespace BlazorCharts
         public static Size operator -(Size z1, Size z2)
         {
             return new Size(z1.W - z2.W, z1.H - z2.H);
-        }
-
-        /// <summary>
-        /// 相等判断
-        /// </summary>
-        public static bool operator ==(Size z1, Size z2)
-        {
-            return z1.W == z2.W && z1.H == z2.H;
-        }
-
-        public static bool operator !=(Size z1, Size z2)
-        {
-            return !(z1.W == z2.W && z1.H == z2.H);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is Size size)
-                return this == size;
-            else
-                return false;
         }
 
         #endregion 
