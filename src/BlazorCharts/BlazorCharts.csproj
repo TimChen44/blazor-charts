@@ -23,7 +23,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\site\BlazorCharts.Docs\wwwroot\blazorcharts.png" Link="blazorcharts.png" />
+    <Content Include="..\..\site\BlazorCharts.Docs\wwwroot\blazorcharts.png" Link="blazorcharts.png">
+		<Pack>True</Pack>
+		<PackagePath></PackagePath>
+    </Content>
   </ItemGroup>
 
   
