@@ -22,6 +22,10 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\site\BlazorCharts.Docs\wwwroot\blazorcharts.png" Link="blazorcharts.png" />
+  </ItemGroup>
+
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -33,10 +37,6 @@
 
   <ItemGroup>
     <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\BlazorCharts.Docs\wwwroot\blazorcharts.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
