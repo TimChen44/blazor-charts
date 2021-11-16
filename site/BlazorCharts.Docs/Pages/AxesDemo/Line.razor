@@ -6,10 +6,10 @@
         <div class="card">
             <div class="chart">
                 <BcChart Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="基本使用" TData="Github"></BcTitle>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcLineSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcLineSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+                    <BcTitle Title="基本使用"></BcTitle>
+                    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcLineSeries>
+                    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcLineSeries>
+                    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
                 </BcChart>
             </div>
             <div class="prop">

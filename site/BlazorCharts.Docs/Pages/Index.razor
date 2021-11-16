@@ -1,26 +1,26 @@
 ﻿@page "/"
 
 <div style="text-align:center">
-	<img src="_content/BlazorCharts.Docs/blazorcharts.svg" style="height: 80px;width: 80px;margin-top:20px" />
-	<Title Level="1">blazor-charts</Title>
+    <img src="_content/BlazorCharts.Docs/blazorcharts.svg" style="height: 80px;width: 80px;margin-top:20px" />
+    <Title Level="1">blazor-charts</Title>
 
-	<Paragraph>
-		基于blazor技术，使用C#编写的charts组件。
-	</Paragraph>
-	<Paragraph>
-		Github:<a href="https://github.com/TimChen44/blazor-charts">https://github.com/TimChen44/blazor-charts</a>
-	</Paragraph>
+    <Paragraph>
+        基于blazor技术，使用C#编写的charts组件。
+    </Paragraph>
+    <Paragraph>
+        Github:<a href="https://github.com/TimChen44/blazor-charts">https://github.com/TimChen44/blazor-charts</a>
+    </Paragraph>
 
-	<Paragraph>
+    <Paragraph>
 
-		<BcChart Height="600" Width="800" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-			<BcTitle Title="图表示例" TData="Github"></BcTitle>
-			<BcAxesY TData="Github" GridLineMajor="true" GridLineMinor="true"></BcAxesY>
-			<BcLegend TData="Github" BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
-			<BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
-			<BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
-			<BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
-		</BcChart>
+<BcChart Data="DemoData.Githubs" Height="600" Width="800" CategoryField="x=>x.Year.ToString()">
+    <BcTitle Title="图表示例"></BcTitle>
+    <BcAxesY GridLineMajor="true" GridLineMinor="true"></BcAxesY>
+    <BcLegend BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
+    <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+    <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+</BcChart>
 
-	</Paragraph>
+    </Paragraph>
 </div>
