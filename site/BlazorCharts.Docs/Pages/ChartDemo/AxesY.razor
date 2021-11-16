@@ -5,17 +5,17 @@
         <div class="card">
             <div class="chart">
                 <BcChart @ref="@bcChart" Height="400" Width="600" Data="DemoData.Githubs" CategoryField="x=>x.Year.ToString()">
-                    <BcTitle Title="Y轴基本使用" TData="Github"></BcTitle>
-                    <BcAxesY TData="Github" UnitsMajor="@unitsMajor" UnitsMinor="@unitsMinor"
+                    <BcTitle Title="Y轴基本使用"></BcTitle>
+                    <BcAxesY UnitsMajor="@unitsMajor" UnitsMinor="@unitsMinor"
                              GridLineMajor="@gridLineMajor" GridLineMinor="@gridLineMinor"
                              DistanceAxis="@distanceAxis" LabelPosition="@labelPosition"
                              Visible="@visible"></BcAxesY>
 
 
-                    <BcAxesY TData="Github" Visible="@visibleSecondary" IsSecondaryAxis="true"></BcAxesY>
-                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
-                    <BcColumnSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
-                    <BcLineSeries TData="Github" ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
+                    <BcAxesY Visible="@visibleSecondary" IsSecondaryAxis="true"></BcAxesY>
+                    <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
+                    <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
+                    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
                 </BcChart>
             </div>
             <div class="prop">

@@ -36,6 +36,7 @@ namespace BlazorCharts
             }
             set => _Padding = value;
         }
+
         /// <summary>
         ///边框左部距离
         /// </summary>
