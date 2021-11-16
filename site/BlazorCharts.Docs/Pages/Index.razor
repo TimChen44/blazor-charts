@@ -19,7 +19,7 @@
     <BcLegend BorderWidth="1" Position="LegendPosition.Bottom"></BcLegend>
     <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.View)" GroupName="View"></BcColumnSeries>
     <BcColumnSeries ValueFunc="x=>x.Sum(y=>y.Start)" GroupName="Start"></BcColumnSeries>
-    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork"></BcLineSeries>
+    <BcLineSeries ValueFunc="x=>x.Sum(y=>y.Fork)" GroupName="Fork" IsSecondaryAxis="true"></BcLineSeries>
 </BcChart>
 
     </Paragraph>
